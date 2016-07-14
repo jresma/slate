@@ -119,7 +119,7 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the inDinero API! You can use our API to access inDinero API endpoints, which can get information on various transactions, reimbursements, and receipts in our database.</p>
+<p>Welcome to the inDinero API! You can use our API to access inDinero API endpoints, which can get information on various companies, transactions, reimbursements, and receipts in our database.</p>
 
 <p>inDinero uses API keys to allow access to the API. You can register a new inDinero API key at our <a href="https://api.indinero.com/">developer portal</a>.</p>
 
@@ -131,9 +131,15 @@
 
 <h2 id="how-to-create-an-application">How to create an application</h2>
 
+<p>Navigate to the <strong>Applications</strong> tab area of the Developer Portal. Click on <code class="prettyprint">New Application</code> button. Fill in all the required fields. Use the application details when doing the authentication.</p>
+
 <h1 id="authentication">Authentication</h1>
 
-<p>Navigate to the <strong>Applications</strong> tab area of the Developer Portal to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.</p>
+<p>inDinero API is using OAuth 2.0, the standard used by most APIs for authenticating and authorizing users. We highly suggest you use an OAuth library/wrapper to simplify the process of authenticating.</p>
+
+<p>Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly accessible areas such GitHub, client-side code, and so forth.</p>
+
+<p>Navigate to the <strong>Applications</strong> tab area of the <a href="https://api.indinero.com/">developer portal</a> to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.</p>
 
 <p><strong>Base URL:</strong> <code class="prettyprint">https://api.indinero.com</code></p>
 
@@ -145,7 +151,7 @@
 
 <h3 id="1-ask-user-for-api-access-permission">1. Ask User for API Access Permission</h3>
 
-<p>The first step of process is to prompt the user for authorization. To display the prompt, redirect the user to authenticate throught the Authorization URL in a <strong>POST:</strong> <code class="prettyprint">https://api.indinero.com/authorize?response_type=code&amp;scope=&amp;client_id={api_key}&amp;redirect_uri={redirect_uri}&amp;state={state}</code>.</p>
+<p>The first step of process is to prompt the user for authorization. To display the prompt, redirect the user to authenticate through the Authorization URL in a <strong>POST:</strong> <code class="prettyprint">https://api.indinero.com/authorize?response_type=code&amp;scope=&amp;client_id={api_key}&amp;redirect_uri={redirect_uri}&amp;state={state}</code>.</p>
 
 <h3 id="2-request-an-oauth-token">2: Request an OAuth Token</h3>
 
@@ -259,9 +265,7 @@ Remember — a happy kitten is an authenticated kitten!
 
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The inDinero API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -279,15 +283,15 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Forbidden &ndash; The account requested is hidden for administrators only</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>Not Found &ndash; The specified account could not be found</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>Method Not Allowed &ndash; You tried to access an account with an invalid method</td>
 </tr>
 <tr>
 <td>406</td>
@@ -295,7 +299,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<td>Gone &ndash; The account requested has been removed from our servers</td>
 </tr>
 <tr>
 <td>418</td>
@@ -303,7 +307,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many calls! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
