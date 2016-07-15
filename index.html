@@ -125,19 +125,19 @@
 
 <h1 id="developer-account">Developer Account</h1>
 
-<p>To create an account go to our <a href="https://api.indinero.com/developer/sign_up">sign up page</a>. Once registered you&rsquo;ll be provided with a set of keys for API authentication.</p>
+<p>To create an account go to our <a href="https://api.indinero.com/developer/sign_up">sign up page</a>. Once registered, you will be provided with a set of keys for API authentication.</p>
 
 <p>After creating an account, you can now create an application.</p>
 
 <h2 id="how-to-create-an-application">How to create an application</h2>
 
-<p>Navigate to the <strong>Applications</strong> tab area of the Developer Portal. Click on <code class="prettyprint">New Application</code> button. Fill in all the required fields. Use the application details when doing the authentication.</p>
+<p>Navigate to the <strong>Applications</strong> tab area of the Developer Portal. Click on <code class="prettyprint">New Application</code> button. Fill out all the required fields. Use the generated Application Details when doing the authentication.</p>
 
 <h1 id="authentication">Authentication</h1>
 
 <p>inDinero API is using OAuth 2.0, the standard used by most APIs for authenticating and authorizing users. We highly suggest you use an OAuth library/wrapper to simplify the process of authenticating.</p>
 
-<p>Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly accessible areas such GitHub, client-side code, and so forth.</p>
+<p>Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly-accessible areas such GitHub, client-side code, and so forth.</p>
 
 <p>Navigate to the <strong>Applications</strong> tab area of the <a href="https://api.indinero.com/">developer portal</a> to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.</p>
 
@@ -157,7 +157,7 @@
 
 <h3 id="2-request-an-oauth-token">2: Request an OAuth Token</h3>
 
-<p>After the successfully authenticating in the prompt inDinero will respond with an authorization code to be used in the subsequent token request to the Access Token URL: <code class="prettyprint">https://api.indinero.com/oauth/token?client_id={api_key}&amp;client_secret={client_secret}&amp;code={authorization_code}&amp;grant_type=authorization_code&amp;redirect_uri={redirect_uri}</code></p>
+<p>After successfully authenticating in the prompt, inDinero will respond with an authorization code to be used in the Access Token URL: <code class="prettyprint">https://api.indinero.com/oauth/token?client_id={api_key}&amp;client_secret={client_secret}&amp;code={authorization_code}&amp;grant_type=authorization_code&amp;redirect_uri={redirect_uri}</code></p>
 
 <h3 id="3-making-authenticated-requests">3: Making authenticated requests</h3>
 
@@ -309,7 +309,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many calls! Slow down!</td>
+<td>Too Many Requests &ndash; You are requesting too many calls! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
@@ -317,7 +317,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We are temporarialy offline for maintanance. Please try again later.</td>
 </tr>
 </tbody></table>
 
