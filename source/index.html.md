@@ -2,10 +2,7 @@
 title: API Reference
 
 language_tabs:
-  - shell
   - ruby
-  - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -19,51 +16,46 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the inDinero API! You can use our API to access inDinero API endpoints, which can get information on various companies, transactions, reimbursements, and receipts in our database.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+inDinero uses API keys to allow access to the API. You can register a new inDinero API key at our [developer portal](https://api.indinero.com/).
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Developer Account
+
+To create an account go to our [sign up page](https://api.indinero.com/developer/sign_up). Once registered, you will be provided with a set of keys for API authentication.
+
+After creating an account, you can now create an application.
+
+## How to create an application
+
+Navigate to the **Applications** tab area of the Developer Portal. Click on `New Application` button. Fill out all the required fields. Use the generated Application Details when doing the authentication.
 
 # Authentication
 
-> To authorize, use this code:
+inDinero API is using OAuth 2.0, the standard used by most APIs for authenticating and authorizing users. We highly suggest you use an OAuth library/wrapper to simplify the process of authenticating.
 
-```ruby
-require 'kittn'
+Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly-accessible areas such GitHub, client-side code, and so forth.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+Navigate to the **Applications** tab area of the [developer portal](https://api.indinero.com/) to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.
 
-```python
-import kittn
+**Base URL:** `https://api.indinero.com`
 
-api = kittn.authorize('meowmeowmeow')
-```
+**Authorization URL:** `https://api.indinero.com/authorize`
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
+**Access Token URL:** `https://api.indinero.com/oauth/token`
 
-```javascript
-const kittn = require('kittn');
+## Steps
 
-let api = kittn.authorize('meowmeowmeow');
-```
+All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
 
-> Make sure to replace `meowmeowmeow` with your API key.
+### 1. Ask User for API Access Permission
+The first step of process is to prompt the user for authorization. To display the prompt, redirect the user to authenticate through the Authorization URL in a **POST:** `https://api.indinero.com/authorize?response_type=code&scope=&client_id={api_key}&redirect_uri={redirect_uri}&state={state}`.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+### 2: Request an OAuth Token
+After successfully authenticating in the prompt, inDinero will respond with an authorization code to be used in the Access Token URL: `https://api.indinero.com/oauth/token?client_id={api_key}&client_secret={client_secret}&code={authorization_code}&grant_type=authorization_code&redirect_uri={redirect_uri}`
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+### 3: Making authenticated requests
+Once the client has obtained an API access token from the previous step, it can used to make authenticated requests to the API. Authenticated requests are signed with a header pair of `access_token: {access_token}` where *{access_token}* is replaced with the permanent token for the user.
 
 # Kittens
 
@@ -74,25 +66,6 @@ require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
 api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
 ```
 
 > The above command returns JSON structured like this:
@@ -140,25 +113,6 @@ require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
 api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
 ```
 
 > The above command returns JSON structured like this:
