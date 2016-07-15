@@ -149,6 +149,8 @@
 
 <h2 id="steps">Steps</h2>
 
+<p>All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.</p>
+
 <h3 id="1-ask-user-for-api-access-permission">1. Ask User for API Access Permission</h3>
 
 <p>The first step of process is to prompt the user for authorization. To display the prompt, redirect the user to authenticate through the Authorization URL in a <strong>POST:</strong> <code class="prettyprint">https://api.indinero.com/authorize?response_type=code&amp;scope=&amp;client_id={api_key}&amp;redirect_uri={redirect_uri}&amp;state={state}</code>.</p>
