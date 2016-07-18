@@ -57,6 +57,31 @@ After successfully authenticating in the prompt, inDinero will respond with an a
 ### 3: Making authenticated requests
 Once the client has obtained an API access token from the previous step, it can used to make authenticated requests to the API. Authenticated requests are signed with a header pair of `access_token: {access_token}` where *{access_token}* is replaced with the permanent token for the user.
 
+## Postman
+
+Postman is a powerful API testing and development suite used to help developers explore our Public API.
+
+### Download Postman
+Download and Install the [Postman Packaged Chrome Application](https://www.getpostman.com/)
+
+### Retrieve a Token
+
+* Navigate to the API Credentials area of the Developer Portal to set your Redirect URL to `https://www.getpostman.com/oauth2/callback`
+* Select the OAuth 2.0 Tab in Postman and paste in your:
+    * Authorization URL
+    * Access Token URL
+    * Client ID
+    * Client Secret
+* Click Get Access Token
+* Authenticate / Approve Access with inDinero in the popup window
+* Name and Save the retrieved token
+
+### Making Authenticated Requests
+* Select an endpoint
+* Click to OAuth 2.0 tab to indicate you are making a OAuth POST
+* In your existing tokens, make sure to add token to header
+* Send the `GET` or `POST` request
+
 # Kittens
 
 ## Get All Kittens
