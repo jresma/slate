@@ -199,6 +199,8 @@
 
 <h1 id="transactions">Transactions</h1>
 
+<p>An accounting transaction is a business event having a monetary impact on the financial statements of a business. It is recorded in the accounting records of the business.</p>
+
 <h2 id="get-all-transactions">Get All Transactions</h2>
 <pre class="highlight ruby"><code></code></pre>
 
@@ -248,6 +250,40 @@
 <h3 id="https-request">HTTPS Request</h3>
 
 <p><code class="prettyprint">GET https://api.indinero.com/api/v2/transactions</code></p>
+
+<h2 id="postman">Postman</h2>
+
+<p>Postman is a powerful API testing and development suite used to help developers explore our Public API.</p>
+
+<h3 id="download-postman">Download Postman</h3>
+
+<p>Download and Install the <a href="https://www.getpostman.com/">Postman Packaged Chrome Application</a></p>
+
+<h3 id="retrieve-a-token">Retrieve a Token</h3>
+
+<ul>
+<li>Navigate to the API Credentials area of the Developer Portal to set your Redirect URL to <code class="prettyprint">https://www.getpostman.com/oauth2/callback</code></li>
+<li>Select the OAuth 2.0 Tab in Postman and paste in your:
+
+<ul>
+<li>Authorization URL</li>
+<li>Access Token URL</li>
+<li>Client ID</li>
+<li>Client Secret</li>
+</ul></li>
+<li>Click Get Access Token</li>
+<li>Authenticate / Approve Access with inDinero in the popup window</li>
+<li>Name and Save the retrieved token</li>
+</ul>
+
+<h3 id="making-authenticated-requests">Making Authenticated Requests</h3>
+
+<ul>
+<li>Select an endpoint</li>
+<li>Click to OAuth 2.0 tab to indicate you are making a OAuth POST</li>
+<li>In your existing tokens, make sure to add token to header</li>
+<li>Send the <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request</li>
+</ul>
 
 <h1 id="kittens">Kittens</h1>
 
