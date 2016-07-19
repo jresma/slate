@@ -1,0 +1,9 @@
+{
+  "description": "inDinero API",
+  "id": "indinero_api",
+  "links": [{
+    "href": "https://api.indinero.com",
+    "rel": "self"
+  }],
+  "title": "inDinero"
+}

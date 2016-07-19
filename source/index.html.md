@@ -2,6 +2,7 @@
 title: API Reference
 
 language_tabs:
+  - bash
   - ruby
 
 toc_footers:
@@ -9,6 +10,7 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - api
   - errors
 
 search: true
@@ -81,99 +83,6 @@ Download and Install the [Postman Packaged Chrome Application](https://www.getpo
 * Click to OAuth 2.0 tab to indicate you are making a OAuth POST
 * In your existing tokens, make sure to add token to header
 * Send the `GET` or `POST` request
-
-# Categories
-
-A chart of accounts is a listing of the names of the accounts that a company has identified and made available for recording trransactions in its general ledger. A company has the flexibility to tailor its chart of accounts to best suit its needs, including adding accounts as needed.
-
-## Get All Categories
-
-``` ruby
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 654321,
-    "name": "Category 1",
-    "mastercategory": 654321,
-    "built_in": true,
-    "transaction_type_name": "both"
-  },
-  {
-    "id": 765432,
-    "name": "Category 2",
-    "mastercategory": 765432,
-    "built_in": false,
-    "transaction_type_name": "spending"
-  },
-]
-```
-
-This endpoint retrieves all categories.
-
-### HTTPS Request
-
-`GET https://api.indinero.com/api/v2/categories`
-
-
-# Transactions
-
-An accounting transaction is a business event having a monetary impact on the financial statements of a business. It is recorded in the accounting records of the business.
-
-## Get All Transactions
-
-``` ruby
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 310741769,
-    "company_id": 12345,
-    "amount": "100.2",
-    "real_amount": "-100.2",
-    "account_id": 11905941,
-    "post_date": "2016-04-18T00:00:00.000Z",
-    "container_type": "bank",
-    "description_user": null,
-    "description_auto": "Home Depot",
-    "detail": "Home Depot",
-    "memo": "bathroom, kitchen",
-    "base_type": "debit",
-    "currency_code": null,
-    "split_id": -1,
-    "category_id": 123456
-  },
-  {
-    "id": 310741768,
-    "company_id": 12345,
-    "amount": "10000.0",
-    "real_amount": "10000.0",
-    "account_id": 11905941,
-    "post_date": "2016-04-18T00:00:00.000Z",
-    "container_type": "bank",
-    "description_user": null,
-    "description_auto": "Paypal",
-    "detail": "Paypal",
-    "memo": "deposit",
-    "base_type": "credit",
-    "currency_code": null,
-    "split_id": -1,
-    "category_id": 234567
-  }
-]
-```
-
-This endpoint retrieves all transactions.
-
-### HTTPS Request
-
-`GET https://api.indinero.com/api/v2/transactions`
 
 # 2-Factor Authentication
 
@@ -263,87 +172,4 @@ This endpoint removes two factor details from user.
 ###HTTPS Request
 `POST https://api.indinero.com/api/v2/two_factor/users/{USER_ID}/delete?api_key={KEY}`
 
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
+# Resources
