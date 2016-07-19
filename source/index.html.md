@@ -175,6 +175,94 @@ This endpoint retrieves all transactions.
 
 `GET https://api.indinero.com/api/v2/transactions`
 
+# 2-Factor Authentication
+
+## Register User
+```shell
+curl "http://api.indinero.com/api/v2/two_factor/new?api_key=d57d919d11e6b" \
+-d user[email]="user@domain.com" \
+-d user[cellphone]="317-338-9302" \
+-d user[country_code]="54"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "message": "User created successfully.",
+  "user": {
+    "id": 209
+  },
+  "success": true
+}
+```
+
+This endpoint registers user to two factor.
+###HTTPS Request
+`POST https://api.indinero.com/api/v2/two_factor/new?api_key={KEY}`
+
+## Request Token
+```shell
+curl -i "http://api.indinero.com/api/v2/two_factor/sms/209?api_key=d57d919d11e6b"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "message": "Token was sent.",
+  "cellphone": "+54-XXX-XXX-XX02"
+}
+```
+
+This endpoint requests two factor token for user.
+###HTTPS Request
+`GET https://api.indinero.com/api/v2/two_factor/sms/{AUTHY_ID}?api_key={KEY}`
+
+###Force SMS
+You can pass in a `force=true` parameter to this api. This will force the SMS to be send even if the user is using the Authy App.
+
+## Verify Token
+```shell
+curl -i "https://api.indinero.com/api/v2/two_factor/verify/0000000/209?api_key=d57d919d11e6b"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": "true",
+  "message": "Token is valid.",
+  "token": "is valid"
+}
+```
+
+This endpoint verifies two factor token of user.
+###HTTPS Request
+`GET https://api.indinero.com/api/v2/two_factor/verify/{TOKEN}/{AUTHY_ID}?api_key={KEY}`
+
+###Force Validation
+You can pass in a `force=true` parameter to this api to check the user regardless of an unfinished registration.
+
+## Delete User
+```shell
+curl -i "https://api.indinero.com/api/v2/two_factor/users/209/delete?api_key=d57d919d11e6b"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "message": "User was added to remove.",
+  "success": true
+}
+```
+
+This endpoint removes two factor details from user.
+###HTTPS Request
+`POST https://api.indinero.com/api/v2/two_factor/users/{USER_ID}/delete?api_key={KEY}`
+
 # Kittens
 
 ## Get All Kittens
