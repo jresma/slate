@@ -125,7 +125,7 @@
 
 <h1 id="developer-account">Developer Account</h1>
 
-<p>To create an account go to our <a href="https://api.indinero.com/developer/sign_up">sign up page</a>. Once registered, you will be provided with a set of keys for API authentication.</p>
+<p>To create an account, go to our <a href="https://api.indinero.com/developer/sign_up">sign up page</a>. Once registered, you will be provided with a set of keys for API authentication.</p>
 
 <p>After creating an account, you can now create an application.</p>
 
@@ -162,6 +162,40 @@
 <h3 id="3-making-authenticated-requests">3: Making authenticated requests</h3>
 
 <p>Once the client has obtained an API access token from the previous step, it can used to make authenticated requests to the API. Authenticated requests are signed with a header pair of <code class="prettyprint">Authorization: Bearer {access_token}</code> where <em>{access_token}</em> is replaced with the permanent token for the user.</p>
+
+<h2 id="postman">Postman</h2>
+
+<p>Postman is a powerful API testing and development suite used to help developers explore our Public API.</p>
+
+<h3 id="download-postman">Download Postman</h3>
+
+<p>Download and Install the <a href="https://www.getpostman.com/">Postman Packaged Chrome Application</a></p>
+
+<h3 id="retrieve-a-token">Retrieve a Token</h3>
+
+<ul>
+<li>Navigate to the API Credentials area of the Developer Portal to set your Redirect URL to <code class="prettyprint">https://www.getpostman.com/oauth2/callback</code></li>
+<li>Select the OAuth 2.0 Tab in Postman and paste in your:
+
+<ul>
+<li>Authorization URL</li>
+<li>Access Token URL</li>
+<li>Client ID</li>
+<li>Client Secret</li>
+</ul></li>
+<li>Click Get Access Token</li>
+<li>Authenticate / Approve Access with inDinero in the popup window</li>
+<li>Name and Save the retrieved token</li>
+</ul>
+
+<h3 id="making-authenticated-requests">Making Authenticated Requests</h3>
+
+<ul>
+<li>Select an endpoint</li>
+<li>Click to OAuth 2.0 tab to indicate you are making a OAuth POST</li>
+<li>In your existing tokens, make sure to add token to header</li>
+<li>Send the <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request</li>
+</ul>
 
 <h1 id="categories">Categories</h1>
 
@@ -250,40 +284,6 @@
 <h3 id="https-request">HTTPS Request</h3>
 
 <p><code class="prettyprint">GET https://api.indinero.com/api/v2/transactions</code></p>
-
-<h2 id="postman">Postman</h2>
-
-<p>Postman is a powerful API testing and development suite used to help developers explore our Public API.</p>
-
-<h3 id="download-postman">Download Postman</h3>
-
-<p>Download and Install the <a href="https://www.getpostman.com/">Postman Packaged Chrome Application</a></p>
-
-<h3 id="retrieve-a-token">Retrieve a Token</h3>
-
-<ul>
-<li>Navigate to the API Credentials area of the Developer Portal to set your Redirect URL to <code class="prettyprint">https://www.getpostman.com/oauth2/callback</code></li>
-<li>Select the OAuth 2.0 Tab in Postman and paste in your:
-
-<ul>
-<li>Authorization URL</li>
-<li>Access Token URL</li>
-<li>Client ID</li>
-<li>Client Secret</li>
-</ul></li>
-<li>Click Get Access Token</li>
-<li>Authenticate / Approve Access with inDinero in the popup window</li>
-<li>Name and Save the retrieved token</li>
-</ul>
-
-<h3 id="making-authenticated-requests">Making Authenticated Requests</h3>
-
-<ul>
-<li>Select an endpoint</li>
-<li>Click to OAuth 2.0 tab to indicate you are making a OAuth POST</li>
-<li>In your existing tokens, make sure to add token to header</li>
-<li>Send the <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request</li>
-</ul>
 
 <h1 id="kittens">Kittens</h1>
 
