@@ -294,7 +294,170 @@
 
 <h1 id="resources">Resources</h1>
 
-          <h2 id="category"><a name="resource-category">Category</a></h2>
+          <h2 id="bank-account"><a name="resource-bank_account">Bank Account</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>Bank account items added to user&rsquo;s company.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>account_name</strong></td>
+<td><em>string</em></td>
+<td>Bank Account name</td>
+<td><code class="prettyprint">&quot;Bank of Asia&quot;</code></td>
+</tr>
+<tr>
+<td><strong>account_number_string</strong></td>
+<td><em>nullable string</em></td>
+<td>account number string</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>balance</strong></td>
+<td><em>number</em></td>
+<td>bank account balance</td>
+<td><code class="prettyprint">5000.0</code></td>
+</tr>
+<tr>
+<td><strong>checking_account_number</strong></td>
+<td><em>nullable string</em></td>
+<td>checking account number</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>coa_number</strong></td>
+<td><em>nullable string</em></td>
+<td>chart of account number</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>company_id</strong></td>
+<td><em>integer</em></td>
+<td>Company ID</td>
+<td><code class="prettyprint">301</code></td>
+</tr>
+<tr>
+<td><strong>created_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item was created</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>currency_code</strong></td>
+<td><em>nullable string</em></td>
+<td>currency code</td>
+<td><code class="prettyprint">&quot;USD&quot;</code></td>
+</tr>
+<tr>
+<td><strong>discontinued</strong></td>
+<td><em>boolean</em></td>
+<td>discontinued</td>
+<td><code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of bank account</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>indinero_status</strong></td>
+<td><em>nullable integer</em></td>
+<td>inDinero status</td>
+<td><code class="prettyprint">3</code></td>
+</tr>
+<tr>
+<td><strong>intuit_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>intuit id</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>item_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>item id</td>
+<td><code class="prettyprint">200</code></td>
+</tr>
+<tr>
+<td><strong>stock_account</strong></td>
+<td><em>nullable boolean</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>stripe_account_id</strong></td>
+<td><em>nullable string</em></td>
+<td>stripe account id</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>svb_account_number</strong></td>
+<td><em>nullable string</em></td>
+<td>SVB account number</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>updated_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item was last updated</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>yodlee_id</strong></td>
+<td><em>nullable integer</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="bank-account-list">Bank Account List</h3>
+
+<p>This endpoint retrieves all bank accounts.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/bank_accounts
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/bank_accounts
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank of Asia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stock_account"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"yodlee_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">5000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"indinero_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"svb_account_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"intuit_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_number_string"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discontinued"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"checking_account_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"coa_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stripe_account_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h2 id="category"><a name="resource-category">Category</a></h2>
 
 <p>Stability: <code class="prettyprint">prototype</code></p>
 
@@ -324,7 +487,7 @@
 </tr>
 <tr>
 <td><strong>mastercategory</strong></td>
-<td><em>integer</em></td>
+<td><em>nullable integer</em></td>
 <td>master category</td>
 <td><code class="prettyprint">654321</code></td>
 </tr>
@@ -366,6 +529,350 @@
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
+<h2 id="financial-account"><a name="resource-financial_account">Financial Account</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>Financial account items added to user&rsquo;s company.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>company_id</strong></td>
+<td><em>integer</em></td>
+<td>Company ID</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>container_type</strong></td>
+<td><em>string</em></td>
+<td>Container type</td>
+<td><code class="prettyprint">&quot;bank&quot;</code></td>
+</tr>
+<tr>
+<td><strong>created_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item was created</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>display_error</strong></td>
+<td><em>nullable boolean</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of financial account</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>intuit_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>intuit id</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>intuit_status_code</strong></td>
+<td><em>nullable integer</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>last_transaction_date</strong></td>
+<td><em>nullable date</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>last_update_attempt</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item update was last attempted</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>last_update_time</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item was updated</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>linked_item_id</strong></td>
+<td><em>nullable integer</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>mfa</strong></td>
+<td><em>nullable string</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td><em>string</em></td>
+<td>Financial Account name</td>
+<td><code class="prettyprint">&quot;Bank of Asia&quot;</code></td>
+</tr>
+<tr>
+<td><strong>poll_status</strong></td>
+<td><em>nullable string</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>refresh_status_code</strong></td>
+<td><em>nullable integer</em></td>
+<td>refresh status code</td>
+<td><code class="prettyprint">1</code></td>
+</tr>
+<tr>
+<td><strong>routing_number</strong></td>
+<td><em>nullable integer</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>send_banklog_email</strong></td>
+<td><em>nullable boolean</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>service_id</strong></td>
+<td><em>integer</em></td>
+<td>service id</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>start_poll_time</strong></td>
+<td><em>nullable date-time</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>status</strong></td>
+<td><em>nullable integer</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>updated_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item was last updated</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>yodlee_id</strong></td>
+<td><em>nullable integer</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="financial-account-list">Financial Account List</h3>
+
+<p>This endpoint retrieves all financial accounts.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/financial_accounts
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/financial_accounts
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"intuit_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"service_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank of Asia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"container_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"refresh_status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_update_attempt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"yodlee_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mfa"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"start_poll_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"poll_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"linked_item_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"intuit_status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"display_error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"send_banklog_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transaction_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h2 id="receipt"><a name="resource-receipt">Receipt</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>receipt</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>amount</strong></td>
+<td><em>number</em></td>
+<td>receipt amount</td>
+<td><code class="prettyprint">1234.0</code></td>
+</tr>
+<tr>
+<td><strong>company_id</strong></td>
+<td><em>integer</em></td>
+<td>Company ID</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td><em>string</em></td>
+<td>receipt description</td>
+<td><code class="prettyprint">&quot;this is a receipt description&quot;</code></td>
+</tr>
+<tr>
+<td><strong>email</strong></td>
+<td><em>nullable string</em></td>
+<td>receipt email</td>
+<td><code class="prettyprint">&quot;this is a receipt email&quot;</code></td>
+</tr>
+<tr>
+<td><strong>email_date</strong></td>
+<td><em>nullable date-time</em></td>
+<td>receipt email date</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>email_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>receipt email_id</td>
+<td><code class="prettyprint">42</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of receipt</td>
+<td><code class="prettyprint">1001</code></td>
+</tr>
+<tr>
+<td><strong>merchant</strong></td>
+<td><em>nullable string</em></td>
+<td>receipt merchant</td>
+<td><code class="prettyprint">&quot;this is a receipt merchant&quot;</code></td>
+</tr>
+<tr>
+<td><strong>processor</strong></td>
+<td><em>nullable string</em></td>
+<td>receipt processor</td>
+<td><code class="prettyprint">&quot;this is a receipt processor&quot;</code></td>
+</tr>
+<tr>
+<td><strong>resend_date</strong></td>
+<td><em>nullable date-time</em></td>
+<td>receipt resend date</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>status</strong></td>
+<td><em>nullable integer</em></td>
+<td>receipt status</td>
+<td><code class="prettyprint">1</code></td>
+</tr>
+<tr>
+<td><strong>subject</strong></td>
+<td><em>string</em></td>
+<td>receipt subject</td>
+<td><code class="prettyprint">&quot;this is a receipt subject&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="receipt-create">Receipt Create</h3>
+
+<p>Create a new receipt.</p>
+<pre class="highlight plaintext"><code>POST /api/v2/receipts
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/receipts <span class="se">\</span>
+  -d <span class="s1">'{
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 201 Created
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt subject"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt description"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"processor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt processor"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt merchant"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt email"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="receipt-list">Receipt List</h3>
+
+<p>list existing receipts.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/receipts
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/receipts
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt subject"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt description"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"processor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt processor"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt merchant"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt email"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
 <h2 id="transaction"><a name="resource-transaction">Transaction</a></h2>
 
 <p>Stability: <code class="prettyprint">prototype</code></p>
@@ -390,9 +897,9 @@
 </tr>
 <tr>
 <td><strong>amount</strong></td>
-<td><em>float</em></td>
+<td><em>number</em></td>
 <td></td>
-<td></td>
+<td><code class="prettyprint">42.0</code></td>
 </tr>
 <tr>
 <td><strong>base_type</strong></td>
@@ -462,9 +969,9 @@
 </tr>
 <tr>
 <td><strong>real_amount</strong></td>
-<td><em>float</em></td>
+<td><em>number</em></td>
 <td></td>
-<td></td>
+<td><code class="prettyprint">42.0</code></td>
 </tr>
 <tr>
 <td><strong>split_id</strong></td>
@@ -491,8 +998,8 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"real_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">42.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"real_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">42.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="nt">"post_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"container_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
