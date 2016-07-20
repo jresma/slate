@@ -18,13 +18,13 @@ search: true
 
 # Introduction
 
-Welcome to the inDinero API! You can use our API to access inDinero API endpoints, which can get information on various companies, transactions, reimbursements, and receipts in our database.
+Welcome to the inDinero API! You can use our API to access inDinero API endpoints which can get information on various companies, transactions, reimbursements, and receipts in our database.
 
-inDinero uses API keys to allow access to the API. You can register a new inDinero API key at our [developer portal](https://api.indinero.com/).
+inDinero uses API keys to allow access to the API. You can register a new inDinero API key at our [Developer Portal](https://api.indinero.com/).
 
 # Developer Account
 
-To create an account, go to our [sign up page](https://api.indinero.com/developer/sign_up). Once registered, you will be provided with a set of keys for API authentication.
+To create an account, go to our [Sign Up Page](https://api.indinero.com/developer/sign_up). Once registered, you will be provided with a set of keys for API authentication.
 
 After creating an account, you can now create an application.
 
@@ -38,7 +38,7 @@ inDinero API is using OAuth 2.0, the standard used by most APIs for authenticati
 
 Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly-accessible areas such GitHub, client-side code, and so forth.
 
-Navigate to the **Applications** tab area of the [developer portal](https://api.indinero.com/) to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.
+Navigate to the **Applications** tab area of the [Developer Portal](https://api.indinero.com/) to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.
 
 **Base URL:** `https://api.indinero.com`
 
@@ -57,7 +57,7 @@ The first step of process is to prompt the user for authorization. To display th
 After successfully authenticating in the prompt, inDinero will respond with an authorization code to be used in the Access Token URL: `https://api.indinero.com/oauth/token?client_id={api_key}&client_secret={client_secret}&code={authorization_code}&grant_type=authorization_code&redirect_uri={redirect_uri}`
 
 ### 3: Making authenticated requests
-Once the client has obtained an API access token from the previous step, it can used to make authenticated requests to the API. Authenticated requests are signed with a header pair of `Authorization: Bearer {access_token}` where *{access_token}* is replaced with the permanent token for the user.
+Once the client has obtained an API access token from the previous step, it can be used to make authenticated requests to the API. Authenticated requests are signed with a header pair of `Authorization: Bearer {access_token}` where *{access_token}* is replaced with the permanent token for the user.
 
 ## Postman
 
@@ -106,7 +106,7 @@ curl "http://api.indinero.com/api/v2/two_factor/new?api_key=d57d919d11e6b" \
 }
 ```
 
-This endpoint registers user to two factor.
+This endpoint registers user to Two-factor Authentication.
 ###HTTPS Request
 `POST https://api.indinero.com/api/v2/two_factor/new?api_key={KEY}`
 
@@ -125,12 +125,12 @@ curl -i "http://api.indinero.com/api/v2/two_factor/sms/209?api_key=d57d919d11e6b
 }
 ```
 
-This endpoint requests two factor token for user.
+This endpoint requests Two-factor token for user.
 ###HTTPS Request
 `GET https://api.indinero.com/api/v2/two_factor/sms/{AUTHY_ID}?api_key={KEY}`
 
 ###Force SMS
-You can pass in a `force=true` parameter to this api. This will force the SMS to be send even if the user is using the Authy App.
+You can pass in a `force=true` parameter to this API. This will force the SMS to be send even if the user is using the Authy App.
 
 ## Verify Token
 ```shell
@@ -147,12 +147,12 @@ curl -i "https://api.indinero.com/api/v2/two_factor/verify/0000000/209?api_key=d
 }
 ```
 
-This endpoint verifies two factor token of user.
+This endpoint verifies Two-factor token of user.
 ###HTTPS Request
 `GET https://api.indinero.com/api/v2/two_factor/verify/{TOKEN}/{AUTHY_ID}?api_key={KEY}`
 
 ###Force Validation
-You can pass in a `force=true` parameter to this api to check the user regardless of an unfinished registration.
+You can pass in a `force=true` parameter to this API to check the user regardless of an unfinished registration.
 
 ## Delete User
 ```shell
@@ -168,7 +168,7 @@ curl -i "https://api.indinero.com/api/v2/two_factor/users/209/delete?api_key=d57
 }
 ```
 
-This endpoint removes two factor details from user.
+This endpoint removes Two-Factor details from user.
 ###HTTPS Request
 `POST https://api.indinero.com/api/v2/two_factor/users/{USER_ID}/delete?api_key={KEY}`
 
