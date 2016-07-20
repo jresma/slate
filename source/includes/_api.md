@@ -126,6 +126,77 @@ HTTP/1.1 200 OK
 ```
 
 
+## <a name="resource-credit_card">Credit Card</a>
+
+Stability: `prototype`
+
+Credit card financial accounts added to company as data source.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **account_name** | *string* | Credit Card Account name | `"Bank of Asia"` |
+| **account_number_string** | *nullable string* | account number string | `null` |
+| **balance** | *number* | Credit card balance | `5000.0` |
+| **coa_number** | *nullable string* | Chart of Accounts number | `null` |
+| **company_id** | *integer* | Company ID | `301` |
+| **created_at** | *nullable date-time* | when the item was created | `null` |
+| **credit_limit** | *nullable string* | The card's credit limit | `5000` |
+| **currency_code** | *nullable string* | currency code | `"USD"` |
+| **discontinued** | *boolean* | discontinued | `false` |
+| **id** | *integer* | unique identifier of credit card | `100` |
+| **indinero_status** | *nullable integer* | inDinero status | `3` |
+| **intuit_id** | *nullable integer* | intuit id | `null` |
+| **item_id** | *nullable integer* | Financial account | `200` |
+| **updated_at** | *nullable date-time* | when the item was last updated | `null` |
+| **yodlee_id** | *nullable integer* |  | `null` |
+
+### Credit Card List
+
+This endpoint retrieves all credit cards.
+
+```
+GET /api/v2/credit_cards
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/credit_cards
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+[
+  {
+    "id": 100,
+    "item_id": 200,
+    "company_id": 301,
+    "account_name": "Bank of Asia",
+    "created_at": "2015-01-01T12:00:00Z",
+    "updated_at": "2015-01-01T12:00:00Z",
+    "currency_code": "USD",
+    "yodlee_id": 42,
+    "balance": 5000.0,
+    "indinero_status": 3,
+    "intuit_id": null,
+    "account_number_string": null,
+    "discontinued": false,
+    "coa_number": null,
+    "credit_limit": 5000
+  }
+]
+```
+
+
 ## <a name="resource-financial_account">Financial Account</a>
 
 Stability: `prototype`
