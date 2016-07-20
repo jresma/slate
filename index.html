@@ -120,13 +120,13 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the inDinero API! You can use our API to access inDinero API endpoints, which can get information on various companies, transactions, reimbursements, and receipts in our database.</p>
+<p>Welcome to the inDinero API! You can use our API to access inDinero API endpoints which can get information on various companies, transactions, reimbursements, and receipts in our database.</p>
 
-<p>inDinero uses API keys to allow access to the API. You can register a new inDinero API key at our <a href="https://api.indinero.com/">developer portal</a>.</p>
+<p>inDinero uses API keys to allow access to the API. You can register a new inDinero API key at our <a href="https://api.indinero.com/">Developer Portal</a>.</p>
 
 <h1 id="developer-account">Developer Account</h1>
 
-<p>To create an account, go to our <a href="https://api.indinero.com/developer/sign_up">sign up page</a>. Once registered, you will be provided with a set of keys for API authentication.</p>
+<p>To create an account, go to our <a href="https://api.indinero.com/developer/sign_up">Sign Up Page</a>. Once registered, you will be provided with a set of keys for API authentication.</p>
 
 <p>After creating an account, you can now create an application.</p>
 
@@ -140,7 +140,7 @@
 
 <p>Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly-accessible areas such GitHub, client-side code, and so forth.</p>
 
-<p>Navigate to the <strong>Applications</strong> tab area of the <a href="https://api.indinero.com/">developer portal</a> to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.</p>
+<p>Navigate to the <strong>Applications</strong> tab area of the <a href="https://api.indinero.com/">Developer Portal</a> to set your Redirect URL. The Redirect URL is the URL within your application that will receive the OAuth2 credentials.</p>
 
 <p><strong>Base URL:</strong> <code class="prettyprint">https://api.indinero.com</code></p>
 
@@ -162,7 +162,7 @@
 
 <h3 id="3-making-authenticated-requests">3: Making authenticated requests</h3>
 
-<p>Once the client has obtained an API access token from the previous step, it can used to make authenticated requests to the API. Authenticated requests are signed with a header pair of <code class="prettyprint">Authorization: Bearer {access_token}</code> where <em>{access_token}</em> is replaced with the permanent token for the user.</p>
+<p>Once the client has obtained an API access token from the previous step, it can be used to make authenticated requests to the API. Authenticated requests are signed with a header pair of <code class="prettyprint">Authorization: Bearer {access_token}</code> where <em>{access_token}</em> is replaced with the permanent token for the user.</p>
 
 <h2 id="postman">Postman</h2>
 
@@ -219,7 +219,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint registers user to two factor.</p>
+<p>This endpoint registers user to Two-factor Authentication.</p>
 
 <h3 id="https-request">HTTPS Request</h3>
 
@@ -239,7 +239,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint requests two factor token for user.</p>
+<p>This endpoint requests Two-factor token for user.</p>
 
 <h3 id="https-request">HTTPS Request</h3>
 
@@ -247,7 +247,7 @@
 
 <h3 id="force-sms">Force SMS</h3>
 
-<p>You can pass in a <code class="prettyprint">force=true</code> parameter to this api. This will force the SMS to be send even if the user is using the Authy App.</p>
+<p>You can pass in a <code class="prettyprint">force=true</code> parameter to this API. This will force the SMS to be send even if the user is using the Authy App.</p>
 
 <h2 id="verify-token">Verify Token</h2>
 <pre class="highlight shell"><code>curl -i <span class="s2">"https://api.indinero.com/api/v2/two_factor/verify/0000000/209?api_key=d57d919d11e6b"</span>
@@ -263,7 +263,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint verifies two factor token of user.</p>
+<p>This endpoint verifies Two-factor token of user.</p>
 
 <h3 id="https-request">HTTPS Request</h3>
 
@@ -271,7 +271,7 @@
 
 <h3 id="force-validation">Force Validation</h3>
 
-<p>You can pass in a <code class="prettyprint">force=true</code> parameter to this api to check the user regardless of an unfinished registration.</p>
+<p>You can pass in a <code class="prettyprint">force=true</code> parameter to this API to check the user regardless of an unfinished registration.</p>
 
 <h2 id="delete-user">Delete User</h2>
 <pre class="highlight shell"><code>curl -i <span class="s2">"https://api.indinero.com/api/v2/two_factor/users/209/delete?api_key=d57d919d11e6b"</span>
@@ -286,7 +286,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint removes two factor details from user.</p>
+<p>This endpoint removes Two-Factor details from user.</p>
 
 <h3 id="https-request">HTTPS Request</h3>
 
@@ -525,6 +525,148 @@
     </span><span class="nt">"mastercategory"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
     </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h2 id="credit-card"><a name="resource-credit_card">Credit Card</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>Credit card financial accounts added to company as data source.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>account_name</strong></td>
+<td><em>string</em></td>
+<td>Credit Card Account name</td>
+<td><code class="prettyprint">&quot;Bank of Asia&quot;</code></td>
+</tr>
+<tr>
+<td><strong>account_number_string</strong></td>
+<td><em>nullable string</em></td>
+<td>account number string</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>balance</strong></td>
+<td><em>number</em></td>
+<td>Credit card balance</td>
+<td><code class="prettyprint">5000.0</code></td>
+</tr>
+<tr>
+<td><strong>coa_number</strong></td>
+<td><em>nullable string</em></td>
+<td>Chart of Accounts number</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>company_id</strong></td>
+<td><em>integer</em></td>
+<td>Company ID</td>
+<td><code class="prettyprint">301</code></td>
+</tr>
+<tr>
+<td><strong>created_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item was created</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>credit_limit</strong></td>
+<td><em>nullable string</em></td>
+<td>The card&rsquo;s credit limit</td>
+<td><code class="prettyprint">5000</code></td>
+</tr>
+<tr>
+<td><strong>currency_code</strong></td>
+<td><em>nullable string</em></td>
+<td>currency code</td>
+<td><code class="prettyprint">&quot;USD&quot;</code></td>
+</tr>
+<tr>
+<td><strong>discontinued</strong></td>
+<td><em>boolean</em></td>
+<td>discontinued</td>
+<td><code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of credit card</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>indinero_status</strong></td>
+<td><em>nullable integer</em></td>
+<td>inDinero status</td>
+<td><code class="prettyprint">3</code></td>
+</tr>
+<tr>
+<td><strong>intuit_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>intuit id</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>item_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>Financial account</td>
+<td><code class="prettyprint">200</code></td>
+</tr>
+<tr>
+<td><strong>updated_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when the item was last updated</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>yodlee_id</strong></td>
+<td><em>nullable integer</em></td>
+<td></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="credit-card-list">Credit Card List</h3>
+
+<p>This endpoint retrieves all credit cards.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/credit_cards
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/credit_cards
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank of Asia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"yodlee_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">5000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"indinero_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"intuit_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_number_string"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discontinued"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"coa_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
