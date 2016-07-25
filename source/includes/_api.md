@@ -126,6 +126,81 @@ HTTP/1.1 200 OK
 ```
 
 
+## <a name="resource-company">Company</a>
+
+Stability: `prototype`
+
+A company in the Indinero App.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **fiscal_year_end** | *string* | Fiscal year end date. | `"12/31"` |
+| **id** | *integer* | Unique identity of a company | `401230` |
+| **name** | *string* | Name of the company | `"Acme Co"` |
+
+### Company Logged in user's company details
+
+User's company information
+
+```
+GET /api/v2/user/company
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/user/company
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 401230,
+  "name": "Acme Co",
+  "fiscal_year_end": "12/31"
+}
+```
+
+### Company Company Logo
+
+Company Logo
+
+```
+GET /api/v2/user/company/logo
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/user/company/logo
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 401230,
+  "name": "Acme Co",
+  "fiscal_year_end": "12/31"
+}
+```
+
+
 ## <a name="resource-credit_card">Credit Card</a>
 
 Stability: `prototype`
@@ -389,6 +464,215 @@ HTTP/1.1 200 OK
 ```
 
 
+## <a name="resource-reimbursement">Reimbursement</a>
+
+Stability: `prototype`
+
+Reimbursement
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **cannot_process_reason** | *nullable string* | Reason why the reimbursement was not processed | `"ACH payment failed"` |
+| **category:account_number** | *string* | A category's account number | `"4123"` |
+| **category:id** | *string* | A category's identifier | `1234` |
+| **category:name** | *string* | A category's name | `"Uncategorized"` |
+| **company:id** | *integer* | A company's identifier | `42` |
+| **created_at** | *nullable date-time* | Time when the reimbursement was created | `null` |
+| **description** | *string* | Description of the reimbursement submitted. | `"Github Processing Fee."` |
+| **employee** | *nullable object* | Employee who submitted the reimbursement request | `null` |
+| **employee:email** | *nullable string* | Employee's email address | `"harrison.redford@example.com"` |
+| **employee:full_name** | *nullable string* | Employee's full name | `"Harrison Redford"` |
+| **id** | *integer* | Unique identifier of the reimbursement. | `123` |
+| **person:full_name** | *nullable string* | Full name of the person | `"John Done"` |
+| **receipt** | *nullable object* | Receipt associated with the reimbursement | `null` |
+| **receipt:id** | *integer* | Receipt's unique identifier. | `1234` |
+| **status** | *integer* | A reimubursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 5 | `3` |
+| **value** | *number* | Amount to reimburse. | `9.99` |
+
+### Reimbursement List
+
+List reimbursements
+
+```
+GET /api/v2/reimbursements
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/reimbursements
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 123,
+  "company": {
+    "id": 42
+  },
+  "status": 3,
+  "value": 9.99,
+  "description": "Github Processing Fee.",
+  "created_at": "2015-01-01T12:00:00Z",
+  "cannot_process_reason": "ACH payment failed",
+  "employee": {
+    "full_name": "Harrison Redford",
+    "email": "harrison.redford@example.com"
+  },
+  "person": {
+    "full_name": "John Done"
+  },
+  "category": {
+    "id": 1234,
+    "name": "Uncategorized",
+    "account_number": "4123"
+  },
+  "receipt": {
+    "id": 1234
+  }
+}
+```
+
+### Reimbursement Approve reimbursements
+
+Approve reimbursements
+
+```
+POST /api/v2/reimbursements/approve
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **reimbursement_ids** | *array* | List of reimbursement ids. | `[5]` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X POST https://api.indinero.com/api/v2/reimbursements/approve \
+  -d '{
+  "reimbursement_ids": [
+    5
+  ]
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+[
+  {
+    "id": 123,
+    "company": {
+      "id": 42
+    },
+    "status": 3,
+    "value": 9.99,
+    "description": "Github Processing Fee.",
+    "created_at": "2015-01-01T12:00:00Z",
+    "cannot_process_reason": "ACH payment failed",
+    "employee": {
+      "full_name": "Harrison Redford",
+      "email": "harrison.redford@example.com"
+    },
+    "person": {
+      "full_name": "John Done"
+    },
+    "category": {
+      "id": 1234,
+      "name": "Uncategorized",
+      "account_number": "4123"
+    },
+    "receipt": {
+      "id": 1234
+    }
+  }
+]
+```
+
+### Reimbursement Deny reimbursements
+
+Deny reimbursements
+
+```
+POST /api/v2/reimbursements/deny
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **reimbursement_ids** | *array* | List of reimbursement ids. | `[5]` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X POST https://api.indinero.com/api/v2/reimbursements/deny \
+  -d '{
+  "reimbursement_ids": [
+    5
+  ]
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+[
+  {
+    "id": 123,
+    "company": {
+      "id": 42
+    },
+    "status": 3,
+    "value": 9.99,
+    "description": "Github Processing Fee.",
+    "created_at": "2015-01-01T12:00:00Z",
+    "cannot_process_reason": "ACH payment failed",
+    "employee": {
+      "full_name": "Harrison Redford",
+      "email": "harrison.redford@example.com"
+    },
+    "person": {
+      "full_name": "John Done"
+    },
+    "category": {
+      "id": 1234,
+      "name": "Uncategorized",
+      "account_number": "4123"
+    },
+    "receipt": {
+      "id": 1234
+    }
+  }
+]
+```
+
+
 ## <a name="resource-transaction">Transaction</a>
 
 Stability: `prototype`
@@ -457,6 +741,84 @@ HTTP/1.1 200 OK
     "category_id": 42
   }
 ]
+```
+
+
+## <a name="resource-user">User</a>
+
+Stability: `prototype`
+
+A user in the Indinero App.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **company_id** | *number* | Identifier of the company a user belongs to | `1234` |
+| **display_name** | *string* | Display name of the user | `"John Done"` |
+| **email** | *string* | Email address of the user | `"john@done.com"` |
+| **id** | *number* | Unique identifier of a user | `123` |
+
+### User Logged in user information
+
+Get logged in user information
+
+```
+GET /api/v2/user
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/user
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 123,
+  "display_name": "John Done",
+  "email": "john@done.com",
+  "company_id": 1234
+}
+```
+
+### User User Profile Photo
+
+Get logged in user profile photo
+
+```
+GET /api/v2/user/profile_photo
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/user/profile_photo
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 123,
+  "display_name": "John Done",
+  "email": "john@done.com",
+  "company_id": 1234
+}
 ```
 
 

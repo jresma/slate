@@ -1,0 +1,1523 @@
+{
+  "$schema": "http://interagent.github.io/interagent-hyper-schema",
+  "type": [
+    "object"
+  ],
+  "definitions": {
+    "bank_account": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Bank Account",
+      "description": "Bank account items added to user's company.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "id",
+        "item_id",
+        "company_id"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of bank account",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "item_id": {
+          "description": "item id",
+          "example": 200,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "company_id": {
+          "description": "Company ID",
+          "example": 301,
+          "type": [
+            "integer"
+          ]
+        },
+        "account_name": {
+          "description": "Bank Account name",
+          "example": "Bank of Asia",
+          "type": [
+            "string"
+          ]
+        },
+        "created_at": {
+          "description": "when the item was created",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "description": "when the item was last updated",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "currency_code": {
+          "description": "currency code",
+          "example": "USD",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stock_account": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "yodlee_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "balance": {
+          "description": "bank account balance",
+          "example": 5000.0,
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "indinero_status": {
+          "description": "inDinero status",
+          "example": 3,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "svb_account_number": {
+          "description": "SVB account number",
+          "example": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intuit_id": {
+          "description": "intuit id",
+          "example": null,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "account_number_string": {
+          "description": "account number string",
+          "example": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "discontinued": {
+          "description": "discontinued",
+          "example": false,
+          "type": [
+            "boolean"
+          ]
+        },
+        "checking_account_number": {
+          "description": "checking account number",
+          "example": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coa_number": {
+          "description": "chart of account number",
+          "example": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stripe_account_id": {
+          "description": "stripe account id",
+          "example": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/bank_account/definitions/id"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/bank_account/definitions/id"
+        },
+        "item_id": {
+          "$ref": "#/definitions/bank_account/definitions/item_id"
+        },
+        "company_id": {
+          "$ref": "#/definitions/bank_account/definitions/company_id"
+        },
+        "account_name": {
+          "$ref": "#/definitions/bank_account/definitions/account_name"
+        },
+        "created_at": {
+          "$ref": "#/definitions/bank_account/definitions/created_at"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/bank_account/definitions/updated_at"
+        },
+        "currency_code": {
+          "$ref": "#/definitions/bank_account/definitions/currency_code"
+        },
+        "stock_account": {
+          "$ref": "#/definitions/bank_account/definitions/stock_account"
+        },
+        "yodlee_id": {
+          "$ref": "#/definitions/bank_account/definitions/yodlee_id"
+        },
+        "balance": {
+          "$ref": "#/definitions/bank_account/definitions/balance"
+        },
+        "indinero_status": {
+          "$ref": "#/definitions/bank_account/definitions/indinero_status"
+        },
+        "svb_account_number": {
+          "$ref": "#/definitions/bank_account/definitions/svb_account_number"
+        },
+        "intuit_id": {
+          "$ref": "#/definitions/bank_account/definitions/intuit_id"
+        },
+        "account_number_string": {
+          "$ref": "#/definitions/bank_account/definitions/account_number_string"
+        },
+        "discontinued": {
+          "$ref": "#/definitions/bank_account/definitions/discontinued"
+        },
+        "checking_account_number": {
+          "$ref": "#/definitions/bank_account/definitions/checking_account_number"
+        },
+        "coa_number": {
+          "$ref": "#/definitions/bank_account/definitions/coa_number"
+        },
+        "stripe_account_id": {
+          "$ref": "#/definitions/bank_account/definitions/stripe_account_id"
+        }
+      },
+      "links": [
+        {
+          "description": "This endpoint retrieves all bank accounts.",
+          "href": "/api/v2/bank_accounts",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        }
+      ]
+    },
+    "category": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Category",
+      "description": "A chart of accounts is a listing of the names of the accounts that a company has identified and made available for recording trransactions in its general ledger. A company has the flexibility to tailor its chart of accounts to best suit its needs, including adding accounts as needed.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of category",
+          "example": 654321,
+          "readOnly": true,
+          "type": [
+            "integer"
+          ]
+        },
+        "name": {
+          "description": "unique name of category",
+          "example": "Category 1",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "mastercategory": {
+          "description": "master category",
+          "example": 654321,
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "built_in": {
+          "description": "boolean",
+          "example": true,
+          "readOnly": true,
+          "type": [
+            "boolean"
+          ]
+        },
+        "transaction_type_name": {
+          "description": "type name",
+          "example": "both",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "List existing categories.",
+          "href": "/api/v2/categories",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        }
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/category/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/category/definitions/name"
+        },
+        "mastercategory": {
+          "$ref": "#/definitions/category/definitions/mastercategory"
+        },
+        "built_in": {
+          "$ref": "#/definitions/category/definitions/built_in"
+        },
+        "transaction_type_name": {
+          "$ref": "#/definitions/category/definitions/transaction_type_name"
+        }
+      }
+    },
+    "company": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Company",
+      "description": "A company in the Indinero App.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "Unique identity of a company",
+          "type": [
+            "integer"
+          ],
+          "example": 401230
+        },
+        "name": {
+          "description": "Name of the company",
+          "type": [
+            "string"
+          ],
+          "example": "Acme Co"
+        },
+        "fiscal_year_end": {
+          "description": "Fiscal year end date.",
+          "type": [
+            "string"
+          ],
+          "example": "12/31"
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/company/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/company/definitions/name"
+        },
+        "fiscal_year_end": {
+          "$ref": "#/definitions/company/definitions/fiscal_year_end"
+        }
+      },
+      "links": [
+        {
+          "description": "User's company information",
+          "href": "/api/v2/user/company",
+          "rel": "show",
+          "title": "Logged in user's company details",
+          "method": "GET"
+        },
+        {
+          "description": "Company Logo",
+          "href": "/api/v2/user/company/logo",
+          "rel": "show",
+          "title": "Company Logo",
+          "method": "GET"
+        }
+      ]
+    },
+    "credit_card": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Credit Card",
+      "description": "Credit card financial accounts added to company as data source.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "id",
+        "item_id",
+        "company_id"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of credit card",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "item_id": {
+          "description": "Financial account",
+          "example": 200,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "company_id": {
+          "description": "Company ID",
+          "example": 301,
+          "type": [
+            "integer"
+          ]
+        },
+        "account_name": {
+          "description": "Credit Card Account name",
+          "example": "Bank of Asia",
+          "type": [
+            "string"
+          ]
+        },
+        "credit_limit": {
+          "description": "The card's credit limit",
+          "example": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "description": "when the item was created",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "description": "when the item was last updated",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "currency_code": {
+          "description": "currency code",
+          "example": "USD",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "balance": {
+          "description": "Credit card balance",
+          "example": 5000.0,
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "indinero_status": {
+          "description": "inDinero status",
+          "example": 3,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "yodlee_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "intuit_id": {
+          "description": "intuit id",
+          "example": null,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "account_number_string": {
+          "description": "account number string",
+          "example": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "discontinued": {
+          "description": "discontinued",
+          "example": false,
+          "type": [
+            "boolean"
+          ]
+        },
+        "coa_number": {
+          "description": "Chart of Accounts number",
+          "example": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/credit_card/definitions/id"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/credit_card/definitions/id"
+        },
+        "item_id": {
+          "$ref": "#/definitions/credit_card/definitions/item_id"
+        },
+        "company_id": {
+          "$ref": "#/definitions/credit_card/definitions/company_id"
+        },
+        "account_name": {
+          "$ref": "#/definitions/credit_card/definitions/account_name"
+        },
+        "created_at": {
+          "$ref": "#/definitions/credit_card/definitions/created_at"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/credit_card/definitions/updated_at"
+        },
+        "currency_code": {
+          "$ref": "#/definitions/credit_card/definitions/currency_code"
+        },
+        "yodlee_id": {
+          "$ref": "#/definitions/credit_card/definitions/yodlee_id"
+        },
+        "balance": {
+          "$ref": "#/definitions/credit_card/definitions/balance"
+        },
+        "indinero_status": {
+          "$ref": "#/definitions/credit_card/definitions/indinero_status"
+        },
+        "intuit_id": {
+          "$ref": "#/definitions/credit_card/definitions/intuit_id"
+        },
+        "account_number_string": {
+          "$ref": "#/definitions/credit_card/definitions/account_number_string"
+        },
+        "discontinued": {
+          "$ref": "#/definitions/credit_card/definitions/discontinued"
+        },
+        "coa_number": {
+          "$ref": "#/definitions/credit_card/definitions/coa_number"
+        },
+        "credit_limit": {
+          "$ref": "#/definitions/credit_card/definitions/credit_limit"
+        }
+      },
+      "links": [
+        {
+          "description": "This endpoint retrieves all credit cards.",
+          "href": "/api/v2/credit_cards",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        }
+      ]
+    },
+    "financial_account": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Financial Account",
+      "description": "Financial account items added to user's company.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "id",
+        "intuit_id",
+        "service_id",
+        "company_id",
+        "name"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of financial account",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "intuit_id": {
+          "description": "intuit id",
+          "example": null,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "service_id": {
+          "description": "service id",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "company_id": {
+          "description": "Company ID",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "name": {
+          "description": "Financial Account name",
+          "example": "Bank of Asia",
+          "type": [
+            "string"
+          ]
+        },
+        "container_type": {
+          "description": "Container type",
+          "example": "bank",
+          "type": [
+            "string"
+          ]
+        },
+        "refresh_status_code": {
+          "description": "refresh status code",
+          "example": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "last_update_attempt": {
+          "description": "when the item update was last attempted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "last_update_time": {
+          "description": "when the item was updated",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "created_at": {
+          "description": "when the item was created",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "description": "when the item was last updated",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "yodlee_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "mfa": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "start_poll_time": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "poll_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "linked_item_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "intuit_status_code": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "routing_number": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "display_error": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "send_banklog_email": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "last_transaction_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/financial_account/definitions/id"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/financial_account/definitions/id"
+        },
+        "intuit_id": {
+          "$ref": "#/definitions/financial_account/definitions/intuit_id"
+        },
+        "service_id": {
+          "$ref": "#/definitions/financial_account/definitions/service_id"
+        },
+        "company_id": {
+          "$ref": "#/definitions/financial_account/definitions/company_id"
+        },
+        "name": {
+          "$ref": "#/definitions/financial_account/definitions/name"
+        },
+        "container_type": {
+          "$ref": "#/definitions/financial_account/definitions/container_type"
+        },
+        "refresh_status_code": {
+          "$ref": "#/definitions/financial_account/definitions/refresh_status_code"
+        },
+        "last_update_attempt": {
+          "$ref": "#/definitions/financial_account/definitions/last_update_attempt"
+        },
+        "last_update_time": {
+          "$ref": "#/definitions/financial_account/definitions/last_update_time"
+        },
+        "created_at": {
+          "$ref": "#/definitions/financial_account/definitions/created_at"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/financial_account/definitions/updated_at"
+        },
+        "yodlee_id": {
+          "$ref": "#/definitions/financial_account/definitions/yodlee_id"
+        },
+        "mfa": {
+          "$ref": "#/definitions/financial_account/definitions/mfa"
+        },
+        "start_poll_time": {
+          "$ref": "#/definitions/financial_account/definitions/start_poll_time"
+        },
+        "poll_status": {
+          "$ref": "#/definitions/financial_account/definitions/poll_status"
+        },
+        "linked_item_id": {
+          "$ref": "#/definitions/financial_account/definitions/linked_item_id"
+        },
+        "intuit_status_code": {
+          "$ref": "#/definitions/financial_account/definitions/intuit_status_code"
+        },
+        "routing_number": {
+          "$ref": "#/definitions/financial_account/definitions/routing_number"
+        },
+        "display_error": {
+          "$ref": "#/definitions/financial_account/definitions/display_error"
+        },
+        "send_banklog_email": {
+          "$ref": "#/definitions/financial_account/definitions/send_banklog_email"
+        },
+        "status": {
+          "$ref": "#/definitions/financial_account/definitions/status"
+        },
+        "last_transaction_date": {
+          "$ref": "#/definitions/financial_account/definitions/last_transaction_date"
+        }
+      },
+      "links": [
+        {
+          "description": "This endpoint retrieves all financial accounts.",
+          "href": "/api/v2/financial_accounts",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        }
+      ]
+    },
+    "receipt": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Receipt",
+      "description": "receipt",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of receipt",
+          "example": 1001,
+          "readOnly": true,
+          "type": [
+            "integer"
+          ]
+        },
+        "company_id": {
+          "description": "Company ID",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "amount": {
+          "description": "receipt amount",
+          "example": 1234.0,
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "subject": {
+          "description": "receipt subject",
+          "example": "this is a receipt subject",
+          "type": [
+            "string"
+          ]
+        },
+        "description": {
+          "description": "receipt description",
+          "example": "this is a receipt description",
+          "type": [
+            "string"
+          ]
+        },
+        "status": {
+          "description": "receipt status",
+          "example": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "processor": {
+          "description": "receipt processor",
+          "example": "this is a receipt processor",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "merchant": {
+          "description": "receipt merchant",
+          "example": "this is a receipt merchant",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "description": "receipt email",
+          "example": "this is a receipt email",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email_id": {
+          "description": "receipt email_id",
+          "example": 42,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "email_date": {
+          "description": "receipt email date",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "resend_date": {
+          "description": "receipt resend date",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/receipt/definitions/id"
+            }
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new receipt.",
+          "href": "/api/v2/receipts",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "list existing receipts.",
+          "href": "/api/v2/receipts",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        }
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/receipt/definitions/id"
+        },
+        "company_id": {
+          "$ref": "#/definitions/receipt/definitions/company_id"
+        },
+        "amount": {
+          "$ref": "#/definitions/receipt/definitions/amount"
+        },
+        "subject": {
+          "$ref": "#/definitions/receipt/definitions/subject"
+        },
+        "description": {
+          "$ref": "#/definitions/receipt/definitions/description"
+        },
+        "status": {
+          "$ref": "#/definitions/receipt/definitions/status"
+        },
+        "processor": {
+          "$ref": "#/definitions/receipt/definitions/processor"
+        },
+        "merchant": {
+          "$ref": "#/definitions/receipt/definitions/merchant"
+        },
+        "email": {
+          "$ref": "#/definitions/receipt/definitions/email"
+        },
+        "email_id": {
+          "$ref": "#/definitions/receipt/definitions/email_id"
+        },
+        "email_date": {
+          "$ref": "#/definitions/receipt/definitions/email_date"
+        },
+        "resend_date": {
+          "$ref": "#/definitions/receipt/definitions/resend_date"
+        }
+      }
+    },
+    "reimbursement": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Reimbursement",
+      "description": "Reimbursement",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "id",
+        "company",
+        "status",
+        "value",
+        "description"
+      ],
+      "definitions": {
+        "id": {
+          "description": "Unique identifier of the reimbursement.",
+          "example": 123,
+          "type": [
+            "integer"
+          ],
+          "readOnly": true
+        },
+        "company": {
+          "description": "Company the reimbursement is part of.",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "id": {
+              "type": [
+                "integer"
+              ],
+              "description": "A company's identifier"
+            }
+          }
+        },
+        "status": {
+          "description": "A reimubursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 5",
+          "type": [
+            "integer"
+          ],
+          "example": 3
+        },
+        "value": {
+          "description": "Amount to reimburse.",
+          "type": [
+            "number"
+          ],
+          "example": 9.99
+        },
+        "description": {
+          "description": "Description of the reimbursement submitted.",
+          "type": [
+            "string"
+          ],
+          "example": "Github Processing Fee."
+        },
+        "created_at": {
+          "description": "Time when the reimbursement was created",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "cannot_process_reason": {
+          "description": "Reason why the reimbursement was not processed",
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "ACH payment failed"
+        },
+        "employee": {
+          "description": "Employee who submitted the reimbursement request",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "full_name": {
+              "description": "Employee's full name",
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "Harrison Redford"
+            },
+            "email": {
+              "description": "Employee's email address",
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "harrison.redford@example.com"
+            }
+          }
+        },
+        "category": {
+          "description": "Category of the reimbursement",
+          "type": [
+            "object"
+          ],
+          "required": [
+            "id",
+            "name"
+          ],
+          "properties": {
+            "id": {
+              "description": "A category's identifier",
+              "type": [
+                "string"
+              ],
+              "example": 1234
+            },
+            "name": {
+              "description": "A category's name",
+              "type": [
+                "string"
+              ],
+              "example": "Uncategorized"
+            },
+            "account_number": {
+              "description": "A category's account number",
+              "type": [
+                "string"
+              ],
+              "example": "4123"
+            }
+          }
+        },
+        "receipt": {
+          "description": "Receipt associated with the reimbursement",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "id": {
+              "description": "Receipt's unique identifier.",
+              "type": [
+                "integer"
+              ],
+              "example": 1234
+            }
+          }
+        },
+        "person": {
+          "type": [
+            "object"
+          ],
+          "description": "Person who requested the reimbursement.",
+          "properties": {
+            "full_name": {
+              "description": "Full name of the person",
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "John Done"
+            }
+          }
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/reimbursement/definitions/id"
+        },
+        "company": {
+          "$ref": "#/definitions/reimbursement/definitions/company"
+        },
+        "status": {
+          "$ref": "#/definitions/reimbursement/definitions/status"
+        },
+        "value": {
+          "$ref": "#/definitions/reimbursement/definitions/value"
+        },
+        "description": {
+          "$ref": "#/definitions/reimbursement/definitions/description"
+        },
+        "created_at": {
+          "$ref": "#/definitions/reimbursement/definitions/created_at"
+        },
+        "cannot_process_reason": {
+          "$ref": "#/definitions/reimbursement/definitions/cannot_process_reason"
+        },
+        "employee": {
+          "$ref": "#/definitions/reimbursement/definitions/employee"
+        },
+        "person": {
+          "$ref": "#/definitions/reimbursement/definitions/person"
+        },
+        "category": {
+          "$ref": "#/definitions/reimbursement/definitions/category"
+        },
+        "receipt": {
+          "$ref": "#/definitions/reimbursement/definitions/receipt"
+        }
+      },
+      "links": [
+        {
+          "description": "List reimbursements",
+          "href": "/api/v2/reimbursements",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List",
+          "targetSchema": {
+            "$ref": "#/definitions/reimbursement"
+          }
+        },
+        {
+          "description": "Approve reimbursements",
+          "href": "/api/v2/reimbursements/approve",
+          "method": "POST",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "reimbursement_ids": {
+                "description": "List of reimbursement ids.",
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "type": [
+                    "integer"
+                  ],
+                  "example": 5
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            }
+          },
+          "title": "Approve reimbursements"
+        },
+        {
+          "description": "Deny reimbursements",
+          "href": "/api/v2/reimbursements/deny",
+          "method": "POST",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "reimbursement_ids": {
+                "description": "List of reimbursement ids.",
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "type": [
+                    "integer"
+                  ],
+                  "example": 5
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            }
+          },
+          "title": "Deny reimbursements"
+        }
+      ]
+    },
+    "transaction": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Transaction",
+      "description": "An accounting transaction is a business event having a monetary impact on the financial statements of a business. It is recorded in the accounting records of the business.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of transaction",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of transaction",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/transaction/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/transaction/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when transaction was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when transaction was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "company_id",
+        "amount",
+        "real_amount",
+        "account_id",
+        "post_date",
+        "container_type",
+        "description_user",
+        "description_auto",
+        "detail",
+        "base_type",
+        "currency_code",
+        "split_id",
+        "category_id"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "integer"
+          ]
+        },
+        "company_id": {
+          "type": [
+            "integer"
+          ]
+        },
+        "amount": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "real_amount": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "account_id": {
+          "type": [
+            "integer"
+          ]
+        },
+        "post_date": {
+          "type": [
+            "string"
+          ]
+        },
+        "container_type": {
+          "type": [
+            "string"
+          ]
+        },
+        "description_user": {
+          "type": [
+            "string"
+          ]
+        },
+        "description_auto": {
+          "type": [
+            "string"
+          ]
+        },
+        "detail": {
+          "type": [
+            "string"
+          ]
+        },
+        "memo": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "base_type": {
+          "type": [
+            "string"
+          ]
+        },
+        "currency_code": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "split_id": {
+          "type": [
+            "integer"
+          ]
+        },
+        "category_id": {
+          "type": [
+            "integer"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "This endpoint retrieves all transactions.",
+          "href": "/api/v2/transactions",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        }
+      ]
+    },
+    "user": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "User",
+      "description": "A user in the Indinero App.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "Unique identifier of a user",
+          "example": 123,
+          "type": [
+            "number"
+          ]
+        },
+        "display_name": {
+          "description": "Display name of the user",
+          "type": [
+            "string"
+          ],
+          "example": "John Done"
+        },
+        "email": {
+          "description": "Email address of the user",
+          "type": [
+            "string"
+          ],
+          "example": "john@done.com"
+        },
+        "company_id": {
+          "description": "Identifier of the company a user belongs to",
+          "type": [
+            "number"
+          ],
+          "example": 1234
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/user/definitions/id"
+        },
+        "display_name": {
+          "$ref": "#/definitions/user/definitions/display_name"
+        },
+        "email": {
+          "$ref": "#/definitions/user/definitions/email"
+        },
+        "company_id": {
+          "$ref": "#/definitions/user/definitions/company_id"
+        }
+      },
+      "links": [
+        {
+          "description": "Get logged in user information",
+          "href": "/api/v2/user",
+          "rel": "show",
+          "title": "Logged in user information",
+          "method": "GET"
+        },
+        {
+          "description": "Get logged in user profile photo",
+          "href": "/api/v2/user/profile_photo",
+          "rel": "profile_photo",
+          "title": "User Profile Photo",
+          "method": "GET"
+        }
+      ]
+    }
+  },
+  "properties": {
+    "bank_account": {
+      "$ref": "#/definitions/bank_account"
+    },
+    "category": {
+      "$ref": "#/definitions/category"
+    },
+    "company": {
+      "$ref": "#/definitions/company"
+    },
+    "credit_card": {
+      "$ref": "#/definitions/credit_card"
+    },
+    "financial_account": {
+      "$ref": "#/definitions/financial_account"
+    },
+    "receipt": {
+      "$ref": "#/definitions/receipt"
+    },
+    "reimbursement": {
+      "$ref": "#/definitions/reimbursement"
+    },
+    "transaction": {
+      "$ref": "#/definitions/transaction"
+    },
+    "user": {
+      "$ref": "#/definitions/user"
+    }
+  },
+  "description": "inDinero API",
+  "id": "indinero_api",
+  "links": [
+    {
+      "href": "https://api.indinero.com",
+      "rel": "self"
+    }
+  ],
+  "title": "inDinero"
+}
