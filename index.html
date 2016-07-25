@@ -529,6 +529,82 @@
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
+<h2 id="company"><a name="resource-company">Company</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>A company in the Indinero App.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>fiscal_year_end</strong></td>
+<td><em>string</em></td>
+<td>Fiscal year end date.</td>
+<td><code class="prettyprint">&quot;12/31&quot;</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>integer</em></td>
+<td>Unique identity of a company</td>
+<td><code class="prettyprint">401230</code></td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td><em>string</em></td>
+<td>Name of the company</td>
+<td><code class="prettyprint">&quot;Acme Co&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="company-logged-in-user-39-s-company-details">Company Logged in user&rsquo;s company details</h3>
+
+<p>User&rsquo;s company information</p>
+<pre class="highlight plaintext"><code>GET /api/v2/user/company
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/user/company
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">401230</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Co"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fiscal_year_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/31"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="company-company-logo">Company Company Logo</h3>
+
+<p>Company Logo</p>
+<pre class="highlight plaintext"><code>GET /api/v2/user/company/logo
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/user/company/logo
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">401230</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Co"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fiscal_year_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/31"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <h2 id="credit-card"><a name="resource-credit_card">Credit Card</a></h2>
 
 <p>Stability: <code class="prettyprint">prototype</code></p>
@@ -1015,6 +1091,295 @@
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
+<h2 id="reimbursement"><a name="resource-reimbursement">Reimbursement</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>Reimbursement</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>cannot_process_reason</strong></td>
+<td><em>nullable string</em></td>
+<td>Reason why the reimbursement was not processed</td>
+<td><code class="prettyprint">&quot;ACH payment failed&quot;</code></td>
+</tr>
+<tr>
+<td><strong>category:account_number</strong></td>
+<td><em>string</em></td>
+<td>A category&rsquo;s account number</td>
+<td><code class="prettyprint">&quot;4123&quot;</code></td>
+</tr>
+<tr>
+<td><strong>category:id</strong></td>
+<td><em>string</em></td>
+<td>A category&rsquo;s identifier</td>
+<td><code class="prettyprint">1234</code></td>
+</tr>
+<tr>
+<td><strong>category:name</strong></td>
+<td><em>string</em></td>
+<td>A category&rsquo;s name</td>
+<td><code class="prettyprint">&quot;Uncategorized&quot;</code></td>
+</tr>
+<tr>
+<td><strong>company:id</strong></td>
+<td><em>integer</em></td>
+<td>A company&rsquo;s identifier</td>
+<td><code class="prettyprint">42</code></td>
+</tr>
+<tr>
+<td><strong>created_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>Time when the reimbursement was created</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td><em>string</em></td>
+<td>Description of the reimbursement submitted.</td>
+<td><code class="prettyprint">&quot;Github Processing Fee.&quot;</code></td>
+</tr>
+<tr>
+<td><strong>employee</strong></td>
+<td><em>nullable object</em></td>
+<td>Employee who submitted the reimbursement request</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>employee:email</strong></td>
+<td><em>nullable string</em></td>
+<td>Employee&rsquo;s email address</td>
+<td><code class="prettyprint">&quot;harrison.redford@example.com&quot;</code></td>
+</tr>
+<tr>
+<td><strong>employee:full_name</strong></td>
+<td><em>nullable string</em></td>
+<td>Employee&rsquo;s full name</td>
+<td><code class="prettyprint">&quot;Harrison Redford&quot;</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>integer</em></td>
+<td>Unique identifier of the reimbursement.</td>
+<td><code class="prettyprint">123</code></td>
+</tr>
+<tr>
+<td><strong>person:full_name</strong></td>
+<td><em>nullable string</em></td>
+<td>Full name of the person</td>
+<td><code class="prettyprint">&quot;John Done&quot;</code></td>
+</tr>
+<tr>
+<td><strong>receipt</strong></td>
+<td><em>nullable object</em></td>
+<td>Receipt associated with the reimbursement</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>receipt:id</strong></td>
+<td><em>integer</em></td>
+<td>Receipt&rsquo;s unique identifier.</td>
+<td><code class="prettyprint">1234</code></td>
+</tr>
+<tr>
+<td><strong>status</strong></td>
+<td><em>integer</em></td>
+<td>A reimubursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 5</td>
+<td><code class="prettyprint">3</code></td>
+</tr>
+<tr>
+<td><strong>value</strong></td>
+<td><em>number</em></td>
+<td>Amount to reimburse.</td>
+<td><code class="prettyprint">9.99</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="reimbursement-list">Reimbursement List</h3>
+
+<p>List reimbursements</p>
+<pre class="highlight plaintext"><code>GET /api/v2/reimbursements
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/reimbursements
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"employee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harrison Redford"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harrison.redford@example.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="reimbursement-approve-reimbursements">Reimbursement Approve reimbursements</h3>
+
+<p>Approve reimbursements</p>
+<pre class="highlight plaintext"><code>POST /api/v2/reimbursements/approve
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>reimbursement_ids</strong></td>
+<td><em>array</em></td>
+<td>List of reimbursement ids.</td>
+<td><code class="prettyprint">[5]</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/reimbursements/approve <span class="se">\</span>
+  -d <span class="s1">'{
+  "reimbursement_ids": [
+    5
+  ]
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"employee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harrison Redford"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harrison.redford@example.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h3 id="reimbursement-deny-reimbursements">Reimbursement Deny reimbursements</h3>
+
+<p>Deny reimbursements</p>
+<pre class="highlight plaintext"><code>POST /api/v2/reimbursements/deny
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>reimbursement_ids</strong></td>
+<td><em>array</em></td>
+<td>List of reimbursement ids.</td>
+<td><code class="prettyprint">[5]</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/reimbursements/deny <span class="se">\</span>
+  -d <span class="s1">'{
+  "reimbursement_ids": [
+    5
+  ]
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"employee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harrison Redford"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harrison.redford@example.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
 <h2 id="transaction"><a name="resource-transaction">Transaction</a></h2>
 
 <p>Stability: <code class="prettyprint">prototype</code></p>
@@ -1155,6 +1520,90 @@
     </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h2 id="user"><a name="resource-user">User</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>A user in the Indinero App.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>company_id</strong></td>
+<td><em>integer</em></td>
+<td>Identifier of the company a user belongs to</td>
+<td><code class="prettyprint">1234</code></td>
+</tr>
+<tr>
+<td><strong>display_name</strong></td>
+<td><em>string</em></td>
+<td>Display name of the user</td>
+<td><code class="prettyprint">&quot;John Done&quot;</code></td>
+</tr>
+<tr>
+<td><strong>email</strong></td>
+<td><em>string</em></td>
+<td>Email address of the user</td>
+<td><code class="prettyprint">&quot;john@done.com&quot;</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>number</em></td>
+<td>Unique identifier of a user</td>
+<td><code class="prettyprint">123</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="user-logged-in-user-information">User Logged in user information</h3>
+
+<p>Get logged in user information</p>
+<pre class="highlight plaintext"><code>GET /api/v2/user
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/user
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@done.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="user-user-profile-photo">User User Profile Photo</h3>
+
+<p>Get logged in user profile photo</p>
+<pre class="highlight plaintext"><code>GET /api/v2/user/profile_photo
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/user/profile_photo
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@done.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
           <h1 id="errors">Errors</h1>
