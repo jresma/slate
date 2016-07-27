@@ -86,10 +86,9 @@ Download and Install the [Postman Packaged Chrome Application](https://www.getpo
 
 # 2-Factor Authentication
 
-## Register User
+## Opt In
 ```shell
-curl "http://api.indinero.com/api/v2/two_factor/new?api_key=d57d919d11e6b" \
--d user[email]="user@domain.com" \
+curl "http://api.indinero.com/api/v2/2fa?access_token=d57d919d11e6b" \
 -d user[cellphone]="317-338-9302" \
 -d user[country_code]="54"
 ```
@@ -97,22 +96,16 @@ curl "http://api.indinero.com/api/v2/two_factor/new?api_key=d57d919d11e6b" \
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "message": "User created successfully.",
-  "user": {
-    "id": 209
-  },
-  "success": true
-}
+{ "id": 209 }
 ```
 
-This endpoint registers user to Two-factor Authentication.
+This endpoint opts the user in for Two-Factor Authentication.
 ###HTTPS Request
-`POST https://api.indinero.com/api/v2/two_factor/new?api_key={KEY}`
+`POST https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}`
 
 ## Request Token
 ```shell
-curl -i "http://api.indinero.com/api/v2/two_factor/sms/209?api_key=d57d919d11e6b"
+curl -i "http://api.indinero.com/api/v2/2fa/sms?access_token=d57d919d11e6b"
 ```
 
 > The above command returns JSON structured like this:
@@ -120,21 +113,24 @@ curl -i "http://api.indinero.com/api/v2/two_factor/sms/209?api_key=d57d919d11e6b
 ```json
 {
   "success": true,
-  "message": "Token was sent.",
+  "message": "SMS token was sent.",
   "cellphone": "+54-XXX-XXX-XX02"
 }
 ```
 
-This endpoint requests Two-factor token for user.
+This endpoint requests Two-Factor token for user.
 ###HTTPS Request
-`GET https://api.indinero.com/api/v2/two_factor/sms/{AUTHY_ID}?api_key={KEY}`
+`GET https://api.indinero.com/api/v2/2fa/sms?access_token={ACCESS_TOKEN}`
 
 ###Force SMS
 You can pass in a `force=true` parameter to this API. This will force the SMS to be send even if the user is using the Authy App.
 
 ## Verify Token
 ```shell
-curl -i "https://api.indinero.com/api/v2/two_factor/verify/0000000/209?api_key=d57d919d11e6b"
+curl "https://api.indinero.com/api/v2/2fa/verify?access_token=d57d919d11e6b" \
+-d user[token]="0000000" \
+-d user[remember_me]="false"
+
 ```
 
 > The above command returns JSON structured like this:
@@ -147,16 +143,16 @@ curl -i "https://api.indinero.com/api/v2/two_factor/verify/0000000/209?api_key=d
 }
 ```
 
-This endpoint verifies Two-factor token of user.
+This endpoint verifies Two-Factor token for user.
 ###HTTPS Request
-`GET https://api.indinero.com/api/v2/two_factor/verify/{TOKEN}/{AUTHY_ID}?api_key={KEY}`
+`POST https://api.indinero.com/api/v2/2fa/verify?access_token={ACCESS_TOKEN}`
 
 ###Force Validation
 You can pass in a `force=true` parameter to this API to check the user regardless of an unfinished registration.
 
-## Delete User
+## Opt Out
 ```shell
-curl -i "https://api.indinero.com/api/v2/two_factor/users/209/delete?api_key=d57d919d11e6b"
+curl -i "https://api.indinero.com/api/v2/2fa?access_token=d57d919d11e6b"
 ```
 
 > The above command returns JSON structured like this:
@@ -168,8 +164,8 @@ curl -i "https://api.indinero.com/api/v2/two_factor/users/209/delete?api_key=d57
 }
 ```
 
-This endpoint removes Two-Factor details from user.
+This endpoint opts the user out and removes Two-Factor details.
 ###HTTPS Request
-`POST https://api.indinero.com/api/v2/two_factor/users/{USER_ID}/delete?api_key={KEY}`
+`POST https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}`
 
 # Resources
