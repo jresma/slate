@@ -166,6 +166,6 @@ curl -i "https://api.indinero.com/api/v2/2fa?access_token=d57d919d11e6b"
 
 This endpoint opts the user out and removes Two-Factor details.
 ###HTTPS Request
-`POST https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}`
+`DELETE https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}`
 
 # Resources
