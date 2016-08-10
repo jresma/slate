@@ -140,19 +140,19 @@ A company in the Indinero App.
 | **id** | *integer* | Unique identity of a company | `401230` |
 | **name** | *string* | Name of the company | `"Acme Co"` |
 
-### Company Logged in user's company details
+### Company Company Details
 
-User's company information
+Detailed company information
 
 ```
-GET /api/v2/user/company
+GET /api/v2/company
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n https://api.indinero.com/api/v2/user/company
+$ curl -n https://api.indinero.com/api/v2/company
 ```
 
 
@@ -172,17 +172,17 @@ HTTP/1.1 200 OK
 
 ### Company Company Logo
 
-Company Logo
+Logo of the company
 
 ```
-GET /api/v2/user/company/logo
+GET /api/v2/company/logo
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n https://api.indinero.com/api/v2/user/company/logo
+$ curl -n https://api.indinero.com/api/v2/company/logo
 ```
 
 
@@ -368,7 +368,10 @@ receipt
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **amount** | *number* | receipt amount | `1234.0` |
+| **category_id** | *nullable integer* | receipt Category ID | `101` |
 | **company_id** | *integer* | Company ID | `100` |
+| **company_name** | *nullable string* | company name | `"Indinero"` |
+| **created_at** | *nullable date-time* | when receipt was created | `null` |
 | **description** | *string* | receipt description | `"this is a receipt description"` |
 | **email** | *nullable string* | receipt email | `"this is a receipt email"` |
 | **email_date** | *nullable date-time* | receipt email date | `null` |
@@ -376,9 +379,11 @@ receipt
 | **id** | *integer* | unique identifier of receipt | `1001` |
 | **merchant** | *nullable string* | receipt merchant | `"this is a receipt merchant"` |
 | **processor** | *nullable string* | receipt processor | `"this is a receipt processor"` |
-| **resend_date** | *nullable date-time* | receipt resend date | `null` |
+| **receipt_type** | *string* | type of receipt | `"Receipt"` |
 | **status** | *nullable integer* | receipt status | `1` |
-| **subject** | *string* | receipt subject | `"this is a receipt subject"` |
+| **transaction_date** | *nullable string* | receipt transaction date | `"07/29/1026"` |
+| **transaction_id** | *nullable integer* | receipt Transaction ID | `101` |
+| **transaction_type** | *string* | type of Transaction | `"Transaction"` |
 
 ### Receipt Create
 
@@ -408,9 +413,11 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1001,
+  "category_id": 101,
   "company_id": 100,
+  "company_name": "Indinero",
+  "receipt_type": "Receipt",
   "amount": 1234.0,
-  "subject": "this is a receipt subject",
   "description": "this is a receipt description",
   "status": 1,
   "processor": "this is a receipt processor",
@@ -418,7 +425,10 @@ HTTP/1.1 201 Created
   "email": "this is a receipt email",
   "email_id": 42,
   "email_date": "2015-01-01T12:00:00Z",
-  "resend_date": "2015-01-01T12:00:00Z"
+  "transaction_id": 101,
+  "transaction_type": "Transaction",
+  "transaction_date": "07/29/1026",
+  "created_at": "2015-01-01T12:00:00Z"
 }
 ```
 
@@ -448,9 +458,11 @@ HTTP/1.1 200 OK
 [
   {
     "id": 1001,
+    "category_id": 101,
     "company_id": 100,
+    "company_name": "Indinero",
+    "receipt_type": "Receipt",
     "amount": 1234.0,
-    "subject": "this is a receipt subject",
     "description": "this is a receipt description",
     "status": 1,
     "processor": "this is a receipt processor",
@@ -458,7 +470,10 @@ HTTP/1.1 200 OK
     "email": "this is a receipt email",
     "email_id": 42,
     "email_date": "2015-01-01T12:00:00Z",
-    "resend_date": "2015-01-01T12:00:00Z"
+    "transaction_id": 101,
+    "transaction_type": "Transaction",
+    "transaction_date": "07/29/1026",
+    "created_at": "2015-01-01T12:00:00Z"
   }
 ]
 ```
@@ -475,10 +490,11 @@ Reimbursement
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **cannot_process_reason** | *nullable string* | Reason why the reimbursement was not processed | `"ACH payment failed"` |
-| **category:account_number** | *string* | A category's account number | `"4123"` |
-| **category:id** | *string* | A category's identifier | `1234` |
+| **category** | *nullable object* | Category of the reimbursement | `null` |
+| **category:account_number** | *nullable string* | A category's account number | `"4123"` |
+| **category:id** | *integer* | A category's identifier | `1234` |
 | **category:name** | *string* | A category's name | `"Uncategorized"` |
-| **company:id** | *integer* | A company's identifier | `42` |
+| **company_id** | *integer* | Company identifier the reimbursement is part of. | `123` |
 | **created_at** | *nullable date-time* | Time when the reimbursement was created | `null` |
 | **description** | *string* | Description of the reimbursement submitted. | `"Github Processing Fee."` |
 | **employee** | *nullable object* | Employee who submitted the reimbursement request | `null` |
@@ -488,8 +504,8 @@ Reimbursement
 | **person:full_name** | *nullable string* | Full name of the person | `"John Done"` |
 | **receipt** | *nullable object* | Receipt associated with the reimbursement | `null` |
 | **receipt:id** | *integer* | Receipt's unique identifier. | `1234` |
-| **status** | *integer* | A reimubursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 5 | `3` |
-| **value** | *number* | Amount to reimburse. | `9.99` |
+| **status** | *enum* | A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6<br/> **one of:**`-1` or `0` or `1` or `2` or `3` or `4` or `5` or `6` | `3` |
+| **value** | *string* | Amount to reimburse. | `"9.99"` |
 
 ### Reimbursement List
 
@@ -514,32 +530,32 @@ HTTP/1.1 200 OK
 ```
 
 ```json
-{
-  "id": 123,
-  "company": {
-    "id": 42
-  },
-  "status": 3,
-  "value": 9.99,
-  "description": "Github Processing Fee.",
-  "created_at": "2015-01-01T12:00:00Z",
-  "cannot_process_reason": "ACH payment failed",
-  "employee": {
-    "full_name": "Harrison Redford",
-    "email": "harrison.redford@example.com"
-  },
-  "person": {
-    "full_name": "John Done"
-  },
-  "category": {
-    "id": 1234,
-    "name": "Uncategorized",
-    "account_number": "4123"
-  },
-  "receipt": {
-    "id": 1234
+[
+  {
+    "id": 123,
+    "company_id": 123,
+    "status": 3,
+    "value": "9.99",
+    "description": "Github Processing Fee.",
+    "created_at": "2015-01-01T12:00:00Z",
+    "cannot_process_reason": "ACH payment failed",
+    "employee": {
+      "full_name": "Harrison Redford",
+      "email": "harrison.redford@example.com"
+    },
+    "person": {
+      "full_name": "John Done"
+    },
+    "category": {
+      "id": 1234,
+      "name": "Uncategorized",
+      "account_number": "4123"
+    },
+    "receipt": {
+      "id": 1234
+    }
   }
-}
+]
 ```
 
 ### Reimbursement Approve reimbursements
@@ -580,11 +596,9 @@ HTTP/1.1 200 OK
 [
   {
     "id": 123,
-    "company": {
-      "id": 42
-    },
+    "company_id": 123,
     "status": 3,
-    "value": 9.99,
+    "value": "9.99",
     "description": "Github Processing Fee.",
     "created_at": "2015-01-01T12:00:00Z",
     "cannot_process_reason": "ACH payment failed",
@@ -645,11 +659,9 @@ HTTP/1.1 200 OK
 [
   {
     "id": 123,
-    "company": {
-      "id": 42
-    },
+    "company_id": 123,
     "status": 3,
-    "value": 9.99,
+    "value": "9.99",
     "description": "Github Processing Fee.",
     "created_at": "2015-01-01T12:00:00Z",
     "cannot_process_reason": "ACH payment failed",
@@ -754,10 +766,14 @@ A user in the Indinero App.
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
+| **authy_id** | *nullable integer* | 2FA Authy ID | `9123814` |
+| **authy_opted_out** | *nullable boolean* | Setting signifying the user opted out of the 2FA Feature | `true` |
 | **company_id** | *integer* | Identifier of the company a user belongs to | `1234` |
 | **display_name** | *string* | Display name of the user | `"John Done"` |
 | **email** | *string* | Email address of the user | `"john@done.com"` |
 | **id** | *number* | Unique identifier of a user | `123` |
+| **permissions** | *array* | List of features the user has permissions to. If the user is an admin, it is assumed that the user has access to all features, and checking this is unnecessary. | `["Finance","Transactions","Taxes"]` |
+| **role** | *string* | Role of the user in the company | `"Admin"` |
 
 ### User Logged in user information
 
@@ -786,7 +802,15 @@ HTTP/1.1 200 OK
   "id": 123,
   "display_name": "John Done",
   "email": "john@done.com",
-  "company_id": 1234
+  "company_id": 1234,
+  "authy_id": 9123814,
+  "authy_opted_out": true,
+  "role": "Admin",
+  "permissions": [
+    "Finance",
+    "Transactions",
+    "Taxes"
+  ]
 }
 ```
 
@@ -817,7 +841,65 @@ HTTP/1.1 200 OK
   "id": 123,
   "display_name": "John Done",
   "email": "john@done.com",
-  "company_id": 1234
+  "company_id": 1234,
+  "authy_id": 9123814,
+  "authy_opted_out": true,
+  "role": "Admin",
+  "permissions": [
+    "Finance",
+    "Transactions",
+    "Taxes"
+  ]
+}
+```
+
+### User User Forgot Password
+
+Reset user's password
+
+```
+POST /api/v2/user/forget_password
+```
+
+#### Required Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **email** | *string* | Email address of the user | `"john@done.com"` |
+
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X POST https://api.indinero.com/api/v2/user/forget_password \
+  -d '{
+  "email": "john@done.com"
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 123,
+  "display_name": "John Done",
+  "email": "john@done.com",
+  "company_id": 1234,
+  "authy_id": 9123814,
+  "authy_opted_out": true,
+  "role": "Admin",
+  "permissions": [
+    "Finance",
+    "Transactions",
+    "Taxes"
+  ]
 }
 ```
 
