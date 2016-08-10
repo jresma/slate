@@ -561,14 +561,14 @@
 </tr>
 </tbody></table>
 
-<h3 id="company-logged-in-user-39-s-company-details">Company Logged in user&rsquo;s company details</h3>
+<h3 id="company-company-details">Company Company Details</h3>
 
-<p>User&rsquo;s company information</p>
-<pre class="highlight plaintext"><code>GET /api/v2/user/company
+<p>Detailed company information</p>
+<pre class="highlight plaintext"><code>GET /api/v2/company
 </code></pre>
 
 <h4 id="curl-example">Curl Example</h4>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/user/company
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/company
 </code></pre>
 
 <h4 id="response-example">Response Example</h4>
@@ -583,12 +583,12 @@
 
 <h3 id="company-company-logo">Company Company Logo</h3>
 
-<p>Company Logo</p>
-<pre class="highlight plaintext"><code>GET /api/v2/user/company/logo
+<p>Logo of the company</p>
+<pre class="highlight plaintext"><code>GET /api/v2/company/logo
 </code></pre>
 
 <h4 id="curl-example">Curl Example</h4>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/user/company/logo
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/company/logo
 </code></pre>
 
 <h4 id="response-example">Response Example</h4>
@@ -957,10 +957,28 @@
 <td><code class="prettyprint">1234.0</code></td>
 </tr>
 <tr>
+<td><strong>category_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>receipt Category ID</td>
+<td><code class="prettyprint">101</code></td>
+</tr>
+<tr>
 <td><strong>company_id</strong></td>
 <td><em>integer</em></td>
 <td>Company ID</td>
 <td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>company_name</strong></td>
+<td><em>nullable string</em></td>
+<td>company name</td>
+<td><code class="prettyprint">&quot;Indinero&quot;</code></td>
+</tr>
+<tr>
+<td><strong>created_at</strong></td>
+<td><em>nullable date-time</em></td>
+<td>when receipt was created</td>
+<td><code class="prettyprint">null</code></td>
 </tr>
 <tr>
 <td><strong>description</strong></td>
@@ -1005,10 +1023,10 @@
 <td><code class="prettyprint">&quot;this is a receipt processor&quot;</code></td>
 </tr>
 <tr>
-<td><strong>resend_date</strong></td>
-<td><em>nullable date-time</em></td>
-<td>receipt resend date</td>
-<td><code class="prettyprint">null</code></td>
+<td><strong>receipt_type</strong></td>
+<td><em>string</em></td>
+<td>type of receipt</td>
+<td><code class="prettyprint">&quot;Receipt&quot;</code></td>
 </tr>
 <tr>
 <td><strong>status</strong></td>
@@ -1017,10 +1035,22 @@
 <td><code class="prettyprint">1</code></td>
 </tr>
 <tr>
-<td><strong>subject</strong></td>
+<td><strong>transaction_date</strong></td>
+<td><em>nullable string</em></td>
+<td>receipt transaction date</td>
+<td><code class="prettyprint">&quot;07/29/1026&quot;</code></td>
+</tr>
+<tr>
+<td><strong>transaction_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>receipt Transaction ID</td>
+<td><code class="prettyprint">101</code></td>
+</tr>
+<tr>
+<td><strong>transaction_type</strong></td>
 <td><em>string</em></td>
-<td>receipt subject</td>
-<td><code class="prettyprint">&quot;this is a receipt subject&quot;</code></td>
+<td>type of Transaction</td>
+<td><code class="prettyprint">&quot;Transaction&quot;</code></td>
 </tr>
 </tbody></table>
 
@@ -1042,9 +1072,11 @@
 </code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
   </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indinero"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"receipt_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt subject"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt description"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"processor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt processor"</span><span class="p">,</span><span class="w">
@@ -1052,7 +1084,10 @@
   </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt email"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+  </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"transaction_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07/29/1026"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1072,9 +1107,11 @@
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indinero"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"receipt_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt subject"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt description"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"processor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt processor"</span><span class="p">,</span><span class="w">
@@ -1082,7 +1119,10 @@
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt email"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"email_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="nt">"email_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+    </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07/29/1026"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -1110,14 +1150,20 @@
 <td><code class="prettyprint">&quot;ACH payment failed&quot;</code></td>
 </tr>
 <tr>
+<td><strong>category</strong></td>
+<td><em>nullable object</em></td>
+<td>Category of the reimbursement</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
 <td><strong>category:account_number</strong></td>
-<td><em>string</em></td>
+<td><em>nullable string</em></td>
 <td>A category&rsquo;s account number</td>
 <td><code class="prettyprint">&quot;4123&quot;</code></td>
 </tr>
 <tr>
 <td><strong>category:id</strong></td>
-<td><em>string</em></td>
+<td><em>integer</em></td>
 <td>A category&rsquo;s identifier</td>
 <td><code class="prettyprint">1234</code></td>
 </tr>
@@ -1128,10 +1174,10 @@
 <td><code class="prettyprint">&quot;Uncategorized&quot;</code></td>
 </tr>
 <tr>
-<td><strong>company:id</strong></td>
+<td><strong>company_id</strong></td>
 <td><em>integer</em></td>
-<td>A company&rsquo;s identifier</td>
-<td><code class="prettyprint">42</code></td>
+<td>Company identifier the reimbursement is part of.</td>
+<td><code class="prettyprint">123</code></td>
 </tr>
 <tr>
 <td><strong>created_at</strong></td>
@@ -1189,15 +1235,15 @@
 </tr>
 <tr>
 <td><strong>status</strong></td>
-<td><em>integer</em></td>
-<td>A reimubursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 5</td>
+<td><em>enum</em></td>
+<td>A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6<br/> <strong>one of:</strong><code class="prettyprint">-1</code> or <code class="prettyprint">0</code> or <code class="prettyprint">1</code> or <code class="prettyprint">2</code> or <code class="prettyprint">3</code> or <code class="prettyprint">4</code> or <code class="prettyprint">5</code> or <code class="prettyprint">6</code></td>
 <td><code class="prettyprint">3</code></td>
 </tr>
 <tr>
 <td><strong>value</strong></td>
-<td><em>number</em></td>
+<td><em>string</em></td>
 <td>Amount to reimburse.</td>
-<td><code class="prettyprint">9.99</code></td>
+<td><code class="prettyprint">&quot;9.99&quot;</code></td>
 </tr>
 </tbody></table>
 
@@ -1214,32 +1260,32 @@
 <h4 id="response-example">Response Example</h4>
 <pre class="highlight plaintext"><code>HTTP/1.1 200 OK
 </code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"employee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harrison Redford"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harrison.redford@example.com"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.99"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"employee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harrison Redford"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harrison.redford@example.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 
 <h3 id="reimbursement-approve-reimbursements">Reimbursement Approve reimbursements</h3>
@@ -1282,11 +1328,9 @@
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.99"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
@@ -1349,11 +1393,9 @@
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.99"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
@@ -1535,6 +1577,18 @@
 </tr>
 </thead><tbody>
 <tr>
+<td><strong>authy_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>2FA Authy ID</td>
+<td><code class="prettyprint">9123814</code></td>
+</tr>
+<tr>
+<td><strong>authy_opted_out</strong></td>
+<td><em>nullable boolean</em></td>
+<td>Setting signifying the user opted out of the 2FA Feature</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
 <td><strong>company_id</strong></td>
 <td><em>integer</em></td>
 <td>Identifier of the company a user belongs to</td>
@@ -1558,6 +1612,18 @@
 <td>Unique identifier of a user</td>
 <td><code class="prettyprint">123</code></td>
 </tr>
+<tr>
+<td><strong>permissions</strong></td>
+<td><em>array</em></td>
+<td>List of features the user has permissions to. If the user is an admin, it is assumed that the user has access to all features, and checking this is unnecessary.</td>
+<td><code class="prettyprint">[&quot;Finance&quot;,&quot;Transactions&quot;,&quot;Taxes&quot;]</code></td>
+</tr>
+<tr>
+<td><strong>role</strong></td>
+<td><em>string</em></td>
+<td>Role of the user in the company</td>
+<td><code class="prettyprint">&quot;Admin&quot;</code></td>
+</tr>
 </tbody></table>
 
 <h3 id="user-logged-in-user-information">User Logged in user information</h3>
@@ -1577,7 +1643,15 @@
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
   </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@done.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authy_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9123814</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authy_opted_out"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admin"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Finance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Transactions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Taxes"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1598,7 +1672,66 @@
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
   </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@done.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authy_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9123814</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authy_opted_out"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admin"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Finance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Transactions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Taxes"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="user-user-forgot-password">User User Forgot Password</h3>
+
+<p>Reset user&rsquo;s password</p>
+<pre class="highlight plaintext"><code>POST /api/v2/user/forget_password
+</code></pre>
+
+<h4 id="required-parameters">Required Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>email</strong></td>
+<td><em>string</em></td>
+<td>Email address of the user</td>
+<td><code class="prettyprint">&quot;john@done.com&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/user/forget_password <span class="se">\</span>
+  -d <span class="s1">'{
+  "email": "john@done.com"
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@done.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authy_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9123814</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authy_opted_out"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admin"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Finance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Transactions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Taxes"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
