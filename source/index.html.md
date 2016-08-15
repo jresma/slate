@@ -2,8 +2,7 @@
 title: API Reference
 
 language_tabs:
-  - bash
-  - ruby
+  - shell
 
 toc_footers:
   - <a href='https://api.indinero.com/developer/sign_up'>Sign Up for a Developer Key</a>
@@ -79,33 +78,75 @@ Download and Install the [Postman Packaged Chrome Application](https://www.getpo
 * Name and Save the retrieved token
 
 ### Making Authenticated Requests
+
+> To make authenticated requests, use this code:
+
+```shell
+curl "indinero_api_endpoint" \
+  -H "Authorization: Bearer indinero-user-access-token"
+```
+
+> Make sure to replace <code>indinero-user-access-token</code> with your access token.
+
 * Select an endpoint
 * Click to OAuth 2.0 tab to indicate you are making a OAuth POST
 * In your existing tokens, make sure to add token to header
 * Send the `GET` or `POST` request
 
-# 2-Factor Authentication
+Unless specified, the API expects the token to be included in the requests to the
+server in a header that looks like the following:
+
+`Authorization: Bearer indinero-user-access-token`
+
+<aside class="notice">
+  You must replace <code>indinero-user-access-token</code> with the access token the server returns after authorization.
+</aside>
+
+# Two-Factor Authentication
+
+The Two-Factor Authentication API requires requests to be authenticated, i.e.
+when doing requests to 2FA endpoints requires OAuth2 access token to be specified
+in the request headers.
 
 ## Opt In
+
+> To opt-in a user, use the following code:
+
 ```shell
-curl "http://api.indinero.com/api/v2/2fa?access_token=d57d919d11e6b" \
--d user[cellphone]="317-338-9302" \
--d user[country_code]="54"
+curl "http://api.indinero.com/api/v2/2fa/opt_in" \
+  -X POST \
+  -H "Authorization: Bearer indinero-user-access-token" \
+  -d user[cellphone]="317-338-9302" \
+  -d user[country_code]="54"
 ```
 
-> The above command returns JSON structured like this:
+> When the call succeeds, the API will return a 200, with the following data:
 
 ```json
 { "id": 209 }
 ```
 
-This endpoint opts the user in for Two-Factor Authentication.
-###HTTPS Request
-`POST https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}`
+> When the call failed, the API will return a Bad Request response.
 
-## Request Token
+This endpoint opts the user in for Two-Factor Authentication.
+
+### HTTPS Request
+
+`POST https://api.indinero.com/api/v2/2fa/opt_in`
+
+### Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+user[cellphone] | | Mobile number to opt in
+user[country_code] | | Country code of the mobile number to opt in
+
+## Request Token via SMS
+
 ```shell
-curl -i "http://api.indinero.com/api/v2/2fa/sms?access_token=d57d919d11e6b"
+curl "http://api.indinero.com/api/v2/2fa/sms" \
+  -X GET \
+  -H "Authorization: Bearer indinero-user-access-token"
 ```
 
 > The above command returns JSON structured like this:
@@ -118,19 +159,22 @@ curl -i "http://api.indinero.com/api/v2/2fa/sms?access_token=d57d919d11e6b"
 }
 ```
 
-This endpoint requests Two-Factor token for user.
-###HTTPS Request
-`GET https://api.indinero.com/api/v2/2fa/sms?access_token={ACCESS_TOKEN}`
+This endpoint requests Two-Factor token for user via SMS.
 
-###Force SMS
-You can pass in a `force=true` parameter to this API. This will force the SMS to be send even if the user is using the Authy App.
+### HTTPS Request
 
-## Verify Token
+`GET https://api.indinero.com/api/v2/2fa/sms`
+
+## Verify Two-Factor Token
+
+> To verify the two-factor token, use the following command:
+
 ```shell
-curl "https://api.indinero.com/api/v2/2fa/verify?access_token=d57d919d11e6b" \
--d user[token]="0000000" \
--d user[remember_me]="false"
-
+curl "https://api.indinero.com/api/v2/2fa/verify" \
+  -X POST \
+  -H "Authorization: Bearer indinero-user-access-token" \
+  -d user[token]="0000000" \
+  -d user[remember]="false"
 ```
 
 > The above command returns JSON structured like this:
@@ -144,28 +188,41 @@ curl "https://api.indinero.com/api/v2/2fa/verify?access_token=d57d919d11e6b" \
 ```
 
 This endpoint verifies Two-Factor token for user.
-###HTTPS Request
-`POST https://api.indinero.com/api/v2/2fa/verify?access_token={ACCESS_TOKEN}`
 
-###Force Validation
-You can pass in a `force=true` parameter to this API to check the user regardless of an unfinished registration.
+### HTTPS Request
+
+`POST https://api.indinero.com/api/v2/2fa/verify`
+
+### Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+user[token] | | Token the user receives from Authy via SMS
+user[remember] | false | Set to true to remember the token for the next thirty days.
 
 ## Opt Out
+
+> To opt out a user from two-factor authentication, make this call:
+
 ```shell
-curl -i "https://api.indinero.com/api/v2/2fa?access_token=d57d919d11e6b"
+curl "https://api.indinero.com/api/v2/2fa/opt_out" \
+  -X DELETE \
+  -H "Authorization: Bearer indinero-user-access-token"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "message": "User was added to remove.",
+  "message": "User was removed.",
   "success": true
 }
 ```
 
 This endpoint opts the user out and removes Two-Factor details.
-###HTTPS Request
-`DELETE https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}`
+
+### HTTPS Request
+
+`DELETE https://api.indinero.com/api/v2/2fa/opt_out`
 
 # Resources
