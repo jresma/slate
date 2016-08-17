@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;bash&quot;,&quot;ruby&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,8 +101,7 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="bash">bash</a>
-              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="shell">shell</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -111,7 +110,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://api.indinero.com/developer/sign_up'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -191,6 +190,17 @@
 
 <h3 id="making-authenticated-requests">Making Authenticated Requests</h3>
 
+<blockquote>
+<p>To make authenticated requests, use this code:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"indinero_api_endpoint"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer indinero-user-access-token"</span>
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace <code>indinero-user-access-token</code> with your access token.</p>
+</blockquote>
+
 <ul>
 <li>Select an endpoint</li>
 <li>Click to OAuth 2.0 tab to indicate you are making a OAuth POST</li>
@@ -198,28 +208,74 @@
 <li>Send the <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request</li>
 </ul>
 
-<h1 id="2-factor-authentication">2-Factor Authentication</h1>
+<p>Unless specified, the API expects the token to be included in the requests to the
+server in a header that looks like the following:</p>
+
+<p><code class="prettyprint">Authorization: Bearer indinero-user-access-token</code></p>
+
+<aside class="notice">
+  You must replace <code>indinero-user-access-token</code> with the access token the server returns after authorization.
+</aside>
+
+<h1 id="two-factor-authentication">Two-Factor Authentication</h1>
+
+<p>The Two-Factor Authentication API requires requests to be authenticated, i.e.
+when doing requests to 2FA endpoints requires OAuth2 access token to be specified
+in the request headers.</p>
 
 <h2 id="opt-in">Opt In</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.indinero.com/api/v2/2fa?access_token=d57d919d11e6b"</span> <span class="se">\</span>
--d user[cellphone]<span class="o">=</span><span class="s2">"317-338-9302"</span> <span class="se">\</span>
--d user[country_code]<span class="o">=</span><span class="s2">"54"</span>
+
+<blockquote>
+<p>To opt-in a user, use the following code:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.indinero.com/api/v2/2fa/opt_in"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer indinero-user-access-token"</span> <span class="se">\</span>
+  -d user[cellphone]<span class="o">=</span><span class="s2">"317-338-9302"</span> <span class="se">\</span>
+  -d user[country_code]<span class="o">=</span><span class="s2">"54"</span>
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>When the call succeeds, the API will return a 200, with the following data:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">209</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<blockquote>
+<p>When the call failed, the API will return a Bad Request response.</p>
+</blockquote>
 
 <p>This endpoint opts the user in for Two-Factor Authentication.</p>
 
 <h3 id="https-request">HTTPS Request</h3>
 
-<p><code class="prettyprint">POST https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}</code></p>
+<p><code class="prettyprint">POST https://api.indinero.com/api/v2/2fa/opt_in</code></p>
 
-<h2 id="request-token">Request Token</h2>
-<pre class="highlight shell"><code>curl -i <span class="s2">"http://api.indinero.com/api/v2/2fa/sms?access_token=d57d919d11e6b"</span>
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user[cellphone]</td>
+<td></td>
+<td>Mobile number to opt in</td>
+</tr>
+<tr>
+<td>user[country_code]</td>
+<td></td>
+<td>Country code of the mobile number to opt in</td>
+</tr>
+</tbody></table>
+
+<h2 id="request-token-via-sms">Request Token via SMS</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.indinero.com/api/v2/2fa/sms"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer indinero-user-access-token"</span>
 </code></pre>
 
 <blockquote>
@@ -232,21 +288,22 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint requests Two-Factor token for user.</p>
+<p>This endpoint requests Two-Factor token for user via SMS.</p>
 
 <h3 id="https-request">HTTPS Request</h3>
 
-<p><code class="prettyprint">GET https://api.indinero.com/api/v2/2fa/sms?access_token={ACCESS_TOKEN}</code></p>
+<p><code class="prettyprint">GET https://api.indinero.com/api/v2/2fa/sms</code></p>
 
-<h3 id="force-sms">Force SMS</h3>
+<h2 id="verify-two-factor-token">Verify Two-Factor Token</h2>
 
-<p>You can pass in a <code class="prettyprint">force=true</code> parameter to this API. This will force the SMS to be send even if the user is using the Authy App.</p>
-
-<h2 id="verify-token">Verify Token</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.indinero.com/api/v2/2fa/verify?access_token=d57d919d11e6b"</span> <span class="se">\</span>
--d user[token]<span class="o">=</span><span class="s2">"0000000"</span> <span class="se">\</span>
--d user[remember_me]<span class="o">=</span><span class="s2">"false"</span>
-
+<blockquote>
+<p>To verify the two-factor token, use the following command:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.indinero.com/api/v2/2fa/verify"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer indinero-user-access-token"</span> <span class="se">\</span>
+  -d user[token]<span class="o">=</span><span class="s2">"0000000"</span> <span class="se">\</span>
+  -d user[remember]<span class="o">=</span><span class="s2">"false"</span>
 </code></pre>
 
 <blockquote>
@@ -263,21 +320,44 @@
 
 <h3 id="https-request">HTTPS Request</h3>
 
-<p><code class="prettyprint">POST https://api.indinero.com/api/v2/2fa/verify?access_token={ACCESS_TOKEN}</code></p>
+<p><code class="prettyprint">POST https://api.indinero.com/api/v2/2fa/verify</code></p>
 
-<h3 id="force-validation">Force Validation</h3>
+<h3 id="parameters">Parameters</h3>
 
-<p>You can pass in a <code class="prettyprint">force=true</code> parameter to this API to check the user regardless of an unfinished registration.</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user[token]</td>
+<td></td>
+<td>Token the user receives from Authy via SMS</td>
+</tr>
+<tr>
+<td>user[remember]</td>
+<td>false</td>
+<td>Set to true to remember the token for the next thirty days.</td>
+</tr>
+</tbody></table>
 
 <h2 id="opt-out">Opt Out</h2>
-<pre class="highlight shell"><code>curl -i <span class="s2">"https://api.indinero.com/api/v2/2fa?access_token=d57d919d11e6b"</span>
+
+<blockquote>
+<p>To opt out a user from two-factor authentication, make this call:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.indinero.com/api/v2/2fa/opt_out"</span> <span class="se">\</span>
+  -X DELETE <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer indinero-user-access-token"</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User was added to remove."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User was removed."</span><span class="p">,</span><span class="w">
   </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -286,7 +366,7 @@
 
 <h3 id="https-request">HTTPS Request</h3>
 
-<p><code class="prettyprint">DELETE https://api.indinero.com/api/v2/2fa?access_token={ACCESS_TOKEN}</code></p>
+<p><code class="prettyprint">DELETE https://api.indinero.com/api/v2/2fa/opt_out</code></p>
 
 <h1 id="resources">Resources</h1>
 
@@ -482,10 +562,10 @@
 <td><code class="prettyprint">654321</code></td>
 </tr>
 <tr>
-<td><strong>mastercategory</strong></td>
-<td><em>nullable integer</em></td>
+<td><strong>master_category</strong></td>
+<td><em>nullable object</em></td>
 <td>master category</td>
-<td><code class="prettyprint">654321</code></td>
+<td><code class="prettyprint">null</code></td>
 </tr>
 <tr>
 <td><strong>name</strong></td>
@@ -518,7 +598,7 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mastercategory"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -957,21 +1037,39 @@
 <td><code class="prettyprint">1234.0</code></td>
 </tr>
 <tr>
-<td><strong>category_id</strong></td>
+<td><strong>attachments</strong></td>
+<td><em>array</em></td>
+<td>list of receipt attachments</td>
+<td><code class="prettyprint">[null]</code></td>
+</tr>
+<tr>
+<td><strong>category:id</strong></td>
 <td><em>nullable integer</em></td>
 <td>receipt Category ID</td>
 <td><code class="prettyprint">101</code></td>
 </tr>
 <tr>
-<td><strong>company_id</strong></td>
+<td><strong>category:master_category</strong></td>
+<td><em>nullable object</em></td>
+<td>receipt Category Master</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>category:name</strong></td>
+<td><em>nullable string</em></td>
+<td>receipt Category name</td>
+<td><code class="prettyprint">&quot;Auto/Fuel&quot;</code></td>
+</tr>
+<tr>
+<td><strong>company:id</strong></td>
 <td><em>integer</em></td>
-<td>Company ID</td>
+<td>receipt Company ID</td>
 <td><code class="prettyprint">100</code></td>
 </tr>
 <tr>
-<td><strong>company_name</strong></td>
+<td><strong>company:name</strong></td>
 <td><em>nullable string</em></td>
-<td>company name</td>
+<td>receipt Company name</td>
 <td><code class="prettyprint">&quot;Indinero&quot;</code></td>
 </tr>
 <tr>
@@ -1029,28 +1127,22 @@
 <td><code class="prettyprint">&quot;Receipt&quot;</code></td>
 </tr>
 <tr>
+<td><strong>resend_date</strong></td>
+<td><em>nullable date</em></td>
+<td>when receipt resent</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
 <td><strong>status</strong></td>
 <td><em>nullable integer</em></td>
 <td>receipt status</td>
 <td><code class="prettyprint">1</code></td>
 </tr>
 <tr>
-<td><strong>transaction_date</strong></td>
-<td><em>nullable string</em></td>
-<td>receipt transaction date</td>
-<td><code class="prettyprint">&quot;07/29/1026&quot;</code></td>
-</tr>
-<tr>
-<td><strong>transaction_id</strong></td>
-<td><em>nullable integer</em></td>
-<td>receipt Transaction ID</td>
-<td><code class="prettyprint">101</code></td>
-</tr>
-<tr>
-<td><strong>transaction_type</strong></td>
+<td><strong>subject</strong></td>
 <td><em>string</em></td>
-<td>type of Transaction</td>
-<td><code class="prettyprint">&quot;Transaction&quot;</code></td>
+<td>receipt subject</td>
+<td><code class="prettyprint">&quot;this is a receipt subject&quot;</code></td>
 </tr>
 </tbody></table>
 
@@ -1072,11 +1164,18 @@
 </code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indinero"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indinero"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nt">"receipt_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt subject"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt description"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"processor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt processor"</span><span class="p">,</span><span class="w">
@@ -1084,10 +1183,11 @@
   </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt email"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"transaction_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07/29/1026"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="kc">null</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1107,11 +1207,18 @@
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indinero"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indinero"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nt">"receipt_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt subject"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt description"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"processor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt processor"</span><span class="p">,</span><span class="w">
@@ -1119,10 +1226,11 @@
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a receipt email"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"email_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="nt">"email_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07/29/1026"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="kc">null</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -1235,7 +1343,7 @@
 </tr>
 <tr>
 <td><strong>status</strong></td>
-<td><em>enum</em></td>
+<td><em>integer</em></td>
 <td>A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6<br/> <strong>one of:</strong><code class="prettyprint">-1</code> or <code class="prettyprint">0</code> or <code class="prettyprint">1</code> or <code class="prettyprint">2</code> or <code class="prettyprint">3</code> or <code class="prettyprint">4</code> or <code class="prettyprint">5</code> or <code class="prettyprint">6</code></td>
 <td><code class="prettyprint">3</code></td>
 </tr>
@@ -1291,7 +1399,7 @@
 <h3 id="reimbursement-approve-reimbursements">Reimbursement Approve reimbursements</h3>
 
 <p>Approve reimbursements</p>
-<pre class="highlight plaintext"><code>POST /api/v2/reimbursements/approve
+<pre class="highlight plaintext"><code>POST /api/v2/reimbursements/actions/approve
 </code></pre>
 
 <h4 id="optional-parameters">Optional Parameters</h4>
@@ -1313,7 +1421,7 @@
 </tbody></table>
 
 <h4 id="curl-example">Curl Example</h4>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/reimbursements/approve <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/reimbursements/actions/approve <span class="se">\</span>
   -d <span class="s1">'{
   "reimbursement_ids": [
     5
@@ -1353,10 +1461,10 @@
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
-<h3 id="reimbursement-deny-reimbursements">Reimbursement Deny reimbursements</h3>
+<h3 id="reimbursement-reject-reimbursements">Reimbursement Reject reimbursements</h3>
 
-<p>Deny reimbursements</p>
-<pre class="highlight plaintext"><code>POST /api/v2/reimbursements/deny
+<p>Reject reimbursements</p>
+<pre class="highlight plaintext"><code>POST /api/v2/reimbursements/actions/reject
 </code></pre>
 
 <h4 id="optional-parameters">Optional Parameters</h4>
@@ -1378,7 +1486,7 @@
 </tbody></table>
 
 <h4 id="curl-example">Curl Example</h4>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/reimbursements/deny <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/reimbursements/actions/reject <span class="se">\</span>
   -d <span class="s1">'{
   "reimbursement_ids": [
     5
@@ -1767,7 +1875,7 @@
 </tr>
 <tr>
 <td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t JSON.</td>
 </tr>
 <tr>
 <td>410</td>
@@ -1787,15 +1895,75 @@
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We are temporarialy offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We are temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
+
+<h1 id="json-error-format">JSON Error Format</h1>
+
+<p>In cases where appropriate, the API could return structured error messages. The
+structure of the JSON response should contain the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Error Key</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>The primary type of the error (application_error, permission_error, etc.)</td>
+</tr>
+<tr>
+<td>subtype</td>
+<td>The subcategory of the error (invalid_credentials, invalid_input_data, unknown_error, etc.)</td>
+</tr>
+<tr>
+<td>details</td>
+<td>Human readable error message</td>
+</tr>
+<tr>
+<td>additional_data</td>
+<td>An array of key-value pairs about the errors</td>
+</tr>
+</tbody></table>
+
+<h2 id="error-types">Error Types</h2>
+
+<h3 id="application-errors">Application Errors</h3>
+
+<h4 id="invalid-input-data">Invalid Input Data</h4>
+
+<p>The <code class="prettyprint">additional_data</code> field contains an array of objects with the erroneous data.</p>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="s1">'application_error'</span><span class="p">,</span>
+  <span class="nx">subtype</span><span class="err">:</span> <span class="s1">'invalid_input_data'</span><span class="p">,</span>
+  <span class="nx">details</span><span class="err">:</span> <span class="s1">'Input data is missing or invalid.'</span><span class="p">,</span>
+  <span class="nx">additional_data</span><span class="err">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">reimbursement_ids</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="na">errors</span><span class="p">:</span> <span class="s1">'reimbursement_ids is required'</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+
+<h4 id="unknown-error">Unknown Error</h4>
+
+<p>A generic error subtype returned when an unexpected error occurs. The API will
+send a notification to the API support team containing necessary information
+to fix the issue.</p>
+
+<h3 id="permission-error">Permission Error</h3>
+
+<h4 id="invalid-credentials">Invalid Credentials</h4>
+
+<p>The access token used in the request is either expired or has been revoked.</p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="bash">bash</a>
-                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="shell">shell</a>
           </div>
       </div>
     </div>
