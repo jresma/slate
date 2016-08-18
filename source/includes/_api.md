@@ -1,3 +1,21 @@
+## <a name="resource-attachment">Attachment</a>
+
+Stability: `prototype`
+
+attachment
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **created_at** | *date-time* | when attachment was created | `"2015-01-01T12:00:00Z"` |
+| **filename** | *string* | attachment filename | `"image.png"` |
+| **id** | *integer* | attachment ID | `1001` |
+| **owner** | *object* | attachment category | `{"id":1,"type":["Receipt"]}` |
+| **size** | *nullable integer* | attachment size | `123000` |
+| **url** | *string* | link to attachment file | `"http://storage.indinero.com/receipts/1/attachments/1/download"` |
+
+
 ## <a name="resource-bank_account">Bank Account</a>
 
 Stability: `prototype`
@@ -9,23 +27,21 @@ Bank account items added to user's company.
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **account_name** | *string* | Bank Account name | `"Bank of Asia"` |
-| **account_number_string** | *nullable string* | account number string | `null` |
-| **balance** | *number* | bank account balance | `5000.0` |
-| **checking_account_number** | *nullable string* | checking account number | `null` |
-| **coa_number** | *nullable string* | chart of account number | `null` |
-| **company_id** | *integer* | Company ID | `301` |
+| **account_number_string** | *nullable string* | Account number in string format | `null` |
+| **balance** | *number* | Bank account balance | `5000.0` |
+| **checking_account_number** | *nullable string* | Checking account number | `null` |
+| **coa_number** | *nullable string* | Chart of account number | `null` |
+| **company_id** | *integer* | Company identifier of the company where the account belongs to. | `301` |
 | **created_at** | *nullable date-time* | when the item was created | `null` |
-| **currency_code** | *nullable string* | currency code | `"USD"` |
-| **discontinued** | *boolean* | discontinued | `false` |
-| **id** | *integer* | unique identifier of bank account | `100` |
-| **indinero_status** | *nullable integer* | inDinero status | `3` |
-| **intuit_id** | *nullable integer* | intuit id | `null` |
-| **item_id** | *nullable integer* | item id | `200` |
-| **stock_account** | *nullable boolean* |  | `null` |
-| **stripe_account_id** | *nullable string* | stripe account id | `null` |
-| **svb_account_number** | *nullable string* | SVB account number | `null` |
+| **currency_code** | *nullable string* | Currency code | `"USD"` |
+| **discontinued** | *boolean* | Discontinued | `false` |
+| **id** | *integer* | Unique identifier of bank account | `100` |
+| **indinero_status** | *nullable integer* | inDinero status of the bank account | `3` |
+| **intuit_id** | *nullable integer* | Identifier of the account when pulled from Intuit | `null` |
+| **item_id** | *nullable integer* | The Financial account the bank account belongs to. | `200` |
+| **stripe_account_id** | *nullable string* | Stripe account id | `null` |
+| **svb_account_number** | *nullable string* | SVB account number if the account is from SVB | `null` |
 | **updated_at** | *nullable date-time* | when the item was last updated | `null` |
-| **yodlee_id** | *nullable integer* |  | `null` |
 
 ### Bank Account List
 
@@ -59,8 +75,6 @@ HTTP/1.1 200 OK
     "created_at": "2015-01-01T12:00:00Z",
     "updated_at": "2015-01-01T12:00:00Z",
     "currency_code": "USD",
-    "stock_account": true,
-    "yodlee_id": 42,
     "balance": 5000.0,
     "indinero_status": 3,
     "svb_account_number": null,
@@ -87,8 +101,8 @@ A chart of accounts is a listing of the names of the accounts that a company has
 | ------- | ------- | ------- | ------- |
 | **built_in** | *boolean* | boolean | `true` |
 | **id** | *integer* | unique identifier of category | `654321` |
-| **mastercategory** | *nullable integer* | master category | `654321` |
-| **name** | *string* | unique name of category | `"Category 1"` |
+| **master_category** | *nullable object* | master category | `{"id":123456,"name":"Travel","built_in":true,"transaction_type_name":"both"}` |
+| **name** | *string* | unique name of category | `"Auto/Fuel"` |
 | **transaction_type_name** | *string* | type name | `"both"` |
 
 ### Category List
@@ -117,8 +131,13 @@ HTTP/1.1 200 OK
 [
   {
     "id": 654321,
-    "name": "Category 1",
-    "mastercategory": 654321,
+    "name": "Auto/Fuel",
+    "master_category": {
+      "id": 123456,
+      "name": "Travel",
+      "built_in": true,
+      "transaction_type_name": "both"
+    },
     "built_in": true,
     "transaction_type_name": "both"
   }
@@ -225,7 +244,6 @@ Credit card financial accounts added to company as data source.
 | **intuit_id** | *nullable integer* | intuit id | `null` |
 | **item_id** | *nullable integer* | Financial account | `200` |
 | **updated_at** | *nullable date-time* | when the item was last updated | `null` |
-| **yodlee_id** | *nullable integer* |  | `null` |
 
 ### Credit Card List
 
@@ -259,7 +277,6 @@ HTTP/1.1 200 OK
     "created_at": "2015-01-01T12:00:00Z",
     "updated_at": "2015-01-01T12:00:00Z",
     "currency_code": "USD",
-    "yodlee_id": 42,
     "balance": 5000.0,
     "indinero_status": 3,
     "intuit_id": null,
@@ -285,25 +302,24 @@ Financial account items added to user's company.
 | **company_id** | *integer* | Company ID | `100` |
 | **container_type** | *string* | Container type | `"bank"` |
 | **created_at** | *nullable date-time* | when the item was created | `null` |
-| **display_error** | *nullable boolean* |  | `null` |
+| **display_error** | *nullable boolean* | For the view, if the error should be displayed or not | `true` |
 | **id** | *integer* | unique identifier of financial account | `100` |
 | **intuit_id** | *nullable integer* | intuit id | `null` |
-| **intuit_status_code** | *nullable integer* |  | `null` |
-| **last_transaction_date** | *nullable date* |  | `null` |
+| **intuit_status_code** | *nullable integer* | Account status from Intuit | `185` |
+| **last_transaction_date** | *nullable date* | Date of the lastest transaction | `null` |
 | **last_update_attempt** | *nullable date-time* | when the item update was last attempted | `null` |
 | **last_update_time** | *nullable date-time* | when the item was updated | `null` |
-| **linked_item_id** | *nullable integer* |  | `null` |
-| **mfa** | *nullable string* |  | `null` |
+| **linked_item_id** | *nullable integer* | Identifier of the financial account linked to this account. | `4010301021` |
+| **mfa** | *nullable string* | Serialized multifactor authentication Questions | `"[\"Name of your favorite street?\"]"` |
 | **name** | *string* | Financial Account name | `"Bank of Asia"` |
-| **poll_status** | *nullable string* |  | `null` |
+| **poll_status** | *nullable integer* | Status of the poll when updating | `4` |
 | **refresh_status_code** | *nullable integer* | refresh status code | `1` |
-| **routing_number** | *nullable integer* |  | `null` |
-| **send_banklog_email** | *nullable boolean* |  | `null` |
+| **routing_number** | *nullable integer* | Routing number of the financial account | `12345678901` |
+| **send_banklog_email** | *nullable boolean* | Setting if the bank log email should be sent for this account | `true` |
 | **service_id** | *integer* | service id | `100` |
-| **start_poll_time** | *nullable date-time* |  | `null` |
-| **status** | *nullable integer* |  | `null` |
+| **start_poll_time** | *nullable date-time* | Time when the poll for download started | `null` |
+| **status** | *nullable integer* | Status of the financial account, whether set to 'automatic' or 'manual' | `"automatic"` |
 | **updated_at** | *nullable date-time* | when the item was last updated | `null` |
-| **yodlee_id** | *nullable integer* |  | `null` |
 
 ### Financial Account List
 
@@ -341,16 +357,15 @@ HTTP/1.1 200 OK
     "last_update_time": "2015-01-01T12:00:00Z",
     "created_at": "2015-01-01T12:00:00Z",
     "updated_at": "2015-01-01T12:00:00Z",
-    "yodlee_id": 42,
-    "mfa": "example",
+    "mfa": "[\"Name of your favorite street?\"]",
     "start_poll_time": "2015-01-01T12:00:00Z",
-    "poll_status": "example",
-    "linked_item_id": 42,
-    "intuit_status_code": 42,
-    "routing_number": 42,
+    "poll_status": 4,
+    "linked_item_id": 4010301021,
+    "intuit_status_code": 185,
+    "routing_number": 12345678901,
     "display_error": true,
     "send_banklog_email": true,
-    "status": 42,
+    "status": "automatic",
     "last_transaction_date": "example"
   }
 ]
@@ -368,22 +383,27 @@ receipt
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **amount** | *number* | receipt amount | `1234.0` |
-| **category_id** | *nullable integer* | receipt Category ID | `101` |
-| **company_id** | *integer* | Company ID | `100` |
-| **company_name** | *nullable string* | company name | `"Indinero"` |
-| **created_at** | *nullable date-time* | when receipt was created | `null` |
-| **description** | *string* | receipt description | `"this is a receipt description"` |
-| **email** | *nullable string* | receipt email | `"this is a receipt email"` |
-| **email_date** | *nullable date-time* | receipt email date | `null` |
-| **email_id** | *nullable integer* | receipt email_id | `42` |
+| **attachments** | *array* | list of receipt attachments | `[{"id":1001,"owner":{"id":1,"type":["Receipt"]},"url":"http://storage.indinero.com/receipts/1/attachments/1/download","filename":"image.png","size":123000,"created_at":"2015-01-01T12:00:00Z"}]` |
+| **[category:built_in](#resource-category)** | *boolean* | boolean | `true` |
+| **[category:id](#resource-category)** | *integer* | unique identifier of category | `654321` |
+| **[category:master_category](#resource-category)** | *nullable object* | master category | `{"id":123456,"name":"Travel","built_in":true,"transaction_type_name":"both"}` |
+| **[category:name](#resource-category)** | *string* | unique name of category | `"Auto/Fuel"` |
+| **[category:transaction_type_name](#resource-category)** | *string* | type name | `"both"` |
+| **[company:fiscal_year_end](#resource-company)** | *string* | Fiscal year end date. | `"12/31"` |
+| **[company:id](#resource-company)** | *integer* | Unique identity of a company | `401230` |
+| **[company:name](#resource-company)** | *string* | Name of the company | `"Acme Co"` |
+| **created_at** | *date-time* | when receipt was created | `"2015-01-01T12:00:00Z"` |
+| **description** | *string* | receipt description | `"Gas for getting to client facility"` |
+| **email** | *nullable string* | receipt email | `"email@example.com"` |
+| **email_date** | *nullable date-time* | receipt email date | `"2015-01-01T12:00:00Z"` |
+| **email_id** | *nullable string* | receipt email_id | `42` |
 | **id** | *integer* | unique identifier of receipt | `1001` |
-| **merchant** | *nullable string* | receipt merchant | `"this is a receipt merchant"` |
-| **processor** | *nullable string* | receipt processor | `"this is a receipt processor"` |
+| **merchant** | *nullable string* | receipt merchant | `"Shell"` |
+| **processor** | *nullable string* | receipt processor | `"mobile_works"` |
 | **receipt_type** | *string* | type of receipt | `"Receipt"` |
+| **resend_date** | *nullable date* | when receipt resent | `"2015-01-01"` |
 | **status** | *nullable integer* | receipt status | `1` |
-| **transaction_date** | *nullable string* | receipt transaction date | `"07/29/1026"` |
-| **transaction_id** | *nullable integer* | receipt Transaction ID | `101` |
-| **transaction_type** | *string* | type of Transaction | `"Transaction"` |
+| **subject** | *nullable string* | receipt email subject | `"Auto/Fuel (upload from iOS app)"` |
 
 ### Receipt Create
 
@@ -413,22 +433,50 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1001,
-  "category_id": 101,
-  "company_id": 100,
-  "company_name": "Indinero",
+  "category": {
+    "id": 654321,
+    "name": "Auto/Fuel",
+    "master_category": {
+      "id": 123456,
+      "name": "Travel",
+      "built_in": true,
+      "transaction_type_name": "both"
+    },
+    "built_in": true,
+    "transaction_type_name": "both"
+  },
+  "company": {
+    "id": 401230,
+    "name": "Acme Co",
+    "fiscal_year_end": "12/31"
+  },
   "receipt_type": "Receipt",
   "amount": 1234.0,
-  "description": "this is a receipt description",
+  "subject": "Auto/Fuel (upload from iOS app)",
+  "description": "Gas for getting to client facility",
   "status": 1,
-  "processor": "this is a receipt processor",
-  "merchant": "this is a receipt merchant",
-  "email": "this is a receipt email",
+  "processor": "mobile_works",
+  "merchant": "Shell",
+  "email": "email@example.com",
   "email_id": 42,
   "email_date": "2015-01-01T12:00:00Z",
-  "transaction_id": 101,
-  "transaction_type": "Transaction",
-  "transaction_date": "07/29/1026",
-  "created_at": "2015-01-01T12:00:00Z"
+  "created_at": "2015-01-01T12:00:00Z",
+  "resend_date": "2015-01-01",
+  "attachments": [
+    {
+      "id": 1001,
+      "owner": {
+        "id": 1,
+        "type": [
+          "Receipt"
+        ]
+      },
+      "url": "http://storage.indinero.com/receipts/1/attachments/1/download",
+      "filename": "image.png",
+      "size": 123000,
+      "created_at": "2015-01-01T12:00:00Z"
+    }
+  ]
 }
 ```
 
@@ -458,22 +506,50 @@ HTTP/1.1 200 OK
 [
   {
     "id": 1001,
-    "category_id": 101,
-    "company_id": 100,
-    "company_name": "Indinero",
+    "category": {
+      "id": 654321,
+      "name": "Auto/Fuel",
+      "master_category": {
+        "id": 123456,
+        "name": "Travel",
+        "built_in": true,
+        "transaction_type_name": "both"
+      },
+      "built_in": true,
+      "transaction_type_name": "both"
+    },
+    "company": {
+      "id": 401230,
+      "name": "Acme Co",
+      "fiscal_year_end": "12/31"
+    },
     "receipt_type": "Receipt",
     "amount": 1234.0,
-    "description": "this is a receipt description",
+    "subject": "Auto/Fuel (upload from iOS app)",
+    "description": "Gas for getting to client facility",
     "status": 1,
-    "processor": "this is a receipt processor",
-    "merchant": "this is a receipt merchant",
-    "email": "this is a receipt email",
+    "processor": "mobile_works",
+    "merchant": "Shell",
+    "email": "email@example.com",
     "email_id": 42,
     "email_date": "2015-01-01T12:00:00Z",
-    "transaction_id": 101,
-    "transaction_type": "Transaction",
-    "transaction_date": "07/29/1026",
-    "created_at": "2015-01-01T12:00:00Z"
+    "created_at": "2015-01-01T12:00:00Z",
+    "resend_date": "2015-01-01",
+    "attachments": [
+      {
+        "id": 1001,
+        "owner": {
+          "id": 1,
+          "type": [
+            "Receipt"
+          ]
+        },
+        "url": "http://storage.indinero.com/receipts/1/attachments/1/download",
+        "filename": "image.png",
+        "size": 123000,
+        "created_at": "2015-01-01T12:00:00Z"
+      }
+    ]
   }
 ]
 ```
@@ -504,7 +580,7 @@ Reimbursement
 | **person:full_name** | *nullable string* | Full name of the person | `"John Done"` |
 | **receipt** | *nullable object* | Receipt associated with the reimbursement | `null` |
 | **receipt:id** | *integer* | Receipt's unique identifier. | `1234` |
-| **status** | *enum* | A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6<br/> **one of:**`-1` or `0` or `1` or `2` or `3` or `4` or `5` or `6` | `3` |
+| **status** | *integer* | A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6<br/> **one of:**`-1` or `0` or `1` or `2` or `3` or `4` or `5` or `6` | `3` |
 | **value** | *string* | Amount to reimburse. | `"9.99"` |
 
 ### Reimbursement List
@@ -563,20 +639,21 @@ HTTP/1.1 200 OK
 Approve reimbursements
 
 ```
-POST /api/v2/reimbursements/approve
+POST /api/v2/reimbursements/actions/approve
 ```
 
-#### Optional Parameters
+#### Required Parameters
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **reimbursement_ids** | *array* | List of reimbursement ids. | `[5]` |
 
 
+
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://api.indinero.com/api/v2/reimbursements/approve \
+$ curl -n -X POST https://api.indinero.com/api/v2/reimbursements/actions/approve \
   -d '{
   "reimbursement_ids": [
     5
@@ -621,25 +698,26 @@ HTTP/1.1 200 OK
 ]
 ```
 
-### Reimbursement Deny reimbursements
+### Reimbursement Reject reimbursements
 
-Deny reimbursements
+Reject reimbursements
 
 ```
-POST /api/v2/reimbursements/deny
+POST /api/v2/reimbursements/actions/reject
 ```
 
-#### Optional Parameters
+#### Required Parameters
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **reimbursement_ids** | *array* | List of reimbursement ids. | `[5]` |
 
 
+
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://api.indinero.com/api/v2/reimbursements/deny \
+$ curl -n -X POST https://api.indinero.com/api/v2/reimbursements/actions/reject \
   -d '{
   "reimbursement_ids": [
     5
@@ -695,21 +773,21 @@ An accounting transaction is a business event having a monetary impact on the fi
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **account_id** | *integer* |  | `42` |
-| **amount** | *number* |  | `42.0` |
-| **base_type** | *string* |  | `"example"` |
-| **category_id** | *integer* |  | `42` |
-| **company_id** | *integer* |  | `42` |
-| **container_type** | *string* |  | `"example"` |
-| **currency_code** | *nullable string* |  | `null` |
-| **description_auto** | *string* |  | `"example"` |
-| **description_user** | *string* |  | `"example"` |
-| **detail** | *string* |  | `"example"` |
-| **id** | *integer* |  | `42` |
-| **memo** | *nullable string* |  | `null` |
-| **post_date** | *string* |  | `"example"` |
-| **real_amount** | *number* |  | `42.0` |
-| **split_id** | *integer* |  | `42` |
+| **account** | *string* | Bank account items added to user's company. or Credit card financial accounts added to company as data source. |  |
+| **amount** | *number* | Amount of the transaction | `42.0` |
+| **base_type** | *string* | Base type of the transaction: either credit or debit | `"credit"` |
+| **category_id** | *nullable integer* | ID of the category of the transaction | `null` |
+| **company_id** | *number* | The ID of the company who owns the transaction | `42.0` |
+| **container_type** | *nullable string* | Container type of the transaction - bank or credits | `null` |
+| **currency_code** | *nullable string* | Currency code for the transaction amount | `"USD"` |
+| **description_auto** | *nullable string* | Transaction description parsed by the app during import | `null` |
+| **description_user** | *nullable string* | Transaction description input by a user | `null` |
+| **detail** | *string* | Description of transaction based on financial institution statements | `"example"` |
+| **id** | *integer* | unique identifier of transaction | `42` |
+| **memo** | *nullable string* | Notes about the transaction | `null` |
+| **post_date** | *nullable date-time* | Date of posting of the transaction | `null` |
+| **real_amount** | *number* | Real amount of the transaction | `42.0` |
+| **split_id** | *nullable integer* | ID of the parent transaction if it's split transaction | `null` |
 
 ### Transaction List
 
@@ -737,18 +815,35 @@ HTTP/1.1 200 OK
 [
   {
     "id": 42,
-    "company_id": 42,
+    "company_id": 42.0,
     "amount": 42.0,
     "real_amount": 42.0,
-    "account_id": 42,
-    "post_date": "example",
+    "account": {
+      "id": 100,
+      "item_id": 200,
+      "company_id": 301,
+      "account_name": "Bank of Asia",
+      "created_at": "2015-01-01T12:00:00Z",
+      "updated_at": "2015-01-01T12:00:00Z",
+      "currency_code": "USD",
+      "balance": 5000.0,
+      "indinero_status": 3,
+      "svb_account_number": null,
+      "intuit_id": null,
+      "account_number_string": null,
+      "discontinued": false,
+      "checking_account_number": null,
+      "coa_number": null,
+      "stripe_account_id": null
+    },
+    "post_date": "2015-01-01T12:00:00Z",
     "container_type": "example",
     "description_user": "example",
     "description_auto": "example",
     "detail": "example",
-    "memo": null,
-    "base_type": "example",
-    "currency_code": null,
+    "memo": "example",
+    "base_type": "credit",
+    "currency_code": "USD",
     "split_id": 42,
     "category_id": 42
   }
@@ -768,7 +863,9 @@ A user in the Indinero App.
 | ------- | ------- | ------- | ------- |
 | **authy_id** | *nullable integer* | 2FA Authy ID | `9123814` |
 | **authy_opted_out** | *nullable boolean* | Setting signifying the user opted out of the 2FA Feature | `true` |
-| **company_id** | *integer* | Identifier of the company a user belongs to | `1234` |
+| **company:fiscal_year_end** | *string* | Fiscal year end date. | `"12/31"` |
+| **company:id** | *integer* | Unique identity of a company | `401230` |
+| **company:name** | *string* | Name of the company | `"Acme Co"` |
 | **display_name** | *string* | Display name of the user | `"John Done"` |
 | **email** | *string* | Email address of the user | `"john@done.com"` |
 | **id** | *number* | Unique identifier of a user | `123` |
@@ -802,7 +899,11 @@ HTTP/1.1 200 OK
   "id": 123,
   "display_name": "John Done",
   "email": "john@done.com",
-  "company_id": 1234,
+  "company": {
+    "id": 401230,
+    "name": "Acme Co",
+    "fiscal_year_end": "12/31"
+  },
   "authy_id": 9123814,
   "authy_opted_out": true,
   "role": "Admin",
@@ -841,7 +942,11 @@ HTTP/1.1 200 OK
   "id": 123,
   "display_name": "John Done",
   "email": "john@done.com",
-  "company_id": 1234,
+  "company": {
+    "id": 401230,
+    "name": "Acme Co",
+    "fiscal_year_end": "12/31"
+  },
   "authy_id": 9123814,
   "authy_opted_out": true,
   "role": "Admin",
@@ -891,7 +996,11 @@ HTTP/1.1 200 OK
   "id": 123,
   "display_name": "John Done",
   "email": "john@done.com",
-  "company_id": 1234,
+  "company": {
+    "id": 401230,
+    "name": "Acme Co",
+    "fiscal_year_end": "12/31"
+  },
   "authy_id": 9123814,
   "authy_opted_out": true,
   "role": "Admin",
