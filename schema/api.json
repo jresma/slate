@@ -4,6 +4,103 @@
     "object"
   ],
   "definitions": {
+    "attachment": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Attachment",
+      "description": "attachment",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "id",
+        "url"
+      ],
+      "definitions": {
+        "id": {
+          "description": "attachment ID",
+          "example": 1001,
+          "readOnly": true,
+          "type": [
+            "integer"
+          ]
+        },
+        "owner": {
+          "description": "attachment category",
+          "type": [
+            "object"
+          ],
+          "example": {
+            "id": 1,
+            "type": [
+              "Receipt"
+            ]
+          },
+          "required": [
+            "id",
+            "type"
+          ]
+        },
+        "url": {
+          "description": "link to attachment file",
+          "example": "http://storage.indinero.com/receipts/1/attachments/1/download",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "filename": {
+          "description": "attachment filename",
+          "example": "image.png",
+          "type": [
+            "string"
+          ]
+        },
+        "size": {
+          "description": "attachment size",
+          "example": 123000,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "created_at": {
+          "description": "when attachment was created",
+          "type": [
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/attachment/definitions/id"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/attachment/definitions/id"
+        },
+        "owner": {
+          "$ref": "#/definitions/attachment/definitions/owner"
+        },
+        "url": {
+          "$ref": "#/definitions/attachment/definitions/url"
+        },
+        "filename": {
+          "$ref": "#/definitions/attachment/definitions/filename"
+        },
+        "size": {
+          "$ref": "#/definitions/attachment/definitions/size"
+        },
+        "created_at": {
+          "$ref": "#/definitions/attachment/definitions/created_at"
+        }
+      }
+    },
     "bank_account": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Bank Account",
@@ -20,14 +117,14 @@
       ],
       "definitions": {
         "id": {
-          "description": "unique identifier of bank account",
+          "description": "Unique identifier of bank account",
           "example": 100,
           "type": [
             "integer"
           ]
         },
         "item_id": {
-          "description": "item id",
+          "description": "The Financial account the bank account belongs to.",
           "example": 200,
           "type": [
             "integer",
@@ -35,7 +132,7 @@
           ]
         },
         "company_id": {
-          "description": "Company ID",
+          "description": "Company identifier of the company where the account belongs to.",
           "example": 301,
           "type": [
             "integer"
@@ -65,27 +162,15 @@
           "format": "date-time"
         },
         "currency_code": {
-          "description": "currency code",
+          "description": "Currency code",
           "example": "USD",
           "type": [
             "string",
             "null"
           ]
         },
-        "stock_account": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "yodlee_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
         "balance": {
-          "description": "bank account balance",
+          "description": "Bank account balance",
           "example": 5000.0,
           "type": [
             "number",
@@ -93,7 +178,7 @@
           ]
         },
         "indinero_status": {
-          "description": "inDinero status",
+          "description": "inDinero status of the bank account",
           "example": 3,
           "type": [
             "integer",
@@ -101,7 +186,7 @@
           ]
         },
         "svb_account_number": {
-          "description": "SVB account number",
+          "description": "SVB account number if the account is from SVB",
           "example": null,
           "type": [
             "string",
@@ -109,7 +194,7 @@
           ]
         },
         "intuit_id": {
-          "description": "intuit id",
+          "description": "Identifier of the account when pulled from Intuit",
           "example": null,
           "type": [
             "integer",
@@ -117,7 +202,7 @@
           ]
         },
         "account_number_string": {
-          "description": "account number string",
+          "description": "Account number in string format",
           "example": null,
           "type": [
             "string",
@@ -125,14 +210,14 @@
           ]
         },
         "discontinued": {
-          "description": "discontinued",
+          "description": "Discontinued",
           "example": false,
           "type": [
             "boolean"
           ]
         },
         "checking_account_number": {
-          "description": "checking account number",
+          "description": "Checking account number",
           "example": null,
           "type": [
             "string",
@@ -140,7 +225,7 @@
           ]
         },
         "coa_number": {
-          "description": "chart of account number",
+          "description": "Chart of account number",
           "example": null,
           "type": [
             "string",
@@ -148,7 +233,7 @@
           ]
         },
         "stripe_account_id": {
-          "description": "stripe account id",
+          "description": "Stripe account id",
           "example": null,
           "type": [
             "string",
@@ -156,11 +241,7 @@
           ]
         },
         "identity": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/bank_account/definitions/id"
-            }
-          ]
+          "$ref": "#/definitions/bank_account/definitions/id"
         }
       },
       "properties": {
@@ -184,12 +265,6 @@
         },
         "currency_code": {
           "$ref": "#/definitions/bank_account/definitions/currency_code"
-        },
-        "stock_account": {
-          "$ref": "#/definitions/bank_account/definitions/stock_account"
-        },
-        "yodlee_id": {
-          "$ref": "#/definitions/bank_account/definitions/yodlee_id"
         },
         "balance": {
           "$ref": "#/definitions/bank_account/definitions/balance"
@@ -247,21 +322,29 @@
             "integer"
           ]
         },
+        "identity": {
+          "$ref": "#/definitions/category/definitions/id"
+        },
         "name": {
           "description": "unique name of category",
-          "example": "Category 1",
+          "example": "Auto/Fuel",
           "readOnly": true,
           "type": [
             "string"
           ]
         },
-        "mastercategory": {
+        "master_category": {
           "description": "master category",
-          "example": 654321,
           "readOnly": true,
+          "example": {
+            "id": 123456,
+            "name": "Travel",
+            "built_in": true,
+            "transaction_type_name": "both"
+          },
           "type": [
-            "integer",
-            "null"
+            "null",
+            "object"
           ]
         },
         "built_in": {
@@ -281,6 +364,11 @@
           ]
         }
       },
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
       "links": [
         {
           "description": "List existing categories.",
@@ -297,8 +385,8 @@
         "name": {
           "$ref": "#/definitions/category/definitions/name"
         },
-        "mastercategory": {
-          "$ref": "#/definitions/category/definitions/mastercategory"
+        "master_category": {
+          "$ref": "#/definitions/category/definitions/master_category"
         },
         "built_in": {
           "$ref": "#/definitions/category/definitions/built_in"
@@ -324,6 +412,9 @@
             "integer"
           ],
           "example": 401230
+        },
+        "identity": {
+          "$ref": "#/definitions/company/definitions/id"
         },
         "name": {
           "description": "Name of the company",
@@ -460,12 +551,6 @@
             "null"
           ]
         },
-        "yodlee_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
         "intuit_id": {
           "description": "intuit id",
           "example": null,
@@ -527,9 +612,6 @@
         "currency_code": {
           "$ref": "#/definitions/credit_card/definitions/currency_code"
         },
-        "yodlee_id": {
-          "$ref": "#/definitions/credit_card/definitions/yodlee_id"
-        },
         "balance": {
           "$ref": "#/definitions/credit_card/definitions/balance"
         },
@@ -585,6 +667,9 @@
           "type": [
             "integer"
           ]
+        },
+        "identity": {
+          "$ref": "#/definitions/financial_account/definitions/id"
         },
         "intuit_id": {
           "description": "intuit id",
@@ -662,80 +747,85 @@
           ],
           "format": "date-time"
         },
-        "yodlee_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
         "mfa": {
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "description": "Serialized multifactor authentication Questions",
+          "example": "[\"Name of your favorite street?\"]"
         },
         "start_poll_time": {
           "type": [
             "string",
             "null"
           ],
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time when the poll for download started"
         },
         "poll_status": {
           "type": [
-            "string",
+            "integer",
             "null"
-          ]
+          ],
+          "description": "Status of the poll when updating",
+          "example": 4
         },
         "linked_item_id": {
           "type": [
             "integer",
             "null"
-          ]
+          ],
+          "description": "Identifier of the financial account linked to this account.",
+          "example": 4010301021
         },
         "intuit_status_code": {
           "type": [
             "integer",
             "null"
-          ]
+          ],
+          "description": "Account status from Intuit",
+          "example": 185
         },
         "routing_number": {
           "type": [
             "integer",
             "null"
-          ]
+          ],
+          "description": "Routing number of the financial account",
+          "example": 12345678901
         },
         "display_error": {
           "type": [
             "boolean",
             "null"
-          ]
+          ],
+          "description": "For the view, if the error should be displayed or not",
+          "example": true
         },
         "send_banklog_email": {
           "type": [
             "boolean",
             "null"
-          ]
+          ],
+          "description": "Setting if the bank log email should be sent for this account",
+          "example": true
         },
         "status": {
           "type": [
             "integer",
             "null"
-          ]
+          ],
+          "description": "Status of the financial account, whether set to 'automatic' or 'manual'",
+          "example": "automatic"
         },
         "last_transaction_date": {
           "type": [
             "string",
             "null"
           ],
+          "description": "Date of the lastest transaction",
           "format": "date"
-        },
-        "identity": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/financial_account/definitions/id"
-            }
-          ]
         }
       },
       "properties": {
@@ -771,9 +861,6 @@
         },
         "updated_at": {
           "$ref": "#/definitions/financial_account/definitions/updated_at"
-        },
-        "yodlee_id": {
-          "$ref": "#/definitions/financial_account/definitions/yodlee_id"
         },
         "mfa": {
           "$ref": "#/definitions/financial_account/definitions/mfa"
@@ -834,30 +921,16 @@
             "integer"
           ]
         },
-        "category_id": {
-          "description": "receipt Category ID",
-          "example": 101,
-          "readOnly": true,
+        "category": {
+          "description": "receipt category",
           "type": [
-            "integer",
-            "null"
+            "object"
           ]
         },
-        "company_id": {
-          "description": "Company ID",
-          "readOnly": true,
-          "example": 100,
+        "company": {
+          "description": "receipt company",
           "type": [
-            "integer"
-          ]
-        },
-        "company_name": {
-          "description": "company name",
-          "readOnly": true,
-          "example": "Indinero",
-          "type": [
-            "string",
-            "null"
+            "object"
           ]
         },
         "receipt_type": {
@@ -875,9 +948,17 @@
             "string"
           ]
         },
+        "subject": {
+          "description": "receipt email subject",
+          "example": "Auto/Fuel (upload from iOS app)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "description": {
           "description": "receipt description",
-          "example": "this is a receipt description",
+          "example": "Gas for getting to client facility",
           "type": [
             "string"
           ]
@@ -892,7 +973,7 @@
         },
         "processor": {
           "description": "receipt processor",
-          "example": "this is a receipt processor",
+          "example": "mobile_works",
           "type": [
             "string",
             "null"
@@ -900,7 +981,7 @@
         },
         "merchant": {
           "description": "receipt merchant",
-          "example": "this is a receipt merchant",
+          "example": "Shell",
           "type": [
             "string",
             "null"
@@ -908,7 +989,7 @@
         },
         "email": {
           "description": "receipt email",
-          "example": "this is a receipt email",
+          "example": "email@example.com",
           "type": [
             "string",
             "null"
@@ -918,50 +999,44 @@
           "description": "receipt email_id",
           "example": 42,
           "type": [
-            "integer",
+            "string",
             "null"
           ]
         },
         "email_date": {
           "description": "receipt email date",
+          "example": "2015-01-01T12:00:00Z",
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
-        },
-        "transaction_id": {
-          "description": "receipt Transaction ID",
-          "example": 101,
-          "readOnly": true,
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "transaction_type": {
-          "description": "type of Transaction",
-          "example": "Transaction",
-          "type": [
-            "string"
-          ]
-        },
-        "transaction_date": {
-          "description": "receipt transaction date",
-          "readOnly": true,
-          "example": "07/29/1026",
-          "type": [
-            "string",
-            "null"
-          ]
         },
         "created_at": {
           "description": "when receipt was created",
           "type": [
+            "string"
+          ],
+          "example": "2015-01-01T12:00:00Z",
+          "format": "date-time"
+        },
+        "resend_date": {
+          "description": "when receipt resent",
+          "example": "2015-01-01",
+          "type": [
             "string",
             "null"
           ],
-          "format": "date-time"
+          "format": "date"
+        },
+        "attachments": {
+          "description": "list of receipt attachments",
+          "items": {
+            "$ref": "#/definitions/attachment"
+          },
+          "type": [
+            "array"
+          ]
         },
         "identity": {
           "anyOf": [
@@ -998,20 +1073,20 @@
         "id": {
           "$ref": "#/definitions/receipt/definitions/id"
         },
-        "category_id": {
-          "$ref": "#/definitions/receipt/definitions/category_id"
+        "category": {
+          "$ref": "#/definitions/category"
         },
-        "company_id": {
-          "$ref": "#/definitions/receipt/definitions/company_id"
-        },
-        "company_name": {
-          "$ref": "#/definitions/receipt/definitions/company_name"
+        "company": {
+          "$ref": "#/definitions/company"
         },
         "receipt_type": {
           "$ref": "#/definitions/receipt/definitions/receipt_type"
         },
         "amount": {
           "$ref": "#/definitions/receipt/definitions/amount"
+        },
+        "subject": {
+          "$ref": "#/definitions/receipt/definitions/subject"
         },
         "description": {
           "$ref": "#/definitions/receipt/definitions/description"
@@ -1034,17 +1109,14 @@
         "email_date": {
           "$ref": "#/definitions/receipt/definitions/email_date"
         },
-        "transaction_id": {
-          "$ref": "#/definitions/receipt/definitions/transaction_id"
-        },
-        "transaction_type": {
-          "$ref": "#/definitions/receipt/definitions/transaction_type"
-        },
-        "transaction_date": {
-          "$ref": "#/definitions/receipt/definitions/transaction_date"
-        },
         "created_at": {
           "$ref": "#/definitions/receipt/definitions/created_at"
+        },
+        "resend_date": {
+          "$ref": "#/definitions/receipt/definitions/resend_date"
+        },
+        "attachments": {
+          "$ref": "#/definitions/receipt/definitions/attachments"
         }
       }
     },
@@ -1073,6 +1145,9 @@
           ],
           "readOnly": true
         },
+        "identity": {
+          "$ref": "#/definitions/reimbursement/definitions/id"
+        },
         "company_id": {
           "description": "Company identifier the reimbursement is part of.",
           "type": [
@@ -1083,7 +1158,7 @@
         "status": {
           "description": "A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6",
           "type": [
-            "enum"
+            "integer"
           ],
           "enum": [
             -1,
@@ -1201,7 +1276,10 @@
               ],
               "example": 1234
             }
-          }
+          },
+          "required": [
+            "id"
+          ]
         },
         "person": {
           "type": [
@@ -1218,6 +1296,20 @@
               "example": "John Done"
             }
           }
+        },
+        "reimbursement_ids": {
+          "description": "List of reimbursement ids.",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "type": [
+              "integer"
+            ],
+            "example": 5
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       },
       "properties": {
@@ -1265,53 +1357,43 @@
         },
         {
           "description": "Approve reimbursements",
-          "href": "/api/v2/reimbursements/approve",
+          "href": "/api/v2/reimbursements/actions/approve",
           "method": "POST",
           "rel": "instances",
           "schema": {
+            "type": [
+              "object"
+            ],
             "properties": {
               "reimbursement_ids": {
-                "description": "List of reimbursement ids.",
-                "type": [
-                  "array"
-                ],
-                "items": {
-                  "type": [
-                    "integer"
-                  ],
-                  "example": 5
-                },
-                "minItems": 1,
-                "uniqueItems": true
+                "$ref": "#/definitions/reimbursement/definitions/reimbursement_ids"
               }
-            }
+            },
+            "required": [
+              "reimbursement_ids"
+            ]
           },
           "title": "Approve reimbursements"
         },
         {
-          "description": "Deny reimbursements",
-          "href": "/api/v2/reimbursements/deny",
+          "description": "Reject reimbursements",
+          "href": "/api/v2/reimbursements/actions/reject",
           "method": "POST",
           "rel": "instances",
           "schema": {
+            "type": [
+              "object"
+            ],
             "properties": {
               "reimbursement_ids": {
-                "description": "List of reimbursement ids.",
-                "type": [
-                  "array"
-                ],
-                "items": {
-                  "type": [
-                    "integer"
-                  ],
-                  "example": 5
-                },
-                "minItems": 1,
-                "uniqueItems": true
+                "$ref": "#/definitions/reimbursement/definitions/reimbursement_ids"
               }
-            }
+            },
+            "required": [
+              "reimbursement_ids"
+            ]
           },
-          "title": "Deny reimbursements"
+          "title": "Reject reimbursements"
         }
       ]
     },
@@ -1328,9 +1410,8 @@
         "id": {
           "description": "unique identifier of transaction",
           "readOnly": true,
-          "format": "uuid",
           "type": [
-            "string"
+            "integer"
           ]
         },
         "name": {
@@ -1341,14 +1422,7 @@
           ]
         },
         "identity": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/transaction/definitions/id"
-            },
-            {
-              "$ref": "#/definitions/transaction/definitions/name"
-            }
-          ]
+          "$ref": "#/definitions/transaction/definitions/id"
         },
         "created_at": {
           "description": "when transaction was created",
@@ -1363,6 +1437,112 @@
           "type": [
             "string"
           ]
+        },
+        "company_id": {
+          "type": [
+            "number"
+          ],
+          "description": "The ID of the company who owns the transaction"
+        },
+        "amount": {
+          "type": [
+            "number",
+            "string"
+          ],
+          "description": "Amount of the transaction"
+        },
+        "real_amount": {
+          "type": [
+            "number",
+            "string"
+          ],
+          "description": "Real amount of the transaction"
+        },
+        "account": {
+          "description": "Account where the transaction was made",
+          "type": [
+            "object",
+            "null"
+          ],
+          "anyOf": [
+            {
+              "$ref": "#/definitions/bank_account"
+            },
+            {
+              "$ref": "#/definitions/credit_card"
+            }
+          ]
+        },
+        "post_date": {
+          "description": "Date of posting of the transaction",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "container_type": {
+          "description": "Container type of the transaction - bank or credits",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description_user": {
+          "description": "Transaction description input by a user",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description_auto": {
+          "description": "Transaction description parsed by the app during import",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "detail": {
+          "description": "Description of transaction based on financial institution statements",
+          "type": [
+            "string"
+          ]
+        },
+        "memo": {
+          "description": "Notes about the transaction",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "base_type": {
+          "description": "Base type of the transaction: either credit or debit",
+          "type": [
+            "string"
+          ],
+          "example": "credit"
+        },
+        "currency_code": {
+          "description": "Currency code for the transaction amount",
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "USD"
+        },
+        "split_id": {
+          "description": "ID of the parent transaction if it's split transaction",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "category_id": {
+          "description": "ID of the category of the transaction",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
       },
       "required": [
@@ -1370,10 +1550,9 @@
         "company_id",
         "amount",
         "real_amount",
-        "account_id",
+        "account",
         "post_date",
         "container_type",
-        "description_user",
         "description_auto",
         "detail",
         "base_type",
@@ -1383,83 +1562,49 @@
       ],
       "properties": {
         "id": {
-          "type": [
-            "integer"
-          ]
+          "$ref": "#/definitions/transaction/definitions/id"
         },
         "company_id": {
-          "type": [
-            "integer"
-          ]
+          "$ref": "#/definitions/transaction/definitions/company_id"
         },
         "amount": {
-          "type": [
-            "number",
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/amount"
         },
         "real_amount": {
-          "type": [
-            "number",
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/real_amount"
         },
-        "account_id": {
-          "type": [
-            "integer"
-          ]
+        "account": {
+          "$ref": "#/definitions/transaction/definitions/account"
         },
         "post_date": {
-          "type": [
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/post_date"
         },
         "container_type": {
-          "type": [
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/container_type"
         },
         "description_user": {
-          "type": [
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/description_user"
         },
         "description_auto": {
-          "type": [
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/description_auto"
         },
         "detail": {
-          "type": [
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/detail"
         },
         "memo": {
-          "type": [
-            "null",
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/memo"
         },
         "base_type": {
-          "type": [
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/base_type"
         },
         "currency_code": {
-          "type": [
-            "null",
-            "string"
-          ]
+          "$ref": "#/definitions/transaction/definitions/currency_code"
         },
         "split_id": {
-          "type": [
-            "integer"
-          ]
+          "$ref": "#/definitions/transaction/definitions/split_id"
         },
         "category_id": {
-          "type": [
-            "integer"
-          ]
+          "$ref": "#/definitions/transaction/definitions/category_id"
         }
       },
       "links": [
@@ -1489,6 +1634,9 @@
             "number"
           ]
         },
+        "identity": {
+          "$ref": "#/definitions/user/definitions/id"
+        },
         "display_name": {
           "description": "Display name of the user",
           "type": [
@@ -1503,12 +1651,41 @@
           ],
           "example": "john@done.com"
         },
-        "company_id": {
-          "description": "Identifier of the company a user belongs to",
-          "type": [
-            "integer"
-          ],
-          "example": 1234
+        "company": {
+          "definitions": {
+            "id": {
+              "description": "Unique identity of a company",
+              "type": [
+                "integer"
+              ],
+              "example": 401230
+            },
+            "name": {
+              "description": "Name of the company",
+              "type": [
+                "string"
+              ],
+              "example": "Acme Co"
+            },
+            "fiscal_year_end": {
+              "description": "Fiscal year end date.",
+              "type": [
+                "string"
+              ],
+              "example": "12/31"
+            }
+          },
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/user/definitions/company/definitions/id"
+            },
+            "name": {
+              "$ref": "#/definitions/user/definitions/company/definitions/name"
+            },
+            "fiscal_year_end": {
+              "$ref": "#/definitions/user/definitions/company/definitions/fiscal_year_end"
+            }
+          }
         },
         "authy_id": {
           "description": "2FA Authy ID",
@@ -1562,8 +1739,8 @@
         "email": {
           "$ref": "#/definitions/user/definitions/email"
         },
-        "company_id": {
-          "$ref": "#/definitions/user/definitions/company_id"
+        "company": {
+          "$ref": "#/definitions/user/definitions/company"
         },
         "authy_id": {
           "$ref": "#/definitions/user/definitions/authy_id"
@@ -1590,7 +1767,8 @@
           "description": "Get logged in user profile photo",
           "href": "/api/v2/user/profile_photo",
           "title": "User Profile Photo",
-          "method": "GET"
+          "method": "GET",
+          "rel": "self"
         },
         {
           "description": "Reset user's password",
@@ -1599,6 +1777,9 @@
           "title": "User Forgot Password",
           "method": "POST",
           "schema": {
+            "type": [
+              "object"
+            ],
             "properties": {
               "email": {
                 "$ref": "#/definitions/user/definitions/email"
@@ -1613,6 +1794,9 @@
     }
   },
   "properties": {
+    "attachment": {
+      "$ref": "#/definitions/attachment"
+    },
     "bank_account": {
       "$ref": "#/definitions/bank_account"
     },
