@@ -99,10 +99,15 @@ A chart of accounts is a listing of the names of the accounts that a company has
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **built_in** | *boolean* | boolean | `true` |
+| **account_number** | *string* | account number | `"5010-00"` |
+| **active** | *boolean* | is active | `true` |
+| **built_in** | *boolean* | is built in | `true` |
+| **deprecated** | *boolean* | is deprecated | `false` |
 | **id** | *integer* | unique identifier of category | `654321` |
+| **in_trend** | *boolean* | is in trend | `true` |
 | **master_category** | *nullable object* | master category | `{"id":123456,"name":"Travel","built_in":true,"transaction_type_name":"both"}` |
 | **name** | *string* | unique name of category | `"Auto/Fuel"` |
+| **sub_type_id** | *integer* | sub type ID | `32` |
 | **transaction_type_name** | *string* | type name | `"both"` |
 
 ### Category List
@@ -139,7 +144,12 @@ HTTP/1.1 200 OK
       "transaction_type_name": "both"
     },
     "built_in": true,
-    "transaction_type_name": "both"
+    "transaction_type_name": "both",
+    "in_trend": true,
+    "deprecated": false,
+    "active": true,
+    "account_number": "5010-00",
+    "sub_type_id": 32
   }
 ]
 ```
@@ -382,12 +392,17 @@ receipt
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **amount** | *number* | receipt amount | `1234.0` |
+| **amount** | *nullable number* | receipt amount | `1234.0` |
 | **attachments** | *array* | list of receipt attachments | `[{"id":1001,"owner":{"id":1,"type":["Receipt"]},"url":"http://storage.indinero.com/receipts/1/attachments/1/download","filename":"image.png","size":123000,"created_at":"2015-01-01T12:00:00Z"}]` |
-| **[category:built_in](#resource-category)** | *boolean* | boolean | `true` |
+| **[category:account_number](#resource-category)** | *string* | account number | `"5010-00"` |
+| **[category:active](#resource-category)** | *boolean* | is active | `true` |
+| **[category:built_in](#resource-category)** | *boolean* | is built in | `true` |
+| **[category:deprecated](#resource-category)** | *boolean* | is deprecated | `false` |
 | **[category:id](#resource-category)** | *integer* | unique identifier of category | `654321` |
+| **[category:in_trend](#resource-category)** | *boolean* | is in trend | `true` |
 | **[category:master_category](#resource-category)** | *nullable object* | master category | `{"id":123456,"name":"Travel","built_in":true,"transaction_type_name":"both"}` |
 | **[category:name](#resource-category)** | *string* | unique name of category | `"Auto/Fuel"` |
+| **[category:sub_type_id](#resource-category)** | *integer* | sub type ID | `32` |
 | **[category:transaction_type_name](#resource-category)** | *string* | type name | `"both"` |
 | **[company:fiscal_year_end](#resource-company)** | *string* | Fiscal year end date. | `"12/31"` |
 | **[company:id](#resource-company)** | *integer* | Unique identity of a company | `401230` |
@@ -443,7 +458,12 @@ HTTP/1.1 201 Created
       "transaction_type_name": "both"
     },
     "built_in": true,
-    "transaction_type_name": "both"
+    "transaction_type_name": "both",
+    "in_trend": true,
+    "deprecated": false,
+    "active": true,
+    "account_number": "5010-00",
+    "sub_type_id": 32
   },
   "company": {
     "id": 401230,
@@ -516,7 +536,12 @@ HTTP/1.1 200 OK
         "transaction_type_name": "both"
       },
       "built_in": true,
-      "transaction_type_name": "both"
+      "transaction_type_name": "both",
+      "in_trend": true,
+      "deprecated": false,
+      "active": true,
+      "account_number": "5010-00",
+      "sub_type_id": 32
     },
     "company": {
       "id": 401230,
@@ -565,11 +590,18 @@ Reimbursement
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
+| **attachments** | *array* | List of attachments | `[{"id":1001,"owner":{"id":1,"type":["Receipt"]},"url":"http://storage.indinero.com/receipts/1/attachments/1/download","filename":"image.png","size":123000,"created_at":"2015-01-01T12:00:00Z"}]` |
 | **cannot_process_reason** | *nullable string* | Reason why the reimbursement was not processed | `"ACH payment failed"` |
-| **category** | *nullable object* | Category of the reimbursement | `null` |
-| **category:account_number** | *nullable string* | A category's account number | `"4123"` |
-| **category:id** | *integer* | A category's identifier | `1234` |
-| **category:name** | *string* | A category's name | `"Uncategorized"` |
+| **[category:account_number](#resource-category)** | *string* | account number | `"5010-00"` |
+| **[category:active](#resource-category)** | *boolean* | is active | `true` |
+| **[category:built_in](#resource-category)** | *boolean* | is built in | `true` |
+| **[category:deprecated](#resource-category)** | *boolean* | is deprecated | `false` |
+| **[category:id](#resource-category)** | *integer* | unique identifier of category | `654321` |
+| **[category:in_trend](#resource-category)** | *boolean* | is in trend | `true` |
+| **[category:master_category](#resource-category)** | *nullable object* | master category | `{"id":123456,"name":"Travel","built_in":true,"transaction_type_name":"both"}` |
+| **[category:name](#resource-category)** | *string* | unique name of category | `"Auto/Fuel"` |
+| **[category:sub_type_id](#resource-category)** | *integer* | sub type ID | `32` |
+| **[category:transaction_type_name](#resource-category)** | *string* | type name | `"both"` |
 | **company_id** | *integer* | Company identifier the reimbursement is part of. | `123` |
 | **created_at** | *nullable date-time* | Time when the reimbursement was created | `null` |
 | **description** | *string* | Description of the reimbursement submitted. | `"Github Processing Fee."` |
@@ -578,8 +610,6 @@ Reimbursement
 | **employee:full_name** | *nullable string* | Employee's full name | `"Harrison Redford"` |
 | **id** | *integer* | Unique identifier of the reimbursement. | `123` |
 | **person:full_name** | *nullable string* | Full name of the person | `"John Done"` |
-| **receipt** | *nullable object* | Receipt associated with the reimbursement | `null` |
-| **receipt:id** | *integer* | Receipt's unique identifier. | `1234` |
 | **status** | *integer* | A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6<br/> **one of:**`-1` or `0` or `1` or `2` or `3` or `4` or `5` or `6` | `3` |
 | **value** | *string* | Amount to reimburse. | `"9.99"` |
 
@@ -610,6 +640,21 @@ HTTP/1.1 200 OK
   {
     "id": 123,
     "company_id": 123,
+    "attachments": [
+      {
+        "id": 1001,
+        "owner": {
+          "id": 1,
+          "type": [
+            "Receipt"
+          ]
+        },
+        "url": "http://storage.indinero.com/receipts/1/attachments/1/download",
+        "filename": "image.png",
+        "size": 123000,
+        "created_at": "2015-01-01T12:00:00Z"
+      }
+    ],
     "status": 3,
     "value": "9.99",
     "description": "Github Processing Fee.",
@@ -623,15 +668,109 @@ HTTP/1.1 200 OK
       "full_name": "John Done"
     },
     "category": {
-      "id": 1234,
-      "name": "Uncategorized",
-      "account_number": "4123"
-    },
-    "receipt": {
-      "id": 1234
+      "id": 654321,
+      "name": "Auto/Fuel",
+      "master_category": {
+        "id": 123456,
+        "name": "Travel",
+        "built_in": true,
+        "transaction_type_name": "both"
+      },
+      "built_in": true,
+      "transaction_type_name": "both",
+      "in_trend": true,
+      "deprecated": false,
+      "active": true,
+      "account_number": "5010-00",
+      "sub_type_id": 32
     }
   }
 ]
+```
+
+### Reimbursement Update
+
+Update reimbursement
+
+```
+PATCH /api/v2/reimbursements/{reimbursement_id}
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **reimbursement:category_id** | *integer* | unique identifier of category | `654321` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X PATCH https://api.indinero.com/api/v2/reimbursements/$REIMBURSEMENT_ID \
+  -d '{
+  "reimbursement": {
+    "category_id": 1234
+  }
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 123,
+  "company_id": 123,
+  "attachments": [
+    {
+      "id": 1001,
+      "owner": {
+        "id": 1,
+        "type": [
+          "Receipt"
+        ]
+      },
+      "url": "http://storage.indinero.com/receipts/1/attachments/1/download",
+      "filename": "image.png",
+      "size": 123000,
+      "created_at": "2015-01-01T12:00:00Z"
+    }
+  ],
+  "status": 3,
+  "value": "9.99",
+  "description": "Github Processing Fee.",
+  "created_at": "2015-01-01T12:00:00Z",
+  "cannot_process_reason": "ACH payment failed",
+  "employee": {
+    "full_name": "Harrison Redford",
+    "email": "harrison.redford@example.com"
+  },
+  "person": {
+    "full_name": "John Done"
+  },
+  "category": {
+    "id": 654321,
+    "name": "Auto/Fuel",
+    "master_category": {
+      "id": 123456,
+      "name": "Travel",
+      "built_in": true,
+      "transaction_type_name": "both"
+    },
+    "built_in": true,
+    "transaction_type_name": "both",
+    "in_trend": true,
+    "deprecated": false,
+    "active": true,
+    "account_number": "5010-00",
+    "sub_type_id": 32
+  }
+}
 ```
 
 ### Reimbursement Approve reimbursements
@@ -674,6 +813,21 @@ HTTP/1.1 200 OK
   {
     "id": 123,
     "company_id": 123,
+    "attachments": [
+      {
+        "id": 1001,
+        "owner": {
+          "id": 1,
+          "type": [
+            "Receipt"
+          ]
+        },
+        "url": "http://storage.indinero.com/receipts/1/attachments/1/download",
+        "filename": "image.png",
+        "size": 123000,
+        "created_at": "2015-01-01T12:00:00Z"
+      }
+    ],
     "status": 3,
     "value": "9.99",
     "description": "Github Processing Fee.",
@@ -687,12 +841,21 @@ HTTP/1.1 200 OK
       "full_name": "John Done"
     },
     "category": {
-      "id": 1234,
-      "name": "Uncategorized",
-      "account_number": "4123"
-    },
-    "receipt": {
-      "id": 1234
+      "id": 654321,
+      "name": "Auto/Fuel",
+      "master_category": {
+        "id": 123456,
+        "name": "Travel",
+        "built_in": true,
+        "transaction_type_name": "both"
+      },
+      "built_in": true,
+      "transaction_type_name": "both",
+      "in_trend": true,
+      "deprecated": false,
+      "active": true,
+      "account_number": "5010-00",
+      "sub_type_id": 32
     }
   }
 ]
@@ -738,6 +901,21 @@ HTTP/1.1 200 OK
   {
     "id": 123,
     "company_id": 123,
+    "attachments": [
+      {
+        "id": 1001,
+        "owner": {
+          "id": 1,
+          "type": [
+            "Receipt"
+          ]
+        },
+        "url": "http://storage.indinero.com/receipts/1/attachments/1/download",
+        "filename": "image.png",
+        "size": 123000,
+        "created_at": "2015-01-01T12:00:00Z"
+      }
+    ],
     "status": 3,
     "value": "9.99",
     "description": "Github Processing Fee.",
@@ -751,12 +929,21 @@ HTTP/1.1 200 OK
       "full_name": "John Done"
     },
     "category": {
-      "id": 1234,
-      "name": "Uncategorized",
-      "account_number": "4123"
-    },
-    "receipt": {
-      "id": 1234
+      "id": 654321,
+      "name": "Auto/Fuel",
+      "master_category": {
+        "id": 123456,
+        "name": "Travel",
+        "built_in": true,
+        "transaction_type_name": "both"
+      },
+      "built_in": true,
+      "transaction_type_name": "both",
+      "in_trend": true,
+      "deprecated": false,
+      "active": true,
+      "account_number": "5010-00",
+      "sub_type_id": 32
     }
   }
 ]
@@ -851,6 +1038,350 @@ HTTP/1.1 200 OK
 ```
 
 
+## <a name="resource-trends">Trends</a>
+
+Stability: `prototype`
+
+The company's financial analytics, during a certain period.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **data/amount** | *number* | amount per date | `2494.06` |
+| **data/date** | *date* | trend date | `"2016-08-01"` |
+| **end_date** | *date* | ending day of trend period | `"2016-08-03"` |
+| **has_invoice_entries** | *boolean* | if it includes invoices during the trend period | `true` |
+| **last_month** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **start_date** | *date* | starting day of trend period | `"2016-05-01"` |
+| **subsection** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+| **two_months_ago** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
+
+
+## <a name="resource-trends-categories">Trends: Categories</a>
+
+Stability: `prototype`
+
+The company's financial analytics, during a certain period, grouped by category.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **data/amount** | *number* | amount spent per category | `23456.0` |
+| **[data/category:account_number](#resource-category)** | *string* | account number | `"5010-00"` |
+| **[data/category:active](#resource-category)** | *boolean* | is active | `true` |
+| **[data/category:built_in](#resource-category)** | *boolean* | is built in | `true` |
+| **[data/category:deprecated](#resource-category)** | *boolean* | is deprecated | `false` |
+| **[data/category:id](#resource-category)** | *integer* | unique identifier of category | `654321` |
+| **[data/category:in_trend](#resource-category)** | *boolean* | is in trend | `true` |
+| **[data/category:master_category](#resource-category)** | *nullable object* | master category | `{"id":123456,"name":"Travel","built_in":true,"transaction_type_name":"both"}` |
+| **[data/category:name](#resource-category)** | *string* | unique name of category | `"Auto/Fuel"` |
+| **[data/category:sub_type_id](#resource-category)** | *integer* | sub type ID | `32` |
+| **[data/category:transaction_type_name](#resource-category)** | *string* | type name | `"both"` |
+| **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
+| **[has_invoice_entries](#resource-trends)** | *boolean* | if it includes invoices during the trend period | `true` |
+| **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **[start_date](#resource-trends)** | *date* | starting day of trend period | `"2016-05-01"` |
+| **[subsection](#resource-trends)** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+| **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
+
+### Trends: Categories Request
+
+Get trends by categories.
+
+```
+GET /api/v2/trends/categories
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **end_date** | *date* |  | `"2016-08-03"` |
+| **section** | *string* | <br/> **default:** `"home"`<br/> **one of:**`"home"` or `"revenue"` or `"spending"` | `"home"` |
+| **start_date** | *date* |  | `"2016-05-01"` |
+| **subsection** | *string* | <br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/trends/categories
+ -G \
+  -d section=home \
+  -d subsection=overview \
+  -d start_date=2016-05-01 \
+  -d end_date=2016-08-03
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "data": [
+    {
+      "category": {
+        "id": 654321,
+        "name": "Auto/Fuel",
+        "master_category": {
+          "id": 123456,
+          "name": "Travel",
+          "built_in": true,
+          "transaction_type_name": "both"
+        },
+        "built_in": true,
+        "transaction_type_name": "both",
+        "in_trend": true,
+        "deprecated": false,
+        "active": true,
+        "account_number": "5010-00",
+        "sub_type_id": 32
+      },
+      "amount": 23456.0
+    }
+  ],
+  "last_month": "2016-07-03T21:32:44Z",
+  "two_months_ago": "2016-06-03T21:32:44Z",
+  "section": "revenue",
+  "subsection": "overview",
+  "start_date": "2016-05-01",
+  "end_date": "2016-08-03",
+  "has_invoice_entries": true
+}
+```
+
+
+## <a name="resource-trends-chart_data">Trends: Chart Data</a>
+
+Stability: `prototype`
+
+The company's graph report, during a certain period.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **series/data/amount** | *number* | amount per date | `2494.06` |
+| **series/data/date** | *date* | trend date | `"2016-08-01"` |
+| **series/name** | *string* | series name<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **[start_date](#resource-trends)** | *date* | starting day of trend period | `"2016-05-01"` |
+| **[subsection](#resource-trends)** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+| **type** | *string* | chart type<br/> **one of:**`"home"` or `"revenue"` or `"spending"` or `"cash"` | `"home"` |
+
+### Trends: Chart Data Request
+
+Get trends chart data.
+
+```
+GET /api/v2/trends/chart_date
+```
+
+#### Required Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **type** | *string* | chart type<br/> **one of:**`"home"` or `"revenue"` or `"spending"` or `"cash"` | `"home"` |
+
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **end_date** | *date* | ending day of trend period | `"2016-08-03"` |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **start_date** | *date* | starting day of trend period | `"2016-05-01"` |
+| **subsection** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/trends/chart_date
+ -G \
+  -d type=home \
+  -d section=revenue \
+  -d subsection=overview \
+  -d start_date=2016-05-01 \
+  -d end_date=2016-08-03
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "series": [
+    {
+      "name": "revenue",
+      "data": [
+        {
+          "date": "2016-08-01",
+          "amount": 2494.06
+        }
+      ]
+    }
+  ],
+  "type": "home",
+  "section": "revenue",
+  "subsection": "overview",
+  "start_date": "2016-05-01",
+  "end_date": "2016-08-03"
+}
+```
+
+
+## <a name="resource-trends-home">Trends: Home</a>
+
+Stability: `prototype`
+
+The company's graphical report for the month
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **stats** | *array* | list of statistical data | `[{"type":"revenue","sum":49167.57,"difference":-48197.03}]` |
+| **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
+
+### Trends: Home Request
+
+Get trends home.
+
+```
+GET /api/v2/trends/home
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **type** | *string* | chart type<br/> **one of:**`"home"` or `"revenue"` or `"spending"` or `"cash"` | `"home"` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/trends/home
+ -G \
+  -d type=home \
+  -d section=revenue
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "stats": [
+    {
+      "type": "revenue",
+      "sum": 49167.57,
+      "difference": -48197.03
+    }
+  ],
+  "section": "revenue",
+  "last_month": "2016-07-03T21:32:44Z",
+  "two_months_ago": "2016-06-03T21:32:44Z"
+}
+```
+
+
+## <a name="resource-trends-spending">Trends: Spending</a>
+
+Stability: `prototype`
+
+Company spending over a period of time.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **data/amount** | *number* | amount spent per date | `2494.06` |
+| **data/date** | *date* | spending date | `"2016-08-01"` |
+| **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
+| **[has_invoice_entries](#resource-trends)** | *boolean* | if it includes invoices during the trend period | `true` |
+| **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **[start_date](#resource-trends)** | *date* | starting day of trend period | `"2016-05-01"` |
+| **[subsection](#resource-trends)** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+| **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
+
+### Trends: Spending Request
+
+Get spending trend.
+
+```
+GET /api/v2/trends/spending
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **end_date** | *date* |  | `"2016-08-03"` |
+| **section** | *string* | <br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **start_date** | *date* |  | `"2016-05-01"` |
+| **subsection** | *string* | <br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/trends/spending
+ -G \
+  -d section=revenue \
+  -d subsection=overview \
+  -d start_date=2016-05-01 \
+  -d end_date=2016-08-03
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "data": [
+    {
+      "date": "2016-08-01",
+      "amount": 2494.06
+    }
+  ],
+  "last_month": "2016-07-03T21:32:44Z",
+  "two_months_ago": "2016-06-03T21:32:44Z",
+  "section": "revenue",
+  "subsection": "overview",
+  "start_date": "2016-05-01",
+  "end_date": "2016-08-03",
+  "has_invoice_entries": true
+}
+```
+
+
 ## <a name="resource-user">User</a>
 
 Stability: `prototype`
@@ -863,9 +1394,9 @@ A user in the Indinero App.
 | ------- | ------- | ------- | ------- |
 | **authy_id** | *nullable integer* | 2FA Authy ID | `9123814` |
 | **authy_opted_out** | *nullable boolean* | Setting signifying the user opted out of the 2FA Feature | `true` |
-| **company:fiscal_year_end** | *string* | Fiscal year end date. | `"12/31"` |
-| **company:id** | *integer* | Unique identity of a company | `401230` |
-| **company:name** | *string* | Name of the company | `"Acme Co"` |
+| **[company:fiscal_year_end](#resource-company)** | *string* | Fiscal year end date. | `"12/31"` |
+| **[company:id](#resource-company)** | *integer* | Unique identity of a company | `401230` |
+| **[company:name](#resource-company)** | *string* | Name of the company | `"Acme Co"` |
 | **display_name** | *string* | Display name of the user | `"John Done"` |
 | **email** | *string* | Email address of the user | `"john@done.com"` |
 | **id** | *number* | Unique identifier of a user | `123` |

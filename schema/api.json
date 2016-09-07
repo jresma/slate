@@ -99,7 +99,9 @@
         "created_at": {
           "$ref": "#/definitions/attachment/definitions/created_at"
         }
-      }
+      },
+      "links": [
+      ]
     },
     "bank_account": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
@@ -348,7 +350,7 @@
           ]
         },
         "built_in": {
-          "description": "boolean",
+          "description": "is built in",
           "example": true,
           "readOnly": true,
           "type": [
@@ -362,6 +364,41 @@
           "type": [
             "string"
           ]
+        },
+        "in_trend": {
+          "description": "is in trend",
+          "type": [
+            "boolean"
+          ],
+          "example": true
+        },
+        "deprecated": {
+          "description": "is deprecated",
+          "type": [
+            "boolean"
+          ],
+          "example": false
+        },
+        "active": {
+          "description": "is active",
+          "type": [
+            "boolean"
+          ],
+          "example": true
+        },
+        "account_number": {
+          "description": "account number",
+          "type": [
+            "string"
+          ],
+          "example": "5010-00"
+        },
+        "sub_type_id": {
+          "description": "sub type ID",
+          "type": [
+            "integer"
+          ],
+          "example": 32
         }
       },
       "required": [
@@ -393,6 +430,21 @@
         },
         "transaction_type_name": {
           "$ref": "#/definitions/category/definitions/transaction_type_name"
+        },
+        "in_trend": {
+          "$ref": "#/definitions/category/definitions/in_trend"
+        },
+        "deprecated": {
+          "$ref": "#/definitions/category/definitions/deprecated"
+        },
+        "active": {
+          "$ref": "#/definitions/category/definitions/active"
+        },
+        "account_number": {
+          "$ref": "#/definitions/category/definitions/account_number"
+        },
+        "sub_type_id": {
+          "$ref": "#/definitions/category/definitions/sub_type_id"
         }
       }
     },
@@ -945,7 +997,8 @@
           "example": 1234.0,
           "type": [
             "number",
-            "string"
+            "string",
+            "null"
           ]
         },
         "subject": {
@@ -1137,6 +1190,15 @@
         "description"
       ],
       "definitions": {
+        "attachments": {
+          "description": "List of attachments",
+          "items": {
+            "$ref": "#/definitions/attachment"
+          },
+          "type": [
+            "array"
+          ]
+        },
         "id": {
           "description": "Unique identifier of the reimbursement.",
           "example": 123,
@@ -1227,60 +1289,6 @@
             }
           }
         },
-        "category": {
-          "description": "Category of the reimbursement",
-          "type": [
-            "object",
-            "null"
-          ],
-          "required": [
-            "id",
-            "name"
-          ],
-          "properties": {
-            "id": {
-              "description": "A category's identifier",
-              "type": [
-                "integer"
-              ],
-              "example": 1234
-            },
-            "name": {
-              "description": "A category's name",
-              "type": [
-                "string"
-              ],
-              "example": "Uncategorized"
-            },
-            "account_number": {
-              "description": "A category's account number",
-              "type": [
-                "string",
-                "null"
-              ],
-              "example": "4123"
-            }
-          }
-        },
-        "receipt": {
-          "description": "Receipt associated with the reimbursement",
-          "type": [
-            "object",
-            "null"
-          ],
-          "properties": {
-            "id": {
-              "description": "Receipt's unique identifier.",
-              "type": [
-                "integer"
-              ],
-              "example": 1234
-            }
-          },
-          "required": [
-            "id"
-          ]
-        },
         "person": {
           "type": [
             "object"
@@ -1319,6 +1327,9 @@
         "company_id": {
           "$ref": "#/definitions/reimbursement/definitions/company_id"
         },
+        "attachments": {
+          "$ref": "#/definitions/reimbursement/definitions/attachments"
+        },
         "status": {
           "$ref": "#/definitions/reimbursement/definitions/status"
         },
@@ -1341,10 +1352,7 @@
           "$ref": "#/definitions/reimbursement/definitions/person"
         },
         "category": {
-          "$ref": "#/definitions/reimbursement/definitions/category"
-        },
-        "receipt": {
-          "$ref": "#/definitions/reimbursement/definitions/receipt"
+          "$ref": "#/definitions/category"
         }
       },
       "links": [
@@ -1354,6 +1362,34 @@
           "method": "GET",
           "rel": "instances",
           "title": "List"
+        },
+        {
+          "description": "Update reimbursement",
+          "href": "/api/v2/reimbursements/{(%23%2Fdefinitions%2Freimbursement%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "self",
+          "title": "Update",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "reimbursement": {
+                "type": [
+                  "object"
+                ],
+                "description": "Reimbursement attributes to update",
+                "properties": {
+                  "category_id": {
+                    "$ref": "#/definitions/category/definitions/identity"
+                  }
+                },
+                "example": {
+                  "category_id": 1234
+                }
+              }
+            }
+          }
         },
         {
           "description": "Approve reimbursements",
@@ -1617,6 +1653,690 @@
         }
       ]
     },
+    "trends": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends",
+      "description": "The company's financial analytics, during a certain period.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "data",
+        "last_month",
+        "two_months_ago",
+        "section",
+        "subsection",
+        "start_date",
+        "end_date",
+        "has_invoice_entries"
+      ],
+      "definitions": {
+        "data": {
+          "description": "financial data points during the trend period",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "date": {
+                "description": "trend date",
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-08-01"
+              },
+              "amount": {
+                "description": "amount per date",
+                "type": [
+                  "number"
+                ],
+                "example": 2494.06
+              }
+            },
+            "required": [
+              "date",
+              "amount"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "last_month": {
+          "description": "the previous month",
+          "type": [
+            "string"
+          ],
+          "example": "2016-07-03T21:32:44Z",
+          "format": "date-time"
+        },
+        "two_months_ago": {
+          "description": "the previous 2 months",
+          "type": [
+            "string"
+          ],
+          "example": "2016-06-03T21:32:44Z",
+          "format": "date-time"
+        },
+        "section": {
+          "description": "trends main section",
+          "type": [
+            "string"
+          ],
+          "default": "spending",
+          "enum": [
+            "revenue",
+            "spending"
+          ]
+        },
+        "subsection": {
+          "description": "trends subsection",
+          "type": [
+            "string"
+          ],
+          "example": "overview",
+          "default": "by_category",
+          "enum": [
+            "overview",
+            "cash_overview",
+            "dept_overview",
+            "by_category",
+            "by_merchant"
+          ]
+        },
+        "start_date": {
+          "description": "starting day of trend period",
+          "type": [
+            "string"
+          ],
+          "example": "2016-05-01",
+          "format": "date"
+        },
+        "end_date": {
+          "description": "ending day of trend period",
+          "type": [
+            "string"
+          ],
+          "example": "2016-08-03",
+          "format": "date"
+        },
+        "has_invoice_entries": {
+          "description": "if it includes invoices during the trend period",
+          "example": true,
+          "readOnly": true,
+          "type": [
+            "boolean"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/section"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/trends/definitions/data"
+        },
+        "last_month": {
+          "$ref": "#/definitions/trends/definitions/last_month"
+        },
+        "two_months_ago": {
+          "$ref": "#/definitions/trends/definitions/two_months_ago"
+        },
+        "section": {
+          "$ref": "#/definitions/trends/definitions/section"
+        },
+        "subsection": {
+          "$ref": "#/definitions/trends/definitions/subsection"
+        },
+        "start_date": {
+          "$ref": "#/definitions/trends/definitions/start_date"
+        },
+        "end_date": {
+          "$ref": "#/definitions/trends/definitions/end_date"
+        },
+        "has_invoice_entries": {
+          "$ref": "#/definitions/trends/definitions/has_invoice_entries"
+        }
+      },
+      "links": [
+      ]
+    },
+    "trends-categories": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends: Categories",
+      "description": "The company's financial analytics, during a certain period, grouped by category.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "data",
+        "last_month",
+        "two_months_ago",
+        "section",
+        "subsection",
+        "start_date",
+        "end_date",
+        "has_invoice_entries"
+      ],
+      "definitions": {
+        "data": {
+          "description": "list of categories amount per date",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "category": {
+                "$ref": "#/definitions/category"
+              },
+              "amount": {
+                "description": "amount spent per category",
+                "type": [
+                  "number"
+                ],
+                "example": 23456.0
+              }
+            },
+            "require": [
+              "category",
+              "amount"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/section"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/trends-categories/definitions/data"
+        },
+        "last_month": {
+          "$ref": "#/definitions/trends/definitions/last_month"
+        },
+        "two_months_ago": {
+          "$ref": "#/definitions/trends/definitions/two_months_ago"
+        },
+        "section": {
+          "$ref": "#/definitions/trends/definitions/section"
+        },
+        "subsection": {
+          "$ref": "#/definitions/trends/definitions/subsection"
+        },
+        "start_date": {
+          "$ref": "#/definitions/trends/definitions/start_date"
+        },
+        "end_date": {
+          "$ref": "#/definitions/trends/definitions/end_date"
+        },
+        "has_invoice_entries": {
+          "$ref": "#/definitions/trends/definitions/has_invoice_entries"
+        }
+      },
+      "links": [
+        {
+          "description": "Get trends by categories.",
+          "href": "/api/v2/trends/categories",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "section": {
+                "type": [
+                  "string"
+                ],
+                "default": "home",
+                "enum": [
+                  "home",
+                  "revenue",
+                  "spending"
+                ]
+              },
+              "subsection": {
+                "type": [
+                  "string"
+                ],
+                "default": "by_category",
+                "enum": [
+                  "overview",
+                  "cash_overview",
+                  "dept_overview",
+                  "by_category",
+                  "by_merchant"
+                ]
+              },
+              "start_date": {
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-05-01"
+              },
+              "end_date": {
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-08-03"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ]
+    },
+    "trends-chart_data": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends: Chart Data",
+      "description": "The company's graph report, during a certain period.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "series",
+        "type",
+        "section",
+        "subsection",
+        "start_date",
+        "end_date"
+      ],
+      "definitions": {
+        "series": {
+          "description": "list of chart data",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "name": {
+                "description": "series name",
+                "type": [
+                  "string"
+                ],
+                "enum": [
+                  "revenue",
+                  "spending"
+                ]
+              },
+              "data": {
+                "$ref": "#/definitions/trends/definitions/data"
+              }
+            },
+            "required": [
+              "name",
+              "data"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "type": {
+          "description": "chart type",
+          "type": [
+            "string"
+          ],
+          "example": "home",
+          "enum": [
+            "home",
+            "revenue",
+            "spending",
+            "cash"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/section"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "series": {
+          "$ref": "#/definitions/trends-chart_data/definitions/series"
+        },
+        "type": {
+          "$ref": "#/definitions/trends-chart_data/definitions/type"
+        },
+        "section": {
+          "$ref": "#/definitions/trends/definitions/section"
+        },
+        "subsection": {
+          "$ref": "#/definitions/trends/definitions/subsection"
+        },
+        "start_date": {
+          "$ref": "#/definitions/trends/definitions/start_date"
+        },
+        "end_date": {
+          "$ref": "#/definitions/trends/definitions/end_date"
+        }
+      },
+      "links": [
+        {
+          "description": "Get trends chart data.",
+          "href": "/api/v2/trends/chart_date",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/trends-chart_data/definitions/type"
+              },
+              "section": {
+                "$ref": "#/definitions/trends/definitions/section"
+              },
+              "subsection": {
+                "$ref": "#/definitions/trends/definitions/subsection"
+              },
+              "start_date": {
+                "$ref": "#/definitions/trends/definitions/start_date"
+              },
+              "end_date": {
+                "$ref": "#/definitions/trends/definitions/end_date"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          }
+        }
+      ]
+    },
+    "trends-home": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends: Home",
+      "description": "The company's graphical report for the month",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "stats",
+        "type",
+        "section",
+        "subsection",
+        "start_date",
+        "end_date"
+      ],
+      "definitions": {
+        "stats-item": {
+          "description": "statistical data",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "type": {
+              "description": "stats type",
+              "type": [
+                "string"
+              ],
+              "enum": [
+                "revenue",
+                "spending",
+                "profit"
+              ]
+            },
+            "sum": {
+              "description": "total amount for the month",
+              "type": [
+                "number"
+              ],
+              "example": 49167.57
+            },
+            "difference": {
+              "description": "amount changed between the previous 2 months",
+              "type": [
+                "number"
+              ],
+              "example": -48197.03
+            }
+          },
+          "required": [
+            "type",
+            "sum",
+            "difference"
+          ]
+        },
+        "stats": {
+          "description": "list of statistical data",
+          "items": {
+            "$ref": "#/definitions/trends-home/definitions/stats-item"
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "type": {
+          "description": "chart type",
+          "type": [
+            "string"
+          ],
+          "example": "home",
+          "enum": [
+            "home",
+            "revenue",
+            "spending",
+            "cash"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/section"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "stats": {
+          "$ref": "#/definitions/trends-home/definitions/stats"
+        },
+        "section": {
+          "$ref": "#/definitions/trends/definitions/section"
+        },
+        "last_month": {
+          "$ref": "#/definitions/trends/definitions/last_month"
+        },
+        "two_months_ago": {
+          "$ref": "#/definitions/trends/definitions/two_months_ago"
+        }
+      },
+      "links": [
+        {
+          "description": "Get trends home.",
+          "href": "/api/v2/trends/home",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/trends-chart_data/definitions/type"
+              },
+              "section": {
+                "$ref": "#/definitions/trends/definitions/section"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "trends-spending": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends: Spending",
+      "description": "Company spending over a period of time.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "data",
+        "last_month",
+        "two_months_ago",
+        "section",
+        "subsection",
+        "start_date",
+        "end_date",
+        "has_invoice_entries"
+      ],
+      "definitions": {
+        "data": {
+          "description": "list of spending amount per date",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "date": {
+                "description": "spending date",
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-08-01"
+              },
+              "amount": {
+                "description": "amount spent per date",
+                "type": [
+                  "number"
+                ],
+                "example": 2494.06
+              }
+            },
+            "required": [
+              "date",
+              "amount"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/section"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/trends-spending/definitions/data"
+        },
+        "last_month": {
+          "$ref": "#/definitions/trends/definitions/last_month"
+        },
+        "two_months_ago": {
+          "$ref": "#/definitions/trends/definitions/two_months_ago"
+        },
+        "section": {
+          "$ref": "#/definitions/trends/definitions/section"
+        },
+        "subsection": {
+          "$ref": "#/definitions/trends/definitions/subsection"
+        },
+        "start_date": {
+          "$ref": "#/definitions/trends/definitions/start_date"
+        },
+        "end_date": {
+          "$ref": "#/definitions/trends/definitions/end_date"
+        },
+        "has_invoice_entries": {
+          "$ref": "#/definitions/trends/definitions/has_invoice_entries"
+        }
+      },
+      "links": [
+        {
+          "description": "Get spending trend.",
+          "href": "/api/v2/trends/spending",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "section": {
+                "type": [
+                  "string"
+                ],
+                "default": "spending",
+                "enum": [
+                  "revenue",
+                  "spending"
+                ]
+              },
+              "subsection": {
+                "type": [
+                  "string"
+                ],
+                "default": "by_category",
+                "enum": [
+                  "overview",
+                  "cash_overview",
+                  "dept_overview",
+                  "by_category",
+                  "by_merchant"
+                ]
+              },
+              "start_date": {
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-05-01"
+              },
+              "end_date": {
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-08-03"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ]
+    },
     "user": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "User",
@@ -1650,42 +2370,6 @@
             "string"
           ],
           "example": "john@done.com"
-        },
-        "company": {
-          "definitions": {
-            "id": {
-              "description": "Unique identity of a company",
-              "type": [
-                "integer"
-              ],
-              "example": 401230
-            },
-            "name": {
-              "description": "Name of the company",
-              "type": [
-                "string"
-              ],
-              "example": "Acme Co"
-            },
-            "fiscal_year_end": {
-              "description": "Fiscal year end date.",
-              "type": [
-                "string"
-              ],
-              "example": "12/31"
-            }
-          },
-          "properties": {
-            "id": {
-              "$ref": "#/definitions/user/definitions/company/definitions/id"
-            },
-            "name": {
-              "$ref": "#/definitions/user/definitions/company/definitions/name"
-            },
-            "fiscal_year_end": {
-              "$ref": "#/definitions/user/definitions/company/definitions/fiscal_year_end"
-            }
-          }
         },
         "authy_id": {
           "description": "2FA Authy ID",
@@ -1740,7 +2424,7 @@
           "$ref": "#/definitions/user/definitions/email"
         },
         "company": {
-          "$ref": "#/definitions/user/definitions/company"
+          "$ref": "#/definitions/company"
         },
         "authy_id": {
           "$ref": "#/definitions/user/definitions/authy_id"
@@ -1820,6 +2504,21 @@
     },
     "transaction": {
       "$ref": "#/definitions/transaction"
+    },
+    "trends": {
+      "$ref": "#/definitions/trends"
+    },
+    "trends-categories": {
+      "$ref": "#/definitions/trends-categories"
+    },
+    "trends-chart_data": {
+      "$ref": "#/definitions/trends-chart_data"
+    },
+    "trends-home": {
+      "$ref": "#/definitions/trends-home"
+    },
+    "trends-spending": {
+      "$ref": "#/definitions/trends-spending"
     },
     "user": {
       "$ref": "#/definitions/user"
