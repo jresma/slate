@@ -590,16 +590,40 @@ in the request headers.</p>
 </tr>
 </thead><tbody>
 <tr>
+<td><strong>account_number</strong></td>
+<td><em>string</em></td>
+<td>account number</td>
+<td><code class="prettyprint">&quot;5010-00&quot;</code></td>
+</tr>
+<tr>
+<td><strong>active</strong></td>
+<td><em>boolean</em></td>
+<td>is active</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
 <td><strong>built_in</strong></td>
 <td><em>boolean</em></td>
-<td>boolean</td>
+<td>is built in</td>
 <td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong>deprecated</strong></td>
+<td><em>boolean</em></td>
+<td>is deprecated</td>
+<td><code class="prettyprint">false</code></td>
 </tr>
 <tr>
 <td><strong>id</strong></td>
 <td><em>integer</em></td>
 <td>unique identifier of category</td>
 <td><code class="prettyprint">654321</code></td>
+</tr>
+<tr>
+<td><strong>in_trend</strong></td>
+<td><em>boolean</em></td>
+<td>is in trend</td>
+<td><code class="prettyprint">true</code></td>
 </tr>
 <tr>
 <td><strong>master_category</strong></td>
@@ -612,6 +636,12 @@ in the request headers.</p>
 <td><em>string</em></td>
 <td>unique name of category</td>
 <td><code class="prettyprint">&quot;Auto/Fuel&quot;</code></td>
+</tr>
+<tr>
+<td><strong>sub_type_id</strong></td>
+<td><em>integer</em></td>
+<td>sub type ID</td>
+<td><code class="prettyprint">32</code></td>
 </tr>
 <tr>
 <td><strong>transaction_type_name</strong></td>
@@ -645,7 +675,12 @@ in the request headers.</p>
       </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+    </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -1063,7 +1098,7 @@ in the request headers.</p>
 </thead><tbody>
 <tr>
 <td><strong>amount</strong></td>
-<td><em>number</em></td>
+<td><em>nullable number</em></td>
 <td>receipt amount</td>
 <td><code class="prettyprint">1234.0</code></td>
 </tr>
@@ -1074,16 +1109,40 @@ in the request headers.</p>
 <td><code class="prettyprint">[{&quot;id&quot;:1001,&quot;owner&quot;:{&quot;id&quot;:1,&quot;type&quot;:[&quot;Receipt&quot;]},&quot;url&quot;:&quot;http://storage.indinero.com/receipts/1/attachments/1/download&quot;,&quot;filename&quot;:&quot;image.png&quot;,&quot;size&quot;:123000,&quot;created_at&quot;:&quot;2015-01-01T12:00:00Z&quot;}]</code></td>
 </tr>
 <tr>
+<td><strong><a href="#resource-category">category:account_number</a></strong></td>
+<td><em>string</em></td>
+<td>account number</td>
+<td><code class="prettyprint">&quot;5010-00&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:active</a></strong></td>
+<td><em>boolean</em></td>
+<td>is active</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
 <td><strong><a href="#resource-category">category:built_in</a></strong></td>
 <td><em>boolean</em></td>
-<td>boolean</td>
+<td>is built in</td>
 <td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:deprecated</a></strong></td>
+<td><em>boolean</em></td>
+<td>is deprecated</td>
+<td><code class="prettyprint">false</code></td>
 </tr>
 <tr>
 <td><strong><a href="#resource-category">category:id</a></strong></td>
 <td><em>integer</em></td>
 <td>unique identifier of category</td>
 <td><code class="prettyprint">654321</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:in_trend</a></strong></td>
+<td><em>boolean</em></td>
+<td>is in trend</td>
+<td><code class="prettyprint">true</code></td>
 </tr>
 <tr>
 <td><strong><a href="#resource-category">category:master_category</a></strong></td>
@@ -1096,6 +1155,12 @@ in the request headers.</p>
 <td><em>string</em></td>
 <td>unique name of category</td>
 <td><code class="prettyprint">&quot;Auto/Fuel&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:sub_type_id</a></strong></td>
+<td><em>integer</em></td>
+<td>sub type ID</td>
+<td><code class="prettyprint">32</code></td>
 </tr>
 <tr>
 <td><strong><a href="#resource-category">category:transaction_type_name</a></strong></td>
@@ -1223,7 +1288,12 @@ in the request headers.</p>
       </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+    </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">401230</span><span class="p">,</span><span class="w">
@@ -1286,7 +1356,12 @@ in the request headers.</p>
         </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+      </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">401230</span><span class="p">,</span><span class="w">
@@ -1341,34 +1416,76 @@ in the request headers.</p>
 </tr>
 </thead><tbody>
 <tr>
+<td><strong>attachments</strong></td>
+<td><em>array</em></td>
+<td>List of attachments</td>
+<td><code class="prettyprint">[{&quot;id&quot;:1001,&quot;owner&quot;:{&quot;id&quot;:1,&quot;type&quot;:[&quot;Receipt&quot;]},&quot;url&quot;:&quot;http://storage.indinero.com/receipts/1/attachments/1/download&quot;,&quot;filename&quot;:&quot;image.png&quot;,&quot;size&quot;:123000,&quot;created_at&quot;:&quot;2015-01-01T12:00:00Z&quot;}]</code></td>
+</tr>
+<tr>
 <td><strong>cannot_process_reason</strong></td>
 <td><em>nullable string</em></td>
 <td>Reason why the reimbursement was not processed</td>
 <td><code class="prettyprint">&quot;ACH payment failed&quot;</code></td>
 </tr>
 <tr>
-<td><strong>category</strong></td>
-<td><em>nullable object</em></td>
-<td>Category of the reimbursement</td>
-<td><code class="prettyprint">null</code></td>
-</tr>
-<tr>
-<td><strong>category:account_number</strong></td>
-<td><em>nullable string</em></td>
-<td>A category&rsquo;s account number</td>
-<td><code class="prettyprint">&quot;4123&quot;</code></td>
-</tr>
-<tr>
-<td><strong>category:id</strong></td>
-<td><em>integer</em></td>
-<td>A category&rsquo;s identifier</td>
-<td><code class="prettyprint">1234</code></td>
-</tr>
-<tr>
-<td><strong>category:name</strong></td>
+<td><strong><a href="#resource-category">category:account_number</a></strong></td>
 <td><em>string</em></td>
-<td>A category&rsquo;s name</td>
-<td><code class="prettyprint">&quot;Uncategorized&quot;</code></td>
+<td>account number</td>
+<td><code class="prettyprint">&quot;5010-00&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:active</a></strong></td>
+<td><em>boolean</em></td>
+<td>is active</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:built_in</a></strong></td>
+<td><em>boolean</em></td>
+<td>is built in</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:deprecated</a></strong></td>
+<td><em>boolean</em></td>
+<td>is deprecated</td>
+<td><code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:id</a></strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of category</td>
+<td><code class="prettyprint">654321</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:in_trend</a></strong></td>
+<td><em>boolean</em></td>
+<td>is in trend</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:master_category</a></strong></td>
+<td><em>nullable object</em></td>
+<td>master category</td>
+<td><code class="prettyprint">{&quot;id&quot;:123456,&quot;name&quot;:&quot;Travel&quot;,&quot;built_in&quot;:true,&quot;transaction_type_name&quot;:&quot;both&quot;}</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:name</a></strong></td>
+<td><em>string</em></td>
+<td>unique name of category</td>
+<td><code class="prettyprint">&quot;Auto/Fuel&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:sub_type_id</a></strong></td>
+<td><em>integer</em></td>
+<td>sub type ID</td>
+<td><code class="prettyprint">32</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">category:transaction_type_name</a></strong></td>
+<td><em>string</em></td>
+<td>type name</td>
+<td><code class="prettyprint">&quot;both&quot;</code></td>
 </tr>
 <tr>
 <td><strong>company_id</strong></td>
@@ -1419,18 +1536,6 @@ in the request headers.</p>
 <td><code class="prettyprint">&quot;John Done&quot;</code></td>
 </tr>
 <tr>
-<td><strong>receipt</strong></td>
-<td><em>nullable object</em></td>
-<td>Receipt associated with the reimbursement</td>
-<td><code class="prettyprint">null</code></td>
-</tr>
-<tr>
-<td><strong>receipt:id</strong></td>
-<td><em>integer</em></td>
-<td>Receipt&rsquo;s unique identifier.</td>
-<td><code class="prettyprint">1234</code></td>
-</tr>
-<tr>
 <td><strong>status</strong></td>
 <td><em>integer</em></td>
 <td>A reimbursements status: Draft: -1, Pending: 0, For processing: 1, Rejected: 2, Processing: 3, Reimbursed: 4, Archived: 5, Cannot Process: 6<br/> <strong>one of:</strong><code class="prettyprint">-1</code> or <code class="prettyprint">0</code> or <code class="prettyprint">1</code> or <code class="prettyprint">2</code> or <code class="prettyprint">3</code> or <code class="prettyprint">4</code> or <code class="prettyprint">5</code> or <code class="prettyprint">6</code></td>
@@ -1461,6 +1566,21 @@ in the request headers.</p>
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Receipt"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://storage.indinero.com/receipts/1/attachments/1/download"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">123000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.99"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
@@ -1474,15 +1594,111 @@ in the request headers.</p>
       </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h3 id="reimbursement-update">Reimbursement Update</h3>
+
+<p>Update reimbursement</p>
+<pre class="highlight plaintext"><code>PATCH /api/v2/reimbursements/{reimbursement_id}
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>reimbursement:category_id</strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of category</td>
+<td><code class="prettyprint">654321</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X PATCH https://api.indinero.com/api/v2/reimbursements/<span class="nv">$REIMBURSEMENT_ID</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "reimbursement": {
+    "category_id": 1234
+  }
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Receipt"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://storage.indinero.com/receipts/1/attachments/1/download"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">123000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.99"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cannot_process_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH payment failed"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"employee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harrison Redford"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harrison.redford@example.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <h3 id="reimbursement-approve-reimbursements">Reimbursement Approve reimbursements</h3>
@@ -1526,6 +1742,21 @@ in the request headers.</p>
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Receipt"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://storage.indinero.com/receipts/1/attachments/1/download"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">123000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.99"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
@@ -1539,12 +1770,21 @@ in the request headers.</p>
       </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -1591,6 +1831,21 @@ in the request headers.</p>
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Receipt"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://storage.indinero.com/receipts/1/attachments/1/download"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">123000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.99"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github Processing Fee."</span><span class="p">,</span><span class="w">
@@ -1604,12 +1859,21 @@ in the request headers.</p>
       </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Done"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncategorized"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4123"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"receipt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -1774,6 +2038,689 @@ in the request headers.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
+<h2 id="trends"><a name="resource-trends">Trends</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>The company&rsquo;s financial analytics, during a certain period.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>data/amount</strong></td>
+<td><em>number</em></td>
+<td>amount per date</td>
+<td><code class="prettyprint">2494.06</code></td>
+</tr>
+<tr>
+<td><strong>data/date</strong></td>
+<td><em>date</em></td>
+<td>trend date</td>
+<td><code class="prettyprint">&quot;2016-08-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>has_invoice_entries</strong></td>
+<td><em>boolean</em></td>
+<td>if it includes invoices during the trend period</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong>last_month</strong></td>
+<td><em>date-time</em></td>
+<td>the previous month</td>
+<td><code class="prettyprint">&quot;2016-07-03T21:32:44Z&quot;</code></td>
+</tr>
+<tr>
+<td><strong>section</strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>subsection</strong></td>
+<td><em>string</em></td>
+<td>trends subsection<br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+<tr>
+<td><strong>two_months_ago</strong></td>
+<td><em>date-time</em></td>
+<td>the previous 2 months</td>
+<td><code class="prettyprint">&quot;2016-06-03T21:32:44Z&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="trends-categories"><a name="resource-trends-categories">Trends: Categories</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>The company&rsquo;s financial analytics, during a certain period, grouped by category.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>data/amount</strong></td>
+<td><em>number</em></td>
+<td>amount spent per category</td>
+<td><code class="prettyprint">23456.0</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:account_number</a></strong></td>
+<td><em>string</em></td>
+<td>account number</td>
+<td><code class="prettyprint">&quot;5010-00&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:active</a></strong></td>
+<td><em>boolean</em></td>
+<td>is active</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:built_in</a></strong></td>
+<td><em>boolean</em></td>
+<td>is built in</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:deprecated</a></strong></td>
+<td><em>boolean</em></td>
+<td>is deprecated</td>
+<td><code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:id</a></strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of category</td>
+<td><code class="prettyprint">654321</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:in_trend</a></strong></td>
+<td><em>boolean</em></td>
+<td>is in trend</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:master_category</a></strong></td>
+<td><em>nullable object</em></td>
+<td>master category</td>
+<td><code class="prettyprint">{&quot;id&quot;:123456,&quot;name&quot;:&quot;Travel&quot;,&quot;built_in&quot;:true,&quot;transaction_type_name&quot;:&quot;both&quot;}</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:name</a></strong></td>
+<td><em>string</em></td>
+<td>unique name of category</td>
+<td><code class="prettyprint">&quot;Auto/Fuel&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:sub_type_id</a></strong></td>
+<td><em>integer</em></td>
+<td>sub type ID</td>
+<td><code class="prettyprint">32</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-category">data/category:transaction_type_name</a></strong></td>
+<td><em>string</em></td>
+<td>type name</td>
+<td><code class="prettyprint">&quot;both&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">end_date</a></strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">has_invoice_entries</a></strong></td>
+<td><em>boolean</em></td>
+<td>if it includes invoices during the trend period</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">last_month</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous month</td>
+<td><code class="prettyprint">&quot;2016-07-03T21:32:44Z&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">section</a></strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">start_date</a></strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">subsection</a></strong></td>
+<td><em>string</em></td>
+<td>trends subsection<br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">two_months_ago</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous 2 months</td>
+<td><code class="prettyprint">&quot;2016-06-03T21:32:44Z&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="trends-categories-request">Trends: Categories Request</h3>
+
+<p>Get trends by categories.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/categories
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td></td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>section</strong></td>
+<td><em>string</em></td>
+<td><br/> <strong>default:</strong> <code class="prettyprint">&quot;home&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;home&quot;</code> or <code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;home&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td></td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>subsection</strong></td>
+<td><em>string</em></td>
+<td><br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/categories
+ -G <span class="se">\</span>
+  -d <span class="nv">section</span><span class="o">=</span>home <span class="se">\</span>
+  -d <span class="nv">subsection</span><span class="o">=</span>overview <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">23456.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"last_month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-03T21:32:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"two_months_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-03T21:32:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"section"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subsection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overview"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_invoice_entries"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="trends-chart-data"><a name="resource-trends-chart_data">Trends: Chart Data</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>The company&rsquo;s graph report, during a certain period.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><a href="#resource-trends">end_date</a></strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">section</a></strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong>series/data/amount</strong></td>
+<td><em>number</em></td>
+<td>amount per date</td>
+<td><code class="prettyprint">2494.06</code></td>
+</tr>
+<tr>
+<td><strong>series/data/date</strong></td>
+<td><em>date</em></td>
+<td>trend date</td>
+<td><code class="prettyprint">&quot;2016-08-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>series/name</strong></td>
+<td><em>string</em></td>
+<td>series name<br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">start_date</a></strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">subsection</a></strong></td>
+<td><em>string</em></td>
+<td>trends subsection<br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+<tr>
+<td><strong>type</strong></td>
+<td><em>string</em></td>
+<td>chart type<br/> <strong>one of:</strong><code class="prettyprint">&quot;home&quot;</code> or <code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;cash&quot;</code></td>
+<td><code class="prettyprint">&quot;home&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="trends-chart-data-request">Trends: Chart Data Request</h3>
+
+<p>Get trends chart data.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/chart_date
+</code></pre>
+
+<h4 id="required-parameters">Required Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>type</strong></td>
+<td><em>string</em></td>
+<td>chart type<br/> <strong>one of:</strong><code class="prettyprint">&quot;home&quot;</code> or <code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;cash&quot;</code></td>
+<td><code class="prettyprint">&quot;home&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>section</strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>subsection</strong></td>
+<td><em>string</em></td>
+<td>trends subsection<br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/chart_date
+ -G <span class="se">\</span>
+  -d <span class="nb">type</span><span class="o">=</span>home <span class="se">\</span>
+  -d <span class="nv">section</span><span class="o">=</span>revenue <span class="se">\</span>
+  -d <span class="nv">subsection</span><span class="o">=</span>overview <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"series"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2494.06</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"home"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"section"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subsection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overview"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="trends-home"><a name="resource-trends-home">Trends: Home</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>The company&rsquo;s graphical report for the month</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><a href="#resource-trends">last_month</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous month</td>
+<td><code class="prettyprint">&quot;2016-07-03T21:32:44Z&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">section</a></strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong>stats</strong></td>
+<td><em>array</em></td>
+<td>list of statistical data</td>
+<td><code class="prettyprint">[{&quot;type&quot;:&quot;revenue&quot;,&quot;sum&quot;:49167.57,&quot;difference&quot;:-48197.03}]</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">two_months_ago</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous 2 months</td>
+<td><code class="prettyprint">&quot;2016-06-03T21:32:44Z&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="trends-home-request">Trends: Home Request</h3>
+
+<p>Get trends home.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/home
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>section</strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong>type</strong></td>
+<td><em>string</em></td>
+<td>chart type<br/> <strong>one of:</strong><code class="prettyprint">&quot;home&quot;</code> or <code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;cash&quot;</code></td>
+<td><code class="prettyprint">&quot;home&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/home
+ -G <span class="se">\</span>
+  -d <span class="nb">type</span><span class="o">=</span>home <span class="se">\</span>
+  -d <span class="nv">section</span><span class="o">=</span>revenue
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">49167.57</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"difference"</span><span class="p">:</span><span class="w"> </span><span class="mf">-48197.03</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"section"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-03T21:32:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"two_months_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-03T21:32:44Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="trends-spending"><a name="resource-trends-spending">Trends: Spending</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>Company spending over a period of time.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>data/amount</strong></td>
+<td><em>number</em></td>
+<td>amount spent per date</td>
+<td><code class="prettyprint">2494.06</code></td>
+</tr>
+<tr>
+<td><strong>data/date</strong></td>
+<td><em>date</em></td>
+<td>spending date</td>
+<td><code class="prettyprint">&quot;2016-08-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">end_date</a></strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">has_invoice_entries</a></strong></td>
+<td><em>boolean</em></td>
+<td>if it includes invoices during the trend period</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">last_month</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous month</td>
+<td><code class="prettyprint">&quot;2016-07-03T21:32:44Z&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">section</a></strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">start_date</a></strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">subsection</a></strong></td>
+<td><em>string</em></td>
+<td>trends subsection<br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">two_months_ago</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous 2 months</td>
+<td><code class="prettyprint">&quot;2016-06-03T21:32:44Z&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="trends-spending-request">Trends: Spending Request</h3>
+
+<p>Get spending trend.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/spending
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td></td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>section</strong></td>
+<td><em>string</em></td>
+<td><br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td></td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>subsection</strong></td>
+<td><em>string</em></td>
+<td><br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/spending
+ -G <span class="se">\</span>
+  -d <span class="nv">section</span><span class="o">=</span>revenue <span class="se">\</span>
+  -d <span class="nv">subsection</span><span class="o">=</span>overview <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2494.06</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"last_month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-03T21:32:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"two_months_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-03T21:32:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"section"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subsection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overview"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_invoice_entries"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <h2 id="user"><a name="resource-user">User</a></h2>
 
 <p>Stability: <code class="prettyprint">prototype</code></p>
@@ -1803,19 +2750,19 @@ in the request headers.</p>
 <td><code class="prettyprint">true</code></td>
 </tr>
 <tr>
-<td><strong>company:fiscal_year_end</strong></td>
+<td><strong><a href="#resource-company">company:fiscal_year_end</a></strong></td>
 <td><em>string</em></td>
 <td>Fiscal year end date.</td>
 <td><code class="prettyprint">&quot;12/31&quot;</code></td>
 </tr>
 <tr>
-<td><strong>company:id</strong></td>
+<td><strong><a href="#resource-company">company:id</a></strong></td>
 <td><em>integer</em></td>
 <td>Unique identity of a company</td>
 <td><code class="prettyprint">401230</code></td>
 </tr>
 <tr>
-<td><strong>company:name</strong></td>
+<td><strong><a href="#resource-company">company:name</a></strong></td>
 <td><em>string</em></td>
 <td>Name of the company</td>
 <td><code class="prettyprint">&quot;Acme Co&quot;</code></td>
