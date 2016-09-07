@@ -1,0 +1,12 @@
+image: ruby:2.1
+
+pages:
+  script:
+  - bundle install
+  - bundle exec middleman build --clean
+  - mv build public
+  artifacts:
+    paths:
+    - public
+  only:
+  - develop
