@@ -114,7 +114,7 @@
       ],
       "required": [
         "id",
-        "item_id",
+        "financial_account_id",
         "company_id"
       ],
       "definitions": {
@@ -125,7 +125,23 @@
             "integer"
           ]
         },
-        "item_id": {
+        "api_id": {
+          "description": "Identifier of the account when pulled from API Source",
+          "example": null,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "api_type": {
+          "description": "Type of the source API of the account",
+          "example": null,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "financial_account_id": {
           "description": "The Financial account the bank account belongs to.",
           "example": 200,
           "type": [
@@ -250,8 +266,8 @@
         "id": {
           "$ref": "#/definitions/bank_account/definitions/id"
         },
-        "item_id": {
-          "$ref": "#/definitions/bank_account/definitions/item_id"
+        "financial_account_id": {
+          "$ref": "#/definitions/bank_account/definitions/financial_account_id"
         },
         "company_id": {
           "$ref": "#/definitions/bank_account/definitions/company_id"
@@ -279,6 +295,12 @@
         },
         "intuit_id": {
           "$ref": "#/definitions/bank_account/definitions/intuit_id"
+        },
+        "api_id": {
+          "$ref": "#/definitions/bank_account/definitions/api_id"
+        },
+        "api_type": {
+          "$ref": "#/definitions/bank_account/definitions/api_type"
         },
         "account_number_string": {
           "$ref": "#/definitions/bank_account/definitions/account_number_string"
@@ -522,7 +544,7 @@
       ],
       "required": [
         "id",
-        "item_id",
+        "financial_account_id",
         "company_id"
       ],
       "definitions": {
@@ -533,7 +555,23 @@
             "integer"
           ]
         },
-        "item_id": {
+        "api_id": {
+          "description": "Identifier of the account when pulled from API Source",
+          "example": null,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "api_type": {
+          "description": "Type of the source API of the account",
+          "example": null,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "financial_account_id": {
           "description": "Financial account",
           "example": 200,
           "type": [
@@ -646,8 +684,8 @@
         "id": {
           "$ref": "#/definitions/credit_card/definitions/id"
         },
-        "item_id": {
-          "$ref": "#/definitions/credit_card/definitions/item_id"
+        "financial_account_id": {
+          "$ref": "#/definitions/credit_card/definitions/financial_account_id"
         },
         "company_id": {
           "$ref": "#/definitions/credit_card/definitions/company_id"
@@ -673,6 +711,12 @@
         "intuit_id": {
           "$ref": "#/definitions/credit_card/definitions/intuit_id"
         },
+        "api_id": {
+          "$ref": "#/definitions/credit_card/definitions/api_id"
+        },
+        "api_type": {
+          "$ref": "#/definitions/credit_card/definitions/api_type"
+        },
         "account_number_string": {
           "$ref": "#/definitions/credit_card/definitions/account_number_string"
         },
@@ -693,6 +737,207 @@
           "method": "GET",
           "rel": "instances",
           "title": "List"
+        }
+      ]
+    },
+    "dimension": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Dimension",
+      "description": "Dimension.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "id",
+        "name"
+      ],
+      "definitions": {
+        "identity": {
+          "$ref": "#/definitions/dimension/definitions/id"
+        },
+        "id": {
+          "description": "Unique identifier of dimension.",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "name": {
+          "description": "Name of the dimension.",
+          "example": "Jobs",
+          "type": [
+            "string"
+          ]
+        },
+        "active": {
+          "description": "Active or inactive dimension.",
+          "type": [
+            "boolean"
+          ],
+          "example": true
+        },
+        "is_default": {
+          "description": "Flags default dimension.",
+          "type": [
+            "boolean"
+          ],
+          "example": true
+        },
+        "required": {
+          "description": "Require dimension.",
+          "type": [
+            "boolean"
+          ],
+          "example": false
+        },
+        "parent_id": {
+          "description": "Id of the parent dimension.",
+          "example": 100,
+          "type": [
+            "integer"
+          ]
+        },
+        "parent": {
+          "description": "Parent dimension.",
+          "properties": {
+            "id": {
+              "description": "Id of the parent dimension.",
+              "$ref": "#/definitions/dimension/definitions/id"
+            },
+            "name": {
+              "description": "Name of parent dimension.",
+              "$ref": "#/definitions/dimension/definitions/name"
+            }
+          },
+          "type": [
+            "object"
+          ]
+        },
+        "children": {
+          "description": "List of child dimensions.",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "id": {
+                "description": "Id of child dimension.",
+                "example": 245,
+                "$ref": "#/definitions/dimension/definitions/id"
+              },
+              "name": {
+                "description": "Name of child dimension.",
+                "example": "245 Client ABS",
+                "$ref": "#/definitions/dimension/definitions/name"
+              },
+              "children": {
+                "description": "Children of child dimension.",
+                "example": [
+                ],
+                "type": [
+                  "array"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "children"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        }
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/dimension/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/dimension/definitions/name"
+        },
+        "active": {
+          "$ref": "#/definitions/dimension/definitions/active"
+        },
+        "is_default": {
+          "$ref": "#/definitions/dimension/definitions/is_default"
+        },
+        "required": {
+          "$ref": "#/definitions/dimension/definitions/required"
+        },
+        "parent": {
+          "$ref": "#/definitions/dimension/definitions/parent"
+        },
+        "children": {
+          "$ref": "#/definitions/dimension/definitions/children"
+        }
+      },
+      "links": [
+        {
+          "description": "This endpoint retrieves all root dimensions.",
+          "href": "/api/v2/dimensions",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "This endpoint retrieves the dimension tree of a root dimension.",
+          "href": "/api/v2/dimensions/{(%23%2Fdefinitions%2Fdimension%2Fdefinitions%2Fid)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "List"
+        },
+        {
+          "description": "Create a new dimension.",
+          "href": "/api/v2/dimensions",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/dimension/definitions/name"
+              },
+              "parent_id": {
+                "$ref": "#/definitions/dimension/definitions/parent_id"
+              }
+            },
+            "type": [
+              "object"
+            ],
+            "required": [
+              "name"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Update dimension.",
+          "href": "/api/v2/dimensions/{(%23%2Fdefinitions%2Fdimension%2Fdefinitions%2Fid)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/dimension/definitions/name"
+              },
+              "parent_id": {
+                "$ref": "#/definitions/dimension/definitions/parent_id"
+              },
+              "active": {
+                "$ref": "#/definitions/dimension/definitions/active"
+              },
+              "required": {
+                "$ref": "#/definitions/dimension/definitions/required"
+              }
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
         }
       ]
     },
@@ -964,6 +1209,11 @@
       "type": [
         "object"
       ],
+      "required": [
+        "id",
+        "description",
+        "amount"
+      ],
       "definitions": {
         "id": {
           "description": "unique identifier of receipt",
@@ -971,18 +1221,6 @@
           "readOnly": true,
           "type": [
             "integer"
-          ]
-        },
-        "category": {
-          "description": "receipt category",
-          "type": [
-            "object"
-          ]
-        },
-        "company": {
-          "description": "receipt company",
-          "type": [
-            "object"
           ]
         },
         "receipt_type": {
@@ -1085,11 +1323,53 @@
         "attachments": {
           "description": "list of receipt attachments",
           "items": {
-            "$ref": "#/definitions/attachment"
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/dimension/definitions/id"
+              },
+              "owner": {
+                "$ref": "#/definitions/attachment/definitions/owner"
+              },
+              "url": {
+                "$ref": "#/definitions/attachment/definitions/url"
+              },
+              "filename": {
+                "$ref": "#/definitions/attachment/definitions/filename"
+              },
+              "size": {
+                "$ref": "#/definitions/attachment/definitions/size"
+              },
+              "created_at": {
+                "$ref": "#/definitions/attachment/definitions/created_at"
+              }
+            },
+            "required": [
+              "id",
+              "url",
+              "size"
+            ]
           },
           "type": [
             "array"
           ]
+        },
+        "dimension": {
+          "description": "receipt dimension",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/dimension/definitions/id"
+            },
+            "name": {
+              "$ref": "#/definitions/dimension/definitions/name"
+            }
+          }
         },
         "identity": {
           "anyOf": [
@@ -1107,12 +1387,50 @@
           "rel": "create",
           "schema": {
             "properties": {
+              "description": {
+                "$ref": "#/definitions/receipt/definitions/description"
+              },
+              "category_id": {
+                "$ref": "#/definitions/category/definitions/id"
+              },
+              "dimension_id": {
+                "$ref": "#/definitions/dimension/definitions/id"
+              },
+              "amount": {
+                "$ref": "#/definitions/receipt/definitions/amount"
+              }
             },
             "type": [
               "object"
             ]
           },
           "title": "Create"
+        },
+        {
+          "description": "Update a receipt.",
+          "href": "/api/v2/receipts/{(%23%2Fdefinitions%2Freceipt%2Fdefinitions%2Fid)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+              "description": {
+                "$ref": "#/definitions/receipt/definitions/description"
+              },
+              "category_id": {
+                "$ref": "#/definitions/category/definitions/id"
+              },
+              "dimension_id": {
+                "$ref": "#/definitions/dimension/definitions/id"
+              },
+              "amount": {
+                "$ref": "#/definitions/receipt/definitions/amount"
+              }
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
         },
         {
           "description": "list existing receipts.",
@@ -1131,6 +1449,9 @@
         },
         "company": {
           "$ref": "#/definitions/company"
+        },
+        "dimension": {
+          "$ref": "#/definitions/receipt/definitions/dimension"
         },
         "receipt_type": {
           "$ref": "#/definitions/receipt/definitions/receipt_type"
@@ -1729,7 +2050,8 @@
           "default": "spending",
           "enum": [
             "revenue",
-            "spending"
+            "spending",
+            "home"
           ]
         },
         "subsection": {
@@ -1806,6 +2128,123 @@
         }
       },
       "links": [
+      ]
+    },
+    "trends-cash": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends: Cash",
+      "description": "The company's cash, during a certain period.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "data",
+        "last_month",
+        "two_months_ago",
+        "section",
+        "subsection",
+        "start_date",
+        "end_date",
+        "has_invoice_entries"
+      ],
+      "definitions": {
+        "data": {
+          "description": "list of cash amount per date",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "date": {
+                "description": "cash date",
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-08-01"
+              },
+              "amount": {
+                "description": "cash amount per date",
+                "type": [
+                  "number"
+                ],
+                "example": 2494.06
+              }
+            },
+            "required": [
+              "date",
+              "amount"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/section"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/trends-cash/definitions/data"
+        },
+        "last_month": {
+          "$ref": "#/definitions/trends/definitions/last_month"
+        },
+        "two_months_ago": {
+          "$ref": "#/definitions/trends/definitions/two_months_ago"
+        },
+        "section": {
+          "$ref": "#/definitions/trends/definitions/section"
+        },
+        "subsection": {
+          "$ref": "#/definitions/trends/definitions/subsection"
+        },
+        "start_date": {
+          "$ref": "#/definitions/trends/definitions/start_date"
+        },
+        "end_date": {
+          "$ref": "#/definitions/trends/definitions/end_date"
+        },
+        "has_invoice_entries": {
+          "$ref": "#/definitions/trends/definitions/has_invoice_entries"
+        }
+      },
+      "links": [
+        {
+          "description": "Get cash trend.",
+          "href": "/api/v2/trends/cash",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "section": {
+                "$ref": "#/definitions/trends/definitions/section"
+              },
+              "subsection": {
+                "$ref": "#/definitions/trends/definitions/subsection"
+              },
+              "start_date": {
+                "$ref": "#/definitions/trends/definitions/start_date"
+              },
+              "end_date": {
+                "$ref": "#/definitions/trends/definitions/end_date"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
       ]
     },
     "trends-categories": {
@@ -2038,7 +2477,7 @@
       "links": [
         {
           "description": "Get trends chart data.",
-          "href": "/api/v2/trends/chart_date",
+          "href": "/api/v2/trends/chart_data",
           "rel": "self",
           "method": "GET",
           "encType": "application/x-www-form-urlencoded",
@@ -2191,6 +2630,123 @@
                 "$ref": "#/definitions/trends/definitions/section"
               }
             }
+          }
+        }
+      ]
+    },
+    "trends-revenue": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends: Revenue",
+      "description": "The company's revenue, during a certain period.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "data",
+        "last_month",
+        "two_months_ago",
+        "section",
+        "subsection",
+        "start_date",
+        "end_date",
+        "has_invoice_entries"
+      ],
+      "definitions": {
+        "data": {
+          "description": "list of revenue amount per date",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "date": {
+                "description": "revenue date",
+                "type": [
+                  "string"
+                ],
+                "format": "date",
+                "example": "2016-08-01"
+              },
+              "amount": {
+                "description": "revenue amount per date",
+                "type": [
+                  "number"
+                ],
+                "example": 2494.06
+              }
+            },
+            "required": [
+              "date",
+              "amount"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/section"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/trends-revenue/definitions/data"
+        },
+        "last_month": {
+          "$ref": "#/definitions/trends/definitions/last_month"
+        },
+        "two_months_ago": {
+          "$ref": "#/definitions/trends/definitions/two_months_ago"
+        },
+        "section": {
+          "$ref": "#/definitions/trends/definitions/section"
+        },
+        "subsection": {
+          "$ref": "#/definitions/trends/definitions/subsection"
+        },
+        "start_date": {
+          "$ref": "#/definitions/trends/definitions/start_date"
+        },
+        "end_date": {
+          "$ref": "#/definitions/trends/definitions/end_date"
+        },
+        "has_invoice_entries": {
+          "$ref": "#/definitions/trends/definitions/has_invoice_entries"
+        }
+      },
+      "links": [
+        {
+          "description": "Get revenue trend.",
+          "href": "/api/v2/trends/revenue",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "section": {
+                "$ref": "#/definitions/trends/definitions/section"
+              },
+              "subsection": {
+                "$ref": "#/definitions/trends/definitions/subsection"
+              },
+              "start_date": {
+                "$ref": "#/definitions/trends/definitions/start_date"
+              },
+              "end_date": {
+                "$ref": "#/definitions/trends/definitions/end_date"
+              }
+            },
+            "additionalProperties": false
           }
         }
       ]
@@ -2493,6 +3049,9 @@
     "credit_card": {
       "$ref": "#/definitions/credit_card"
     },
+    "dimension": {
+      "$ref": "#/definitions/dimension"
+    },
     "financial_account": {
       "$ref": "#/definitions/financial_account"
     },
@@ -2508,6 +3067,9 @@
     "trends": {
       "$ref": "#/definitions/trends"
     },
+    "trends-cash": {
+      "$ref": "#/definitions/trends-cash"
+    },
     "trends-categories": {
       "$ref": "#/definitions/trends-categories"
     },
@@ -2516,6 +3078,9 @@
     },
     "trends-home": {
       "$ref": "#/definitions/trends-home"
+    },
+    "trends-revenue": {
+      "$ref": "#/definitions/trends-revenue"
     },
     "trends-spending": {
       "$ref": "#/definitions/trends-spending"

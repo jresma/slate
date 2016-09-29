@@ -28,6 +28,8 @@ Bank account items added to user's company.
 | ------- | ------- | ------- | ------- |
 | **account_name** | *string* | Bank Account name | `"Bank of Asia"` |
 | **account_number_string** | *nullable string* | Account number in string format | `null` |
+| **api_id** | *nullable integer* | Identifier of the account when pulled from API Source | `null` |
+| **api_type** | *nullable integer* | Type of the source API of the account | `null` |
 | **balance** | *number* | Bank account balance | `5000.0` |
 | **checking_account_number** | *nullable string* | Checking account number | `null` |
 | **coa_number** | *nullable string* | Chart of account number | `null` |
@@ -35,10 +37,10 @@ Bank account items added to user's company.
 | **created_at** | *nullable date-time* | when the item was created | `null` |
 | **currency_code** | *nullable string* | Currency code | `"USD"` |
 | **discontinued** | *boolean* | Discontinued | `false` |
+| **financial_account_id** | *nullable integer* | The Financial account the bank account belongs to. | `200` |
 | **id** | *integer* | Unique identifier of bank account | `100` |
 | **indinero_status** | *nullable integer* | inDinero status of the bank account | `3` |
 | **intuit_id** | *nullable integer* | Identifier of the account when pulled from Intuit | `null` |
-| **item_id** | *nullable integer* | The Financial account the bank account belongs to. | `200` |
 | **stripe_account_id** | *nullable string* | Stripe account id | `null` |
 | **svb_account_number** | *nullable string* | SVB account number if the account is from SVB | `null` |
 | **updated_at** | *nullable date-time* | when the item was last updated | `null` |
@@ -69,7 +71,7 @@ HTTP/1.1 200 OK
 [
   {
     "id": 100,
-    "item_id": 200,
+    "financial_account_id": 200,
     "company_id": 301,
     "account_name": "Bank of Asia",
     "created_at": "2015-01-01T12:00:00Z",
@@ -79,6 +81,8 @@ HTTP/1.1 200 OK
     "indinero_status": 3,
     "svb_account_number": null,
     "intuit_id": null,
+    "api_id": null,
+    "api_type": null,
     "account_number_string": null,
     "discontinued": false,
     "checking_account_number": null,
@@ -242,6 +246,8 @@ Credit card financial accounts added to company as data source.
 | ------- | ------- | ------- | ------- |
 | **account_name** | *string* | Credit Card Account name | `"Bank of Asia"` |
 | **account_number_string** | *nullable string* | account number string | `null` |
+| **api_id** | *nullable integer* | Identifier of the account when pulled from API Source | `null` |
+| **api_type** | *nullable integer* | Type of the source API of the account | `null` |
 | **balance** | *number* | Credit card balance | `5000.0` |
 | **coa_number** | *nullable string* | Chart of Accounts number | `null` |
 | **company_id** | *integer* | Company ID | `301` |
@@ -249,10 +255,10 @@ Credit card financial accounts added to company as data source.
 | **credit_limit** | *nullable string* | The card's credit limit | `5000` |
 | **currency_code** | *nullable string* | currency code | `"USD"` |
 | **discontinued** | *boolean* | discontinued | `false` |
+| **financial_account_id** | *nullable integer* | Financial account | `200` |
 | **id** | *integer* | unique identifier of credit card | `100` |
 | **indinero_status** | *nullable integer* | inDinero status | `3` |
 | **intuit_id** | *nullable integer* | intuit id | `null` |
-| **item_id** | *nullable integer* | Financial account | `200` |
 | **updated_at** | *nullable date-time* | when the item was last updated | `null` |
 
 ### Credit Card List
@@ -281,7 +287,7 @@ HTTP/1.1 200 OK
 [
   {
     "id": 100,
-    "item_id": 200,
+    "financial_account_id": 200,
     "company_id": 301,
     "account_name": "Bank of Asia",
     "created_at": "2015-01-01T12:00:00Z",
@@ -290,12 +296,252 @@ HTTP/1.1 200 OK
     "balance": 5000.0,
     "indinero_status": 3,
     "intuit_id": null,
+    "api_id": null,
+    "api_type": null,
     "account_number_string": null,
     "discontinued": false,
     "coa_number": null,
     "credit_limit": 5000
   }
 ]
+```
+
+
+## <a name="resource-dimension">Dimension</a>
+
+Stability: `prototype`
+
+Dimension.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **active** | *boolean* | Active or inactive dimension. | `true` |
+| **children/children** | *array* | Children of child dimension. | `[]` |
+| **children/id** | *integer* | Id of child dimension. | `245` |
+| **children/name** | *string* | Name of child dimension. | `"245 Client ABS"` |
+| **id** | *integer* | Unique identifier of dimension. | `100` |
+| **is_default** | *boolean* | Flags default dimension. | `true` |
+| **name** | *string* | Name of the dimension. | `"Jobs"` |
+| **parent:id** | *integer* | Id of the parent dimension. | `100` |
+| **parent:name** | *string* | Name of parent dimension. | `"Jobs"` |
+| **required** | *boolean* | Require dimension. | `false` |
+
+### Dimension List
+
+This endpoint retrieves all root dimensions.
+
+```
+GET /api/v2/dimensions
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/dimensions
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+[
+  {
+    "id": 100,
+    "name": "Jobs",
+    "active": true,
+    "is_default": true,
+    "required": false,
+    "parent": {
+      "id": 100,
+      "name": "Jobs"
+    },
+    "children": [
+      {
+        "id": 245,
+        "name": "245 Client ABS",
+        "children": [
+
+        ]
+      }
+    ]
+  }
+]
+```
+
+### Dimension List
+
+This endpoint retrieves the dimension tree of a root dimension.
+
+```
+GET /api/v2/dimensions/{dimension_id}
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/dimensions/$DIMENSION_ID
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 100,
+  "name": "Jobs",
+  "active": true,
+  "is_default": true,
+  "required": false,
+  "parent": {
+    "id": 100,
+    "name": "Jobs"
+  },
+  "children": [
+    {
+      "id": 245,
+      "name": "245 Client ABS",
+      "children": [
+
+      ]
+    }
+  ]
+}
+```
+
+### Dimension Create
+
+Create a new dimension.
+
+```
+POST /api/v2/dimensions
+```
+
+#### Required Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **name** | *string* | Name of the dimension. | `"Jobs"` |
+
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **parent_id** | *integer* | Id of the parent dimension. | `100` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X POST https://api.indinero.com/api/v2/dimensions \
+  -d '{
+  "name": "Jobs",
+  "parent_id": 100
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 201 Created
+```
+
+```json
+{
+  "id": 100,
+  "name": "Jobs",
+  "active": true,
+  "is_default": true,
+  "required": false,
+  "parent": {
+    "id": 100,
+    "name": "Jobs"
+  },
+  "children": [
+    {
+      "id": 245,
+      "name": "245 Client ABS",
+      "children": [
+
+      ]
+    }
+  ]
+}
+```
+
+### Dimension Update
+
+Update dimension.
+
+```
+PATCH /api/v2/dimensions/{dimension_id}
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **active** | *boolean* | Active or inactive dimension. | `true` |
+| **name** | *string* | Name of the dimension. | `"Jobs"` |
+| **parent_id** | *integer* | Id of the parent dimension. | `100` |
+| **required** | *boolean* | Require dimension. | `false` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X PATCH https://api.indinero.com/api/v2/dimensions/$DIMENSION_ID \
+  -d '{
+  "name": "Jobs",
+  "parent_id": 100,
+  "active": true,
+  "required": false
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 100,
+  "name": "Jobs",
+  "active": true,
+  "is_default": true,
+  "required": false,
+  "parent": {
+    "id": 100,
+    "name": "Jobs"
+  },
+  "children": [
+    {
+      "id": 245,
+      "name": "245 Client ABS",
+      "children": [
+
+      ]
+    }
+  ]
+}
 ```
 
 
@@ -393,7 +639,12 @@ receipt
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **amount** | *nullable number* | receipt amount | `1234.0` |
-| **attachments** | *array* | list of receipt attachments | `[{"id":1001,"owner":{"id":1,"type":["Receipt"]},"url":"http://storage.indinero.com/receipts/1/attachments/1/download","filename":"image.png","size":123000,"created_at":"2015-01-01T12:00:00Z"}]` |
+| **[attachments/created_at](#resource-attachment)** | *date-time* | when attachment was created | `"2015-01-01T12:00:00Z"` |
+| **[attachments/filename](#resource-attachment)** | *string* | attachment filename | `"image.png"` |
+| **[attachments/id](#resource-dimension)** | *integer* | Unique identifier of dimension. | `100` |
+| **[attachments/owner](#resource-attachment)** | *object* | attachment category | `{"id":1,"type":["Receipt"]}` |
+| **[attachments/size](#resource-attachment)** | *nullable integer* | attachment size | `123000` |
+| **[attachments/url](#resource-attachment)** | *string* | link to attachment file | `"http://storage.indinero.com/receipts/1/attachments/1/download"` |
 | **[category:account_number](#resource-category)** | *string* | account number | `"5010-00"` |
 | **[category:active](#resource-category)** | *boolean* | is active | `true` |
 | **[category:built_in](#resource-category)** | *boolean* | is built in | `true` |
@@ -409,6 +660,9 @@ receipt
 | **[company:name](#resource-company)** | *string* | Name of the company | `"Acme Co"` |
 | **created_at** | *date-time* | when receipt was created | `"2015-01-01T12:00:00Z"` |
 | **description** | *string* | receipt description | `"Gas for getting to client facility"` |
+| **[dimension](#resource-dimension)** | *nullable object* | receipt dimension | `null` |
+| **[dimension:id](#resource-dimension)** | *integer* | Unique identifier of dimension. | `100` |
+| **[dimension:name](#resource-dimension)** | *string* | Name of the dimension. | `"Jobs"` |
 | **email** | *nullable string* | receipt email | `"email@example.com"` |
 | **email_date** | *nullable date-time* | receipt email date | `"2015-01-01T12:00:00Z"` |
 | **email_id** | *nullable string* | receipt email_id | `42` |
@@ -428,12 +682,25 @@ Create a new receipt.
 POST /api/v2/receipts
 ```
 
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **amount** | *nullable number* | receipt amount | `1234.0` |
+| **category_id** | *integer* | unique identifier of category | `654321` |
+| **description** | *string* | receipt description | `"Gas for getting to client facility"` |
+| **dimension_id** | *integer* | Unique identifier of dimension. | `100` |
+
 
 #### Curl Example
 
 ```bash
 $ curl -n -X POST https://api.indinero.com/api/v2/receipts \
   -d '{
+  "description": "Gas for getting to client facility",
+  "category_id": 654321,
+  "dimension_id": 100,
+  "amount": 1234.0
 }' \
   -H "Content-Type: application/json"
 ```
@@ -470,6 +737,10 @@ HTTP/1.1 201 Created
     "name": "Acme Co",
     "fiscal_year_end": "12/31"
   },
+  "dimension": {
+    "id": 100,
+    "name": "Jobs"
+  },
   "receipt_type": "Receipt",
   "amount": 1234.0,
   "subject": "Auto/Fuel (upload from iOS app)",
@@ -484,7 +755,104 @@ HTTP/1.1 201 Created
   "resend_date": "2015-01-01",
   "attachments": [
     {
-      "id": 1001,
+      "id": 100,
+      "owner": {
+        "id": 1,
+        "type": [
+          "Receipt"
+        ]
+      },
+      "url": "http://storage.indinero.com/receipts/1/attachments/1/download",
+      "filename": "image.png",
+      "size": 123000,
+      "created_at": "2015-01-01T12:00:00Z"
+    }
+  ]
+}
+```
+
+### Receipt Update
+
+Update a receipt.
+
+```
+PATCH /api/v2/receipts/{receipt_id}
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **amount** | *nullable number* | receipt amount | `1234.0` |
+| **category_id** | *integer* | unique identifier of category | `654321` |
+| **description** | *string* | receipt description | `"Gas for getting to client facility"` |
+| **dimension_id** | *integer* | Unique identifier of dimension. | `100` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X PATCH https://api.indinero.com/api/v2/receipts/$RECEIPT_ID \
+  -d '{
+  "description": "Gas for getting to client facility",
+  "category_id": 654321,
+  "dimension_id": 100,
+  "amount": 1234.0
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 1001,
+  "category": {
+    "id": 654321,
+    "name": "Auto/Fuel",
+    "master_category": {
+      "id": 123456,
+      "name": "Travel",
+      "built_in": true,
+      "transaction_type_name": "both"
+    },
+    "built_in": true,
+    "transaction_type_name": "both",
+    "in_trend": true,
+    "deprecated": false,
+    "active": true,
+    "account_number": "5010-00",
+    "sub_type_id": 32
+  },
+  "company": {
+    "id": 401230,
+    "name": "Acme Co",
+    "fiscal_year_end": "12/31"
+  },
+  "dimension": {
+    "id": 100,
+    "name": "Jobs"
+  },
+  "receipt_type": "Receipt",
+  "amount": 1234.0,
+  "subject": "Auto/Fuel (upload from iOS app)",
+  "description": "Gas for getting to client facility",
+  "status": 1,
+  "processor": "mobile_works",
+  "merchant": "Shell",
+  "email": "email@example.com",
+  "email_id": 42,
+  "email_date": "2015-01-01T12:00:00Z",
+  "created_at": "2015-01-01T12:00:00Z",
+  "resend_date": "2015-01-01",
+  "attachments": [
+    {
+      "id": 100,
       "owner": {
         "id": 1,
         "type": [
@@ -548,6 +916,10 @@ HTTP/1.1 200 OK
       "name": "Acme Co",
       "fiscal_year_end": "12/31"
     },
+    "dimension": {
+      "id": 100,
+      "name": "Jobs"
+    },
     "receipt_type": "Receipt",
     "amount": 1234.0,
     "subject": "Auto/Fuel (upload from iOS app)",
@@ -562,7 +934,7 @@ HTTP/1.1 200 OK
     "resend_date": "2015-01-01",
     "attachments": [
       {
-        "id": 1001,
+        "id": 100,
         "owner": {
           "id": 1,
           "type": [
@@ -1007,7 +1379,7 @@ HTTP/1.1 200 OK
     "real_amount": 42.0,
     "account": {
       "id": 100,
-      "item_id": 200,
+      "financial_account_id": 200,
       "company_id": 301,
       "account_name": "Bank of Asia",
       "created_at": "2015-01-01T12:00:00Z",
@@ -1017,6 +1389,8 @@ HTTP/1.1 200 OK
       "indinero_status": 3,
       "svb_account_number": null,
       "intuit_id": null,
+      "api_id": null,
+      "api_type": null,
       "account_number_string": null,
       "discontinued": false,
       "checking_account_number": null,
@@ -1053,10 +1427,85 @@ The company's financial analytics, during a certain period.
 | **end_date** | *date* | ending day of trend period | `"2016-08-03"` |
 | **has_invoice_entries** | *boolean* | if it includes invoices during the trend period | `true` |
 | **last_month** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
-| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
 | **start_date** | *date* | starting day of trend period | `"2016-05-01"` |
 | **subsection** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
 | **two_months_ago** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
+
+
+## <a name="resource-trends-cash">Trends: Cash</a>
+
+Stability: `prototype`
+
+The company's cash, during a certain period.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **data/amount** | *number* | cash amount per date | `2494.06` |
+| **data/date** | *date* | cash date | `"2016-08-01"` |
+| **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
+| **[has_invoice_entries](#resource-trends)** | *boolean* | if it includes invoices during the trend period | `true` |
+| **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
+| **[start_date](#resource-trends)** | *date* | starting day of trend period | `"2016-05-01"` |
+| **[subsection](#resource-trends)** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+| **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
+
+### Trends: Cash Request
+
+Get cash trend.
+
+```
+GET /api/v2/trends/cash
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **end_date** | *date* | ending day of trend period | `"2016-08-03"` |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
+| **start_date** | *date* | starting day of trend period | `"2016-05-01"` |
+| **subsection** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/trends/cash
+ -G \
+  -d section=revenue \
+  -d subsection=overview \
+  -d start_date=2016-05-01 \
+  -d end_date=2016-08-03
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "data": [
+    {
+      "date": "2016-08-01",
+      "amount": 2494.06
+    }
+  ],
+  "last_month": "2016-07-03T21:32:44Z",
+  "two_months_ago": "2016-06-03T21:32:44Z",
+  "section": "revenue",
+  "subsection": "overview",
+  "start_date": "2016-05-01",
+  "end_date": "2016-08-03",
+  "has_invoice_entries": true
+}
+```
 
 
 ## <a name="resource-trends-categories">Trends: Categories</a>
@@ -1083,7 +1532,7 @@ The company's financial analytics, during a certain period, grouped by category.
 | **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
 | **[has_invoice_entries](#resource-trends)** | *boolean* | if it includes invoices during the trend period | `true` |
 | **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
-| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
 | **[start_date](#resource-trends)** | *date* | starting day of trend period | `"2016-05-01"` |
 | **[subsection](#resource-trends)** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
 | **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
@@ -1170,7 +1619,7 @@ The company's graph report, during a certain period.
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
-| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
 | **series/data/amount** | *number* | amount per date | `2494.06` |
 | **series/data/date** | *date* | trend date | `"2016-08-01"` |
 | **series/name** | *string* | series name<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
@@ -1183,7 +1632,7 @@ The company's graph report, during a certain period.
 Get trends chart data.
 
 ```
-GET /api/v2/trends/chart_date
+GET /api/v2/trends/chart_data
 ```
 
 #### Required Parameters
@@ -1198,7 +1647,7 @@ GET /api/v2/trends/chart_date
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **end_date** | *date* | ending day of trend period | `"2016-08-03"` |
-| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
 | **start_date** | *date* | starting day of trend period | `"2016-05-01"` |
 | **subsection** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
 
@@ -1206,7 +1655,7 @@ GET /api/v2/trends/chart_date
 #### Curl Example
 
 ```bash
-$ curl -n https://api.indinero.com/api/v2/trends/chart_date
+$ curl -n https://api.indinero.com/api/v2/trends/chart_data
  -G \
   -d type=home \
   -d section=revenue \
@@ -1255,7 +1704,7 @@ The company's graphical report for the month
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
-| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
 | **stats** | *array* | list of statistical data | `[{"type":"revenue","sum":49167.57,"difference":-48197.03}]` |
 | **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
 
@@ -1271,7 +1720,7 @@ GET /api/v2/trends/home
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
 | **type** | *string* | chart type<br/> **one of:**`"home"` or `"revenue"` or `"spending"` or `"cash"` | `"home"` |
 
 
@@ -1307,6 +1756,81 @@ HTTP/1.1 200 OK
 ```
 
 
+## <a name="resource-trends-revenue">Trends: Revenue</a>
+
+Stability: `prototype`
+
+The company's revenue, during a certain period.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **data/amount** | *number* | revenue amount per date | `2494.06` |
+| **data/date** | *date* | revenue date | `"2016-08-01"` |
+| **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
+| **[has_invoice_entries](#resource-trends)** | *boolean* | if it includes invoices during the trend period | `true` |
+| **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
+| **[start_date](#resource-trends)** | *date* | starting day of trend period | `"2016-05-01"` |
+| **[subsection](#resource-trends)** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+| **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
+
+### Trends: Revenue Request
+
+Get revenue trend.
+
+```
+GET /api/v2/trends/revenue
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **end_date** | *date* | ending day of trend period | `"2016-08-03"` |
+| **section** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
+| **start_date** | *date* | starting day of trend period | `"2016-05-01"` |
+| **subsection** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://api.indinero.com/api/v2/trends/revenue
+ -G \
+  -d section=revenue \
+  -d subsection=overview \
+  -d start_date=2016-05-01 \
+  -d end_date=2016-08-03
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "data": [
+    {
+      "date": "2016-08-01",
+      "amount": 2494.06
+    }
+  ],
+  "last_month": "2016-07-03T21:32:44Z",
+  "two_months_ago": "2016-06-03T21:32:44Z",
+  "section": "revenue",
+  "subsection": "overview",
+  "start_date": "2016-05-01",
+  "end_date": "2016-08-03",
+  "has_invoice_entries": true
+}
+```
+
+
 ## <a name="resource-trends-spending">Trends: Spending</a>
 
 Stability: `prototype`
@@ -1322,7 +1846,7 @@ Company spending over a period of time.
 | **[end_date](#resource-trends)** | *date* | ending day of trend period | `"2016-08-03"` |
 | **[has_invoice_entries](#resource-trends)** | *boolean* | if it includes invoices during the trend period | `true` |
 | **[last_month](#resource-trends)** | *date-time* | the previous month | `"2016-07-03T21:32:44Z"` |
-| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` | `"revenue"` |
+| **[section](#resource-trends)** | *string* | trends main section<br/> **default:** `"spending"`<br/> **one of:**`"revenue"` or `"spending"` or `"home"` | `"revenue"` |
 | **[start_date](#resource-trends)** | *date* | starting day of trend period | `"2016-05-01"` |
 | **[subsection](#resource-trends)** | *string* | trends subsection<br/> **default:** `"by_category"`<br/> **one of:**`"overview"` or `"cash_overview"` or `"dept_overview"` or `"by_category"` or `"by_merchant"` | `"overview"` |
 | **[two_months_ago](#resource-trends)** | *date-time* | the previous 2 months | `"2016-06-03T21:32:44Z"` |
