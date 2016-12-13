@@ -183,8 +183,7 @@
           "description": "Currency code",
           "example": "USD",
           "type": [
-            "string",
-            "null"
+            "string"
           ]
         },
         "balance": {
@@ -621,8 +620,7 @@
           "description": "currency code",
           "example": "USD",
           "type": [
-            "string",
-            "null"
+            "string"
           ]
         },
         "balance": {
@@ -850,6 +848,41 @@
           "type": [
             "array"
           ]
+        },
+        "dimension_ids": {
+          "description": "list of Dimension IDs",
+          "items": {
+            "type": [
+              "integer"
+            ],
+            "$ref": "#/definitions/dimension/definitions/id"
+          },
+          "type": [
+            "array"
+          ]
+        },
+        "basic_dimensions": {
+          "description": "list of basic dimensions",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/dimension/definitions/id"
+              },
+              "name": {
+                "$ref": "#/definitions/dimension/definitions/name"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "type": [
+            "array"
+          ]
         }
       },
       "properties": {
@@ -888,7 +921,7 @@
           "href": "/api/v2/dimensions/{(%23%2Fdefinitions%2Fdimension%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
-          "title": "List"
+          "title": "Tree"
         },
         {
           "description": "Create a new dimension.",
@@ -1356,21 +1389,6 @@
             "array"
           ]
         },
-        "dimension": {
-          "description": "receipt dimension",
-          "type": [
-            "object",
-            "null"
-          ],
-          "properties": {
-            "id": {
-              "$ref": "#/definitions/dimension/definitions/id"
-            },
-            "name": {
-              "$ref": "#/definitions/dimension/definitions/name"
-            }
-          }
-        },
         "identity": {
           "anyOf": [
             {
@@ -1393,8 +1411,8 @@
               "category_id": {
                 "$ref": "#/definitions/category/definitions/id"
               },
-              "dimension_id": {
-                "$ref": "#/definitions/dimension/definitions/id"
+              "dimension_ids": {
+                "$ref": "#/definitions/dimension/definitions/dimension_ids"
               },
               "amount": {
                 "$ref": "#/definitions/receipt/definitions/amount"
@@ -1419,8 +1437,8 @@
               "category_id": {
                 "$ref": "#/definitions/category/definitions/id"
               },
-              "dimension_id": {
-                "$ref": "#/definitions/dimension/definitions/id"
+              "dimension_ids": {
+                "$ref": "#/definitions/dimension/definitions/dimension_ids"
               },
               "amount": {
                 "$ref": "#/definitions/receipt/definitions/amount"
@@ -1450,8 +1468,8 @@
         "company": {
           "$ref": "#/definitions/company"
         },
-        "dimension": {
-          "$ref": "#/definitions/receipt/definitions/dimension"
+        "dimensions": {
+          "$ref": "#/definitions/dimension/definitions/basic_dimensions"
         },
         "receipt_type": {
           "$ref": "#/definitions/receipt/definitions/receipt_type"
@@ -1882,8 +1900,7 @@
         "currency_code": {
           "description": "Currency code for the transaction amount",
           "type": [
-            "string",
-            "null"
+            "string"
           ],
           "example": "USD"
         },
@@ -2093,6 +2110,67 @@
             "boolean"
           ]
         },
+        "period": {
+          "description": "trend period",
+          "type": [
+            "string"
+          ],
+          "example": "monthly",
+          "enum": [
+            "monthly",
+            "quarterly",
+            "yearly"
+          ]
+        },
+        "trends": {
+          "description": "list of revenues, spendings and profits",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "name": {
+                "description": "series name",
+                "type": [
+                  "string"
+                ]
+              },
+              "data": {
+                "$ref": "#/definitions/trends/definitions/data"
+              },
+              "revenue": {
+                "type": [
+                  "number"
+                ],
+                "description": "amount earned",
+                "example": 26578.0
+              },
+              "spending": {
+                "type": [
+                  "number"
+                ],
+                "description": "amount spent on expenses",
+                "example": 9568.0
+              },
+              "profit": {
+                "type": [
+                  "number"
+                ],
+                "description": "difference between revenue and spending",
+                "example": 17010.0
+              }
+            },
+            "required": [
+              "name",
+              "revenue",
+              "spending",
+              "profit"
+            ]
+          },
+          "type": [
+            "array"
+          ]
+        },
         "identity": {
           "anyOf": [
             {
@@ -2130,6 +2208,110 @@
       "links": [
       ]
     },
+    "trends-by-period": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Trends: By Period",
+      "description": "Profit Loss by time period.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "required": [
+        "period",
+        "start_date",
+        "end_date",
+        "trends"
+      ],
+      "definitions": {
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/trends/definitions/period"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "period": {
+          "$ref": "#/definitions/trends/definitions/period"
+        },
+        "start_date": {
+          "$ref": "#/definitions/trends/definitions/start_date"
+        },
+        "end_date": {
+          "$ref": "#/definitions/trends/definitions/end_date"
+        },
+        "trends": {
+          "$ref": "#/definitions/trends/definitions/trends"
+        }
+      },
+      "links": [
+        {
+          "description": "Monthly trend.",
+          "href": "/api/v2/trends/monthly",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "start_date": {
+                "$ref": "#/definitions/trends/definitions/start_date"
+              },
+              "end_date": {
+                "$ref": "#/definitions/trends/definitions/end_date"
+              }
+            }
+          }
+        },
+        {
+          "description": "Quarterly trend.",
+          "href": "/api/v2/trends/quarterly",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "start_date": {
+                "$ref": "#/definitions/trends/definitions/start_date"
+              },
+              "end_date": {
+                "$ref": "#/definitions/trends/definitions/end_date"
+              }
+            }
+          }
+        },
+        {
+          "description": "Yearly trend.",
+          "href": "/api/v2/trends/yearly",
+          "rel": "self",
+          "method": "GET",
+          "encType": "application/x-www-form-urlencoded",
+          "title": "Request",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "start_date": {
+                "$ref": "#/definitions/trends/definitions/start_date"
+              },
+              "end_date": {
+                "$ref": "#/definitions/trends/definitions/end_date"
+              }
+            }
+          }
+        }
+      ]
+    },
     "trends-cash": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Trends: Cash",
@@ -2141,13 +2323,9 @@
       ],
       "required": [
         "data",
-        "last_month",
-        "two_months_ago",
-        "section",
-        "subsection",
+        "period",
         "start_date",
-        "end_date",
-        "has_invoice_entries"
+        "end_date"
       ],
       "definitions": {
         "data": {
@@ -2194,26 +2372,14 @@
         "data": {
           "$ref": "#/definitions/trends-cash/definitions/data"
         },
-        "last_month": {
-          "$ref": "#/definitions/trends/definitions/last_month"
-        },
-        "two_months_ago": {
-          "$ref": "#/definitions/trends/definitions/two_months_ago"
-        },
-        "section": {
-          "$ref": "#/definitions/trends/definitions/section"
-        },
-        "subsection": {
-          "$ref": "#/definitions/trends/definitions/subsection"
+        "period": {
+          "$ref": "#/definitions/trends/definitions/period"
         },
         "start_date": {
           "$ref": "#/definitions/trends/definitions/start_date"
         },
         "end_date": {
           "$ref": "#/definitions/trends/definitions/end_date"
-        },
-        "has_invoice_entries": {
-          "$ref": "#/definitions/trends/definitions/has_invoice_entries"
         }
       },
       "links": [
@@ -2229,11 +2395,8 @@
               "object"
             ],
             "properties": {
-              "section": {
-                "$ref": "#/definitions/trends/definitions/section"
-              },
-              "subsection": {
-                "$ref": "#/definitions/trends/definitions/subsection"
+              "period": {
+                "$ref": "#/definitions/trends/definitions/period"
               },
               "start_date": {
                 "$ref": "#/definitions/trends/definitions/start_date"
@@ -2378,6 +2541,17 @@
                 ],
                 "format": "date",
                 "example": "2016-08-03"
+              },
+              "period": {
+                "type": [
+                  "string"
+                ],
+                "default": "monthly",
+                "enum": [
+                  "monthly",
+                  "quarterly",
+                  "yearly"
+                ]
               }
             },
             "additionalProperties": false
@@ -2414,10 +2588,6 @@
                 "description": "series name",
                 "type": [
                   "string"
-                ],
-                "enum": [
-                  "revenue",
-                  "spending"
                 ]
               },
               "data": {
@@ -3066,6 +3236,9 @@
     },
     "trends": {
       "$ref": "#/definitions/trends"
+    },
+    "trends-by-period": {
+      "$ref": "#/definitions/trends-by-period"
     },
     "trends-cash": {
       "$ref": "#/definitions/trends-cash"
