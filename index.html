@@ -228,7 +228,7 @@ in the request headers.</p>
 <blockquote>
 <p>To opt-in a user, use the following code:</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.indinero.com/api/v2/2fa/opt_in"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.indinero.com/api/v2/2fa"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer indinero-user-access-token"</span> <span class="se">\</span>
   -d user[cellphone]<span class="o">=</span><span class="s2">"317-338-9302"</span> <span class="se">\</span>
@@ -348,7 +348,7 @@ in the request headers.</p>
 <blockquote>
 <p>To opt out a user from two-factor authentication, make this call:</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.indinero.com/api/v2/2fa/opt_out"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.indinero.com/api/v2/2fa"</span> <span class="se">\</span>
   -X DELETE <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer indinero-user-access-token"</span>
 </code></pre>
@@ -453,6 +453,18 @@ in the request headers.</p>
 <td><code class="prettyprint">null</code></td>
 </tr>
 <tr>
+<td><strong>api_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>Identifier of the account when pulled from API Source</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>api_type</strong></td>
+<td><em>nullable integer</em></td>
+<td>Type of the source API of the account</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
 <td><strong>balance</strong></td>
 <td><em>number</em></td>
 <td>Bank account balance</td>
@@ -484,7 +496,7 @@ in the request headers.</p>
 </tr>
 <tr>
 <td><strong>currency_code</strong></td>
-<td><em>nullable string</em></td>
+<td><em>string</em></td>
 <td>Currency code</td>
 <td><code class="prettyprint">&quot;USD&quot;</code></td>
 </tr>
@@ -493,6 +505,12 @@ in the request headers.</p>
 <td><em>boolean</em></td>
 <td>Discontinued</td>
 <td><code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td><strong>financial_account_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>The Financial account the bank account belongs to.</td>
+<td><code class="prettyprint">200</code></td>
 </tr>
 <tr>
 <td><strong>id</strong></td>
@@ -511,12 +529,6 @@ in the request headers.</p>
 <td><em>nullable integer</em></td>
 <td>Identifier of the account when pulled from Intuit</td>
 <td><code class="prettyprint">null</code></td>
-</tr>
-<tr>
-<td><strong>item_id</strong></td>
-<td><em>nullable integer</em></td>
-<td>The Financial account the bank account belongs to.</td>
-<td><code class="prettyprint">200</code></td>
 </tr>
 <tr>
 <td><strong>stripe_account_id</strong></td>
@@ -554,7 +566,7 @@ in the request headers.</p>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"item_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"financial_account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
     </span><span class="nt">"account_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank of Asia"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
@@ -564,6 +576,8 @@ in the request headers.</p>
     </span><span class="nt">"indinero_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"svb_account_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"intuit_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"api_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"api_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"account_number_string"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"discontinued"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nt">"checking_account_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -790,6 +804,18 @@ in the request headers.</p>
 <td><code class="prettyprint">null</code></td>
 </tr>
 <tr>
+<td><strong>api_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>Identifier of the account when pulled from API Source</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><strong>api_type</strong></td>
+<td><em>nullable integer</em></td>
+<td>Type of the source API of the account</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
 <td><strong>balance</strong></td>
 <td><em>number</em></td>
 <td>Credit card balance</td>
@@ -821,7 +847,7 @@ in the request headers.</p>
 </tr>
 <tr>
 <td><strong>currency_code</strong></td>
-<td><em>nullable string</em></td>
+<td><em>string</em></td>
 <td>currency code</td>
 <td><code class="prettyprint">&quot;USD&quot;</code></td>
 </tr>
@@ -830,6 +856,12 @@ in the request headers.</p>
 <td><em>boolean</em></td>
 <td>discontinued</td>
 <td><code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td><strong>financial_account_id</strong></td>
+<td><em>nullable integer</em></td>
+<td>Financial account</td>
+<td><code class="prettyprint">200</code></td>
 </tr>
 <tr>
 <td><strong>id</strong></td>
@@ -848,12 +880,6 @@ in the request headers.</p>
 <td><em>nullable integer</em></td>
 <td>intuit id</td>
 <td><code class="prettyprint">null</code></td>
-</tr>
-<tr>
-<td><strong>item_id</strong></td>
-<td><em>nullable integer</em></td>
-<td>Financial account</td>
-<td><code class="prettyprint">200</code></td>
 </tr>
 <tr>
 <td><strong>updated_at</strong></td>
@@ -879,7 +905,7 @@ in the request headers.</p>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"item_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"financial_account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
     </span><span class="nt">"account_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank of Asia"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
@@ -888,12 +914,318 @@ in the request headers.</p>
     </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">5000.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"indinero_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"intuit_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"api_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"api_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"account_number_string"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"discontinued"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nt">"coa_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h2 id="dimension"><a name="resource-dimension">Dimension</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>Dimension.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>active</strong></td>
+<td><em>boolean</em></td>
+<td>Active or inactive dimension.</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong>children/children</strong></td>
+<td><em>array</em></td>
+<td>Children of child dimension.</td>
+<td><code class="prettyprint">[]</code></td>
+</tr>
+<tr>
+<td><strong>children/id</strong></td>
+<td><em>integer</em></td>
+<td>Id of child dimension.</td>
+<td><code class="prettyprint">245</code></td>
+</tr>
+<tr>
+<td><strong>children/name</strong></td>
+<td><em>string</em></td>
+<td>Name of child dimension.</td>
+<td><code class="prettyprint">&quot;245 Client ABS&quot;</code></td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td><em>integer</em></td>
+<td>Unique identifier of dimension.</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>is_default</strong></td>
+<td><em>boolean</em></td>
+<td>Flags default dimension.</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td><em>string</em></td>
+<td>Name of the dimension.</td>
+<td><code class="prettyprint">&quot;Jobs&quot;</code></td>
+</tr>
+<tr>
+<td><strong>parent:id</strong></td>
+<td><em>integer</em></td>
+<td>Id of the parent dimension.</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>parent:name</strong></td>
+<td><em>string</em></td>
+<td>Name of parent dimension.</td>
+<td><code class="prettyprint">&quot;Jobs&quot;</code></td>
+</tr>
+<tr>
+<td><strong>required</strong></td>
+<td><em>boolean</em></td>
+<td>Require dimension.</td>
+<td><code class="prettyprint">false</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="dimension-list">Dimension List</h3>
+
+<p>This endpoint retrieves all root dimensions.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/dimensions
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/dimensions
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">245</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"245 Client ABS"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h3 id="dimension-tree">Dimension Tree</h3>
+
+<p>This endpoint retrieves the dimension tree of a root dimension.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/dimensions/{dimension_id}
+</code></pre>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/dimensions/<span class="nv">$DIMENSION_ID</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">245</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"245 Client ABS"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="dimension-create">Dimension Create</h3>
+
+<p>Create a new dimension.</p>
+<pre class="highlight plaintext"><code>POST /api/v2/dimensions
+</code></pre>
+
+<h4 id="required-parameters">Required Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>name</strong></td>
+<td><em>string</em></td>
+<td>Name of the dimension.</td>
+<td><code class="prettyprint">&quot;Jobs&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>parent_id</strong></td>
+<td><em>integer</em></td>
+<td>Id of the parent dimension.</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/dimensions <span class="se">\</span>
+  -d <span class="s1">'{
+  "name": "Jobs",
+  "parent_id": 100
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 201 Created
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">245</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"245 Client ABS"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="dimension-update">Dimension Update</h3>
+
+<p>Update dimension.</p>
+<pre class="highlight plaintext"><code>PATCH /api/v2/dimensions/{dimension_id}
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>active</strong></td>
+<td><em>boolean</em></td>
+<td>Active or inactive dimension.</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td><em>string</em></td>
+<td>Name of the dimension.</td>
+<td><code class="prettyprint">&quot;Jobs&quot;</code></td>
+</tr>
+<tr>
+<td><strong>parent_id</strong></td>
+<td><em>integer</em></td>
+<td>Id of the parent dimension.</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong>required</strong></td>
+<td><em>boolean</em></td>
+<td>Require dimension.</td>
+<td><code class="prettyprint">false</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X PATCH https://api.indinero.com/api/v2/dimensions/<span class="nv">$DIMENSION_ID</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "name": "Jobs",
+  "parent_id": 100,
+  "active": true,
+  "required": false
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">245</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"245 Client ABS"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <h2 id="financial-account"><a name="resource-financial_account">Financial Account</a></h2>
@@ -1103,10 +1435,40 @@ in the request headers.</p>
 <td><code class="prettyprint">1234.0</code></td>
 </tr>
 <tr>
-<td><strong>attachments</strong></td>
-<td><em>array</em></td>
-<td>list of receipt attachments</td>
-<td><code class="prettyprint">[{&quot;id&quot;:1001,&quot;owner&quot;:{&quot;id&quot;:1,&quot;type&quot;:[&quot;Receipt&quot;]},&quot;url&quot;:&quot;http://storage.indinero.com/receipts/1/attachments/1/download&quot;,&quot;filename&quot;:&quot;image.png&quot;,&quot;size&quot;:123000,&quot;created_at&quot;:&quot;2015-01-01T12:00:00Z&quot;}]</code></td>
+<td><strong><a href="#resource-attachment">attachments/created_at</a></strong></td>
+<td><em>date-time</em></td>
+<td>when attachment was created</td>
+<td><code class="prettyprint">&quot;2015-01-01T12:00:00Z&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-attachment">attachments/filename</a></strong></td>
+<td><em>string</em></td>
+<td>attachment filename</td>
+<td><code class="prettyprint">&quot;image.png&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-dimension">attachments/id</a></strong></td>
+<td><em>integer</em></td>
+<td>Unique identifier of dimension.</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-attachment">attachments/owner</a></strong></td>
+<td><em>object</em></td>
+<td>attachment category</td>
+<td><code class="prettyprint">{&quot;id&quot;:1,&quot;type&quot;:[&quot;Receipt&quot;]}</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-attachment">attachments/size</a></strong></td>
+<td><em>nullable integer</em></td>
+<td>attachment size</td>
+<td><code class="prettyprint">123000</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-attachment">attachments/url</a></strong></td>
+<td><em>string</em></td>
+<td>link to attachment file</td>
+<td><code class="prettyprint">&quot;http://storage.indinero.com/receipts/1/attachments/1/download&quot;</code></td>
 </tr>
 <tr>
 <td><strong><a href="#resource-category">category:account_number</a></strong></td>
@@ -1199,6 +1561,18 @@ in the request headers.</p>
 <td><code class="prettyprint">&quot;Gas for getting to client facility&quot;</code></td>
 </tr>
 <tr>
+<td><strong><a href="#resource-dimension">dimensions/id</a></strong></td>
+<td><em>integer</em></td>
+<td>Unique identifier of dimension.</td>
+<td><code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-dimension">dimensions/name</a></strong></td>
+<td><em>string</em></td>
+<td>Name of the dimension.</td>
+<td><code class="prettyprint">&quot;Jobs&quot;</code></td>
+</tr>
+<tr>
 <td><strong>email</strong></td>
 <td><em>nullable string</em></td>
 <td>receipt email</td>
@@ -1266,9 +1640,51 @@ in the request headers.</p>
 <pre class="highlight plaintext"><code>POST /api/v2/receipts
 </code></pre>
 
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>amount</strong></td>
+<td><em>nullable number</em></td>
+<td>receipt amount</td>
+<td><code class="prettyprint">1234.0</code></td>
+</tr>
+<tr>
+<td><strong>category_id</strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of category</td>
+<td><code class="prettyprint">654321</code></td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td><em>string</em></td>
+<td>receipt description</td>
+<td><code class="prettyprint">&quot;Gas for getting to client facility&quot;</code></td>
+</tr>
+<tr>
+<td><strong>dimension_ids</strong></td>
+<td><em>array</em></td>
+<td>list of Dimension IDs</td>
+<td><code class="prettyprint">[100]</code></td>
+</tr>
+</tbody></table>
+
 <h4 id="curl-example">Curl Example</h4>
 <pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X POST https://api.indinero.com/api/v2/receipts <span class="se">\</span>
   -d <span class="s1">'{
+  "description": "Gas for getting to client facility",
+  "category_id": 654321,
+  "dimension_ids": [
+    100
+  ],
+  "amount": 1234.0
 }'</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span>
 </code></pre>
@@ -1300,6 +1716,12 @@ in the request headers.</p>
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Co"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"fiscal_year_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/31"</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"receipt_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel (upload from iOS app)"</span><span class="p">,</span><span class="w">
@@ -1314,7 +1736,125 @@ in the request headers.</p>
   </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Receipt"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://storage.indinero.com/receipts/1/attachments/1/download"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">123000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="receipt-update">Receipt Update</h3>
+
+<p>Update a receipt.</p>
+<pre class="highlight plaintext"><code>PATCH /api/v2/receipts/{receipt_id}
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>amount</strong></td>
+<td><em>nullable number</em></td>
+<td>receipt amount</td>
+<td><code class="prettyprint">1234.0</code></td>
+</tr>
+<tr>
+<td><strong>category_id</strong></td>
+<td><em>integer</em></td>
+<td>unique identifier of category</td>
+<td><code class="prettyprint">654321</code></td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td><em>string</em></td>
+<td>receipt description</td>
+<td><code class="prettyprint">&quot;Gas for getting to client facility&quot;</code></td>
+</tr>
+<tr>
+<td><strong>dimension_ids</strong></td>
+<td><em>array</em></td>
+<td>list of Dimension IDs</td>
+<td><code class="prettyprint">[100]</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n -X PATCH https://api.indinero.com/api/v2/receipts/<span class="nv">$RECEIPT_ID</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "description": "Gas for getting to client facility",
+  "category_id": 654321,
+  "dimension_ids": [
+    100
+  ],
+  "amount": 1234.0
+}'</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">654321</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"master_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"built_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"in_trend"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deprecated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5010-00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sub_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">401230</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Co"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fiscal_year_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/31"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"receipt_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel (upload from iOS app)"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gas for getting to client facility"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"processor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mobile_works"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shell"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
       </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1368,6 +1908,12 @@ in the request headers.</p>
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Co"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"fiscal_year_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/31"</span><span class="w">
     </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jobs"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"receipt_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1234.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto/Fuel (upload from iOS app)"</span><span class="p">,</span><span class="w">
@@ -1382,7 +1928,7 @@ in the request headers.</p>
     </span><span class="nt">"resend_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
         </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1933,7 +2479,7 @@ in the request headers.</p>
 </tr>
 <tr>
 <td><strong>currency_code</strong></td>
-<td><em>nullable string</em></td>
+<td><em>string</em></td>
 <td>Currency code for the transaction amount</td>
 <td><code class="prettyprint">&quot;USD&quot;</code></td>
 </tr>
@@ -2008,7 +2554,7 @@ in the request headers.</p>
     </span><span class="nt">"real_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">42.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"item_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"financial_account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
       </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
       </span><span class="nt">"account_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank of Asia"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01T12:00:00Z"</span><span class="p">,</span><span class="w">
@@ -2018,6 +2564,8 @@ in the request headers.</p>
       </span><span class="nt">"indinero_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nt">"svb_account_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"intuit_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"api_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"api_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"account_number_string"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"discontinued"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"checking_account_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -2087,7 +2635,7 @@ in the request headers.</p>
 <tr>
 <td><strong>section</strong></td>
 <td><em>string</em></td>
-<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
 <td><code class="prettyprint">&quot;revenue&quot;</code></td>
 </tr>
 <tr>
@@ -2109,6 +2657,369 @@ in the request headers.</p>
 <td><code class="prettyprint">&quot;2016-06-03T21:32:44Z&quot;</code></td>
 </tr>
 </tbody></table>
+
+<h2 id="trends-by-period"><a name="resource-trends-by-period">Trends: By Period</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>Profit Loss by time period.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><a href="#resource-trends">end_date</a></strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">period</a></strong></td>
+<td><em>string</em></td>
+<td>trend period<br/> <strong>one of:</strong><code class="prettyprint">&quot;monthly&quot;</code> or <code class="prettyprint">&quot;quarterly&quot;</code> or <code class="prettyprint">&quot;yearly&quot;</code></td>
+<td><code class="prettyprint">&quot;monthly&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">start_date</a></strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>trends/data/amount</strong></td>
+<td><em>number</em></td>
+<td>amount per date</td>
+<td><code class="prettyprint">2494.06</code></td>
+</tr>
+<tr>
+<td><strong>trends/data/date</strong></td>
+<td><em>date</em></td>
+<td>trend date</td>
+<td><code class="prettyprint">&quot;2016-08-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>trends/name</strong></td>
+<td><em>string</em></td>
+<td>series name</td>
+<td><code class="prettyprint">&quot;example&quot;</code></td>
+</tr>
+<tr>
+<td><strong>trends/profit</strong></td>
+<td><em>number</em></td>
+<td>difference between revenue and spending</td>
+<td><code class="prettyprint">17010.0</code></td>
+</tr>
+<tr>
+<td><strong>trends/revenue</strong></td>
+<td><em>number</em></td>
+<td>amount earned</td>
+<td><code class="prettyprint">26578.0</code></td>
+</tr>
+<tr>
+<td><strong>trends/spending</strong></td>
+<td><em>number</em></td>
+<td>amount spent on expenses</td>
+<td><code class="prettyprint">9568.0</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="trends-by-period-request">Trends: By Period Request</h3>
+
+<p>Monthly trend.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/monthly
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/monthly
+ -G <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"trends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2494.06</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"revenue"</span><span class="p">:</span><span class="w"> </span><span class="mf">26578.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"spending"</span><span class="p">:</span><span class="w"> </span><span class="mf">9568.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"profit"</span><span class="p">:</span><span class="w"> </span><span class="mf">17010.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="trends-by-period-request">Trends: By Period Request</h3>
+
+<p>Quarterly trend.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/quarterly
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/quarterly
+ -G <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"trends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2494.06</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"revenue"</span><span class="p">:</span><span class="w"> </span><span class="mf">26578.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"spending"</span><span class="p">:</span><span class="w"> </span><span class="mf">9568.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"profit"</span><span class="p">:</span><span class="w"> </span><span class="mf">17010.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="trends-by-period-request">Trends: By Period Request</h3>
+
+<p>Yearly trend.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/yearly
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/yearly
+ -G <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"trends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2494.06</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"revenue"</span><span class="p">:</span><span class="w"> </span><span class="mf">26578.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"spending"</span><span class="p">:</span><span class="w"> </span><span class="mf">9568.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"profit"</span><span class="p">:</span><span class="w"> </span><span class="mf">17010.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="trends-cash"><a name="resource-trends-cash">Trends: Cash</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>The company&rsquo;s cash, during a certain period.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>data/amount</strong></td>
+<td><em>number</em></td>
+<td>cash amount per date</td>
+<td><code class="prettyprint">2494.06</code></td>
+</tr>
+<tr>
+<td><strong>data/date</strong></td>
+<td><em>date</em></td>
+<td>cash date</td>
+<td><code class="prettyprint">&quot;2016-08-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">end_date</a></strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">period</a></strong></td>
+<td><em>string</em></td>
+<td>trend period<br/> <strong>one of:</strong><code class="prettyprint">&quot;monthly&quot;</code> or <code class="prettyprint">&quot;quarterly&quot;</code> or <code class="prettyprint">&quot;yearly&quot;</code></td>
+<td><code class="prettyprint">&quot;monthly&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">start_date</a></strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="trends-cash-request">Trends: Cash Request</h3>
+
+<p>Get cash trend.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/cash
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>period</strong></td>
+<td><em>string</em></td>
+<td>trend period<br/> <strong>one of:</strong><code class="prettyprint">&quot;monthly&quot;</code> or <code class="prettyprint">&quot;quarterly&quot;</code> or <code class="prettyprint">&quot;yearly&quot;</code></td>
+<td><code class="prettyprint">&quot;monthly&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/cash
+ -G <span class="se">\</span>
+  -d <span class="nv">period</span><span class="o">=</span>monthly <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2494.06</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h2 id="trends-categories"><a name="resource-trends-categories">Trends: Categories</a></h2>
 
@@ -2213,7 +3124,7 @@ in the request headers.</p>
 <tr>
 <td><strong><a href="#resource-trends">section</a></strong></td>
 <td><em>string</em></td>
-<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
 <td><code class="prettyprint">&quot;revenue&quot;</code></td>
 </tr>
 <tr>
@@ -2259,6 +3170,12 @@ in the request headers.</p>
 <td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
 </tr>
 <tr>
+<td><strong>period</strong></td>
+<td><em>string</em></td>
+<td><br/> <strong>default:</strong> <code class="prettyprint">&quot;monthly&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;monthly&quot;</code> or <code class="prettyprint">&quot;quarterly&quot;</code> or <code class="prettyprint">&quot;yearly&quot;</code></td>
+<td><code class="prettyprint">&quot;monthly&quot;</code></td>
+</tr>
+<tr>
 <td><strong>section</strong></td>
 <td><em>string</em></td>
 <td><br/> <strong>default:</strong> <code class="prettyprint">&quot;home&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;home&quot;</code> or <code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
@@ -2284,7 +3201,8 @@ in the request headers.</p>
   -d <span class="nv">section</span><span class="o">=</span>home <span class="se">\</span>
   -d <span class="nv">subsection</span><span class="o">=</span>overview <span class="se">\</span>
   -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
-  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03 <span class="se">\</span>
+  -d <span class="nv">period</span><span class="o">=</span>monthly
 </code></pre>
 
 <h4 id="response-example">Response Example</h4>
@@ -2348,7 +3266,7 @@ in the request headers.</p>
 <tr>
 <td><strong><a href="#resource-trends">section</a></strong></td>
 <td><em>string</em></td>
-<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
 <td><code class="prettyprint">&quot;revenue&quot;</code></td>
 </tr>
 <tr>
@@ -2366,8 +3284,8 @@ in the request headers.</p>
 <tr>
 <td><strong>series/name</strong></td>
 <td><em>string</em></td>
-<td>series name<br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
-<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+<td>series name</td>
+<td><code class="prettyprint">&quot;example&quot;</code></td>
 </tr>
 <tr>
 <td><strong><a href="#resource-trends">start_date</a></strong></td>
@@ -2392,7 +3310,7 @@ in the request headers.</p>
 <h3 id="trends-chart-data-request">Trends: Chart Data Request</h3>
 
 <p>Get trends chart data.</p>
-<pre class="highlight plaintext"><code>GET /api/v2/trends/chart_date
+<pre class="highlight plaintext"><code>GET /api/v2/trends/chart_data
 </code></pre>
 
 <h4 id="required-parameters">Required Parameters</h4>
@@ -2432,7 +3350,7 @@ in the request headers.</p>
 <tr>
 <td><strong>section</strong></td>
 <td><em>string</em></td>
-<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
 <td><code class="prettyprint">&quot;revenue&quot;</code></td>
 </tr>
 <tr>
@@ -2450,7 +3368,7 @@ in the request headers.</p>
 </tbody></table>
 
 <h4 id="curl-example">Curl Example</h4>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/chart_date
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/chart_data
  -G <span class="se">\</span>
   -d <span class="nb">type</span><span class="o">=</span>home <span class="se">\</span>
   -d <span class="nv">section</span><span class="o">=</span>revenue <span class="se">\</span>
@@ -2465,7 +3383,7 @@ in the request headers.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"series"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
@@ -2507,7 +3425,7 @@ in the request headers.</p>
 <tr>
 <td><strong><a href="#resource-trends">section</a></strong></td>
 <td><em>string</em></td>
-<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
 <td><code class="prettyprint">&quot;revenue&quot;</code></td>
 </tr>
 <tr>
@@ -2543,7 +3461,7 @@ in the request headers.</p>
 <tr>
 <td><strong>section</strong></td>
 <td><em>string</em></td>
-<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
 <td><code class="prettyprint">&quot;revenue&quot;</code></td>
 </tr>
 <tr>
@@ -2575,6 +3493,149 @@ in the request headers.</p>
   </span><span class="nt">"section"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"last_month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-03T21:32:44Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"two_months_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-03T21:32:44Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="trends-revenue"><a name="resource-trends-revenue">Trends: Revenue</a></h2>
+
+<p>Stability: <code class="prettyprint">prototype</code></p>
+
+<p>The company&rsquo;s revenue, during a certain period.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>data/amount</strong></td>
+<td><em>number</em></td>
+<td>revenue amount per date</td>
+<td><code class="prettyprint">2494.06</code></td>
+</tr>
+<tr>
+<td><strong>data/date</strong></td>
+<td><em>date</em></td>
+<td>revenue date</td>
+<td><code class="prettyprint">&quot;2016-08-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">end_date</a></strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">has_invoice_entries</a></strong></td>
+<td><em>boolean</em></td>
+<td>if it includes invoices during the trend period</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">last_month</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous month</td>
+<td><code class="prettyprint">&quot;2016-07-03T21:32:44Z&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">section</a></strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">start_date</a></strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">subsection</a></strong></td>
+<td><em>string</em></td>
+<td>trends subsection<br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+<tr>
+<td><strong><a href="#resource-trends">two_months_ago</a></strong></td>
+<td><em>date-time</em></td>
+<td>the previous 2 months</td>
+<td><code class="prettyprint">&quot;2016-06-03T21:32:44Z&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="trends-revenue-request">Trends: Revenue Request</h3>
+
+<p>Get revenue trend.</p>
+<pre class="highlight plaintext"><code>GET /api/v2/trends/revenue
+</code></pre>
+
+<h4 id="optional-parameters">Optional Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>end_date</strong></td>
+<td><em>date</em></td>
+<td>ending day of trend period</td>
+<td><code class="prettyprint">&quot;2016-08-03&quot;</code></td>
+</tr>
+<tr>
+<td><strong>section</strong></td>
+<td><em>string</em></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
+<td><code class="prettyprint">&quot;revenue&quot;</code></td>
+</tr>
+<tr>
+<td><strong>start_date</strong></td>
+<td><em>date</em></td>
+<td>starting day of trend period</td>
+<td><code class="prettyprint">&quot;2016-05-01&quot;</code></td>
+</tr>
+<tr>
+<td><strong>subsection</strong></td>
+<td><em>string</em></td>
+<td>trends subsection<br/> <strong>default:</strong> <code class="prettyprint">&quot;by_category&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;overview&quot;</code> or <code class="prettyprint">&quot;cash_overview&quot;</code> or <code class="prettyprint">&quot;dept_overview&quot;</code> or <code class="prettyprint">&quot;by_category&quot;</code> or <code class="prettyprint">&quot;by_merchant&quot;</code></td>
+<td><code class="prettyprint">&quot;overview&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="curl-example">Curl Example</h4>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -n https://api.indinero.com/api/v2/trends/revenue
+ -G <span class="se">\</span>
+  -d <span class="nv">section</span><span class="o">=</span>revenue <span class="se">\</span>
+  -d <span class="nv">subsection</span><span class="o">=</span>overview <span class="se">\</span>
+  -d <span class="nv">start_date</span><span class="o">=</span>2016-05-01 <span class="se">\</span>
+  -d <span class="nv">end_date</span><span class="o">=</span>2016-08-03
+</code></pre>
+
+<h4 id="response-example">Response Example</h4>
+<pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-01"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2494.06</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"last_month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-03T21:32:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"two_months_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-03T21:32:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"section"</span><span class="p">:</span><span class="w"> </span><span class="s2">"revenue"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subsection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overview"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-03"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_invoice_entries"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -2627,7 +3688,7 @@ in the request headers.</p>
 <tr>
 <td><strong><a href="#resource-trends">section</a></strong></td>
 <td><em>string</em></td>
-<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code></td>
+<td>trends main section<br/> <strong>default:</strong> <code class="prettyprint">&quot;spending&quot;</code><br/> <strong>one of:</strong><code class="prettyprint">&quot;revenue&quot;</code> or <code class="prettyprint">&quot;spending&quot;</code> or <code class="prettyprint">&quot;home&quot;</code></td>
 <td><code class="prettyprint">&quot;revenue&quot;</code></td>
 </tr>
 <tr>
