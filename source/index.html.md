@@ -113,7 +113,7 @@ in the request headers.
 > To opt-in a user, use the following code:
 
 ```shell
-curl "http://api.indinero.com/api/v2/2fa/opt_in" \
+curl "http://api.indinero.com/api/v2/2fa" \
   -X POST \
   -H "Authorization: Bearer indinero-user-access-token" \
   -d user[cellphone]="317-338-9302" \
@@ -132,7 +132,7 @@ This endpoint opts the user in for Two-Factor Authentication.
 
 ### HTTPS Request
 
-`POST https://api.indinero.com/api/v2/2fa/opt_in`
+`POST https://api.indinero.com/api/v2/2fa`
 
 ### Parameters
 
@@ -205,7 +205,7 @@ user[remember] | false | Set to true to remember the token for the next thirty d
 > To opt out a user from two-factor authentication, make this call:
 
 ```shell
-curl "https://api.indinero.com/api/v2/2fa/opt_out" \
+curl "https://api.indinero.com/api/v2/2fa" \
   -X DELETE \
   -H "Authorization: Bearer indinero-user-access-token"
 ```
@@ -223,6 +223,6 @@ This endpoint opts the user out and removes Two-Factor details.
 
 ### HTTPS Request
 
-`DELETE https://api.indinero.com/api/v2/2fa/opt_out`
+`DELETE https://api.indinero.com/api/v2/2fa`
 
 # Resources
