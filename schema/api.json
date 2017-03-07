@@ -3182,8 +3182,8 @@
         },
         {
           "description": "Reset user's password",
-          "href": "/api/v2/user/forget_password",
-          "rel": "forget_password",
+          "href": "/api/v2/user/forgot_password",
+          "rel": "forgot_password",
           "title": "User Forgot Password",
           "method": "POST",
           "schema": {
