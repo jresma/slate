@@ -2202,7 +2202,7 @@ HTTP/1.1 200 OK
 Reset user's password
 
 ```
-POST /api/v2/user/forget_password
+POST /api/v2/user/forgot_password
 ```
 
 #### Required Parameters
@@ -2216,7 +2216,7 @@ POST /api/v2/user/forget_password
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://api.indinero.com/api/v2/user/forget_password \
+$ curl -n -X POST https://api.indinero.com/api/v2/user/forgot_password \
   -d '{
   "email": "john@done.com"
 }' \
